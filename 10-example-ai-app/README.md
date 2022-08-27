@@ -19,3 +19,4 @@ Modifications made by me (as listed below), shall also be licensed under the MIT
 - For each chat a universally unique identifier (UUID4) is being generated and used for logging.
 - Collected settings in a ``config.py``-file for easy tinkering with parameters.
 - Created a Pipenv ``Pipfile`` with all the necessary dependencies.
+- Added and implemented 'Hanover Tagger' for lemmatization of german.
