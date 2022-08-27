@@ -669,12 +669,12 @@
 
 \section*{\langde{Abkürzungsverzeichnis}\langen{List of Abbreviations}}
 
-\begin{acronym}[Beispiel]\itemsep0pt %der Parameter in Klammern sollte die längste Abkürzung sein. Damit wird der Abstand zwischen Abkürzung und Übersetzung festgelegt
+\begin{acronym}[foobalouhuhu]\itemsep0pt %der Parameter in Klammern sollte die längste Abkürzung sein. Damit wird der Abstand zwischen Abkürzung und Übersetzung festgelegt
   \acro{API}{Application Programming Interface}
   \acro{HTTP/S}{Hypertext Transfer Protocol (Secure)}
   \acro{KI}{Künstliche Intelligenz}
   \acro{REST}{Representational State Transfer}
-  \acro{Beispiel}{Nicht verwendet, taucht nicht im Abkürzungsverzeichnis auf}
+  \acro{foobalouhuhu}{Nicht verwendet, taucht nicht im Abkürzungsverzeichnis auf}
 \end{acronym}
 % haenno-apa6-slim: End
 \newpage
@@ -777,7 +777,7 @@
 \section{Einleitung und Zielsetzung}
 % In dieser Seminararbeit sollen Grundlagen ermittelt werden die einen geeigneten Aufbau der IT-Infrastruktur zum diaglobasierten Zugriff auf eine \ac{KI} erlauben. Der Zugriff soll dabei für Anwendungen aus dem Bereich der Web-Technologien ermöglicht werden. Dazu soll  eine \acs{API}\footnote{\acl{API}, Programmierschnittstelle} bereit gestellt werden, die dem \acs{REST}-Architekturansatz \footnote{\acl{REST}, für Webservices konzipierte und entwickelte API} entspricht. Die Lösung soll dabei innerhalb von Django, einem weit verbreiteten und intensiv in anspruchsvollem Produktivumfeld eingesetzem Framework, umgesetzt werden. 
 
-In dieser Seminararbeit soll eine \ac{KI}-Anwendung über eine \acs{REST}\footnote{\acl{REST}, API-Architekturansatz, konzipiert und entwickelt für Webservices} \acs{API}\footnote{\acl{API}, Programmierschnittstelle} aufrubar gemacht werden. Eine \ac{KI}-Anwendung muss dazu in einer Art eingebunden werden, die es erlaubt auf diese selbst in geeigneter Weise über die Endpunkte einer API zuzugreifen. Das bedeutet, dass die \ac{KI}-Anwendung als Webservice zur Verfügung gestellt wird und damit auch einen diaglobasierten Zugriff auf die \ac{KI}-Anwendung und dessen Funktionen selbst ermöglicht. 
+In dieser Seminararbeit soll eine \ac{KI}-Anwendung über eine \acs{REST}\footnote{\acl{REST}, API-Architekturansatz, konzipiert und entwickelt für Webservices} \acs{API}\footnote{\acl{API}, Programmierschnittstelle} aufrufar gemacht werden. Eine \ac{KI}-Anwendung muss dazu in einer Art eingebunden werden, die es erlaubt auf diese selbst in geeigneter Weise über die Endpunkte einer API zuzugreifen. Das bedeutet, dass die \ac{KI}-Anwendung als Webservice zur Verfügung gestellt wird und damit auch einen dialogbasierten Zugriff auf die \ac{KI}-Anwendung und dessen Funktionen selbst ermöglicht. 
 
 Verwendet werden dazu soll Django, ein quelloffenes Web-Framework das weit verbreitet im produktiven Einsatz ist und ebenso wie viele \ac{KI}-Anwendungen in der Programmiersprache Python geschrieben wurde. Dieses zusammenführen und bereitstellen als eine Lösung im Softwarebereich, bzw. hier als Dienst, stellt dabei einen typischen Arbeitsbereich der IT-Infrastruktur dar. Die \ac{KI}-Anwendung muss also in eine geeignete IT-Infrastruktur eingebunden werden. Ein sicherer und belastbarer Webservice, ist das angestrebte Ziel dieser Seminararbeit. 
 
@@ -786,9 +786,9 @@ Verwendet werden dazu soll Django, ein quelloffenes Web-Framework das weit verbr
 
 \subsection{Praktische Relevanz und Problemstellung}
 
-Aktuell werden in vielen Bereichen neue Projekte und Lösungen mit \ac{KI} entworfen, entwickelt und getestet. Dazu werden \ac{KI}-Frameworks wie TensorFlow, PyTorch oder Keras benutzt. Für die vorgenannten, aber ebenso wie auch für andere \ac{KI}-Frameworks, hat sich Python als Programmiersprache durchegsetzt. Dies, da sich mit Pyhton große Datenmengen vergleichweise einfach aufnehmen, verarbeiten und ausgeben lassen. Große Datenmengen sind für die \ac{KI}-Entwicklung, häufig z.B. als Trainingsdatensätze, unverzichtbar. 
+Aktuell werden in vielen Bereichen neue Projekte und Lösungen mit \ac{KI} entworfen, entwickelt und getestet. Dazu werden \ac{KI}-Frameworks wie TensorFlow, PyTorch oder Keras benutzt. Für die vorgenannten, aber ebenso wie auch für andere \ac{KI}-Frameworks, hat sich Python als Programmiersprache durchgesetzt. Dies, da sich mit Pyhton große Datenmengen vergleichsweise einfach aufnehmen, verarbeiten und ausgeben lassen. Große Datenmengen sind für die \ac{KI}-Entwicklung, häufig z.B. als Trainingsdatensätze, unverzichtbar. 
 
-Entwürfe und Testentwicklungen von \ac{KI}-Anwendungen erfolgen insbesondere in frühen Phasen meist lokal in einer Entwicklungsumgebung. Ergebnisse zu präsentieren oder ein Austausch mit Dritten darüber ist damit nicht immer einfach möglich. Zumeist müssten Dritte erst einen Python-Interpreter sowie umfangreiche weitere Äbhänigkeiten, wie z.B. das verwendete \ac{KI}-Framework selbst, installieren um die \ac{KI}-Anwendung überhaupt erst Ausführen zu können. Das fällt nicht jedem interessieren leicht. Auch gibt es, durch die dynmaische Entwicklung, meist verscheidenste Versionen der Software und Komponenten die zu unbeabsichtigen und unerwarteten Problemen und Hürden führen können.
+Entwürfe und Testentwicklungen von \ac{KI}-Anwendungen erfolgen insbesondere in frühen Phasen meist lokal in einer Entwicklungsumgebung. Ergebnisse zu präsentieren oder ein Austausch mit Dritten darüber ist damit nicht immer einfach möglich. Zumeist müssten Dritte erst einen Python-Interpreter sowie umfangreiche weitere Abhängigkeiten, wie z.B. das verwendete \ac{KI}-Framework selbst, installieren um die \ac{KI}-Anwendung überhaupt erst Ausführen zu können. Das fällt nicht jedem interessieren leicht. Auch gibt es, durch die dynamische Entwicklung, meist verschiedenste Versionen der Software und Komponenten die zu unbeabsichtigten und unerwarteten Problemen und Hürden führen können.
 
 
 %\subsection{Zielsetzung}
@@ -800,13 +800,13 @@ Entwürfe und Testentwicklungen von \ac{KI}-Anwendungen erfolgen insbesondere in
 
 \subsection{Methodik}
 
-Die Seminararbeit soll das gewünschte Ziel, durch exploratives, vertikalens Prototyping erreichen. Vertikal bedeutet dabei, dass von der einfachen Konsolen KI-Anwendung bis hin zum dialogbasierten Aufruf über den Webserver, alle Ebenen durchdrungen werden sollen. Dabei sollen alle Schritte, jede eingesetzte Software und Lösung gründlich betrachtet und alle Schritte und Entscheidungen nachvollziehbar dokumentiert werden.
+Die Seminararbeit soll das gewünschte Ziel, durch exploratives, vertikalen  Prototyping erreichen. Vertikal bedeutet dabei, dass von der einfachen Konsolen KI-Anwendung bis hin zum dialogbasierten Aufruf über den Webserver, alle Ebenen durchdrungen werden sollen. Dabei sollen alle Schritte, jede eingesetzte Software und Lösung gründlich betrachtet und alle Schritte und Entscheidungen nachvollziehbar dokumentiert werden.
 
 Zuerst soll eine einfache KI-Anwendung, die als Konsolenanwendung lokal in einer Entwicklungsumgebung, lauffähig ist erstellt werden. Hier ist ein üblicher Prototyp einer KI-Anwendung, z.B. aus einem einfach Tutorial, aus. Zum erreichen des Ziels, reicht es dabei aus, wenn nur wenige einfache Funktionen des verwendeten KI-Frameworks zum Einsatz kommen.
 
 Im Anschluss daran, soll ermittelt werden auf welche Arten die Einbindung einer solchen KI-Anwendung in das Django-Framework möglich ist. Mögliche Lösungsansätze sollen ermittelt, betrachtet und bewertet werden. 
 
-Die schrittweise Einrichtung einer Django-Installation wird analog durchgeführt und alle gemachten Einstellungen, eingerichteten Erweiterungen und Anpssungen nachvollziehbar dokumentiert. Dies umfasst dabei auch die notwendigen Module für Bereitstellung der API sowie den Einsatz von Django in einem produktiven Umfeld. 
+Die schrittweise Einrichtung einer Django-Installation wird analog durchgeführt und alle gemachten Einstellungen, eingerichteten Erweiterungen und Anpassungen nachvollziehbar dokumentiert. Dies umfasst dabei auch die notwendigen Module für Bereitstellung der API sowie den Einsatz von Django in einem produktiven Umfeld. 
 
 Im Schlussschritt werden die Django-Installation und die, für die Einbindung vorbereitete, KI-Anwendung zusammengeführt. Der dann mögliche, dialogbasierte Zugriff auf die KI-Anwendung als Webservice, die Django REST API, soll durch den Einsatz eines dynamischen Frontends, belegt werden. 
 
@@ -814,21 +814,45 @@ Im Schlussschritt werden die Django-Installation und die, für die Einbindung vo
 \newpage
 \section{Theorie: Begrifflichkeiten und Grundlagen}
 
-In diesem Abschnitt werden einige für das weieter Verständnis hilfreiche Begrifflichkeiten und Grundlagen kurz erklärt und eingeordnet. Dabei wird als Zielgruppe der Seminararbeit, eine zumindest in IT-Grundlagen versierte, Leserschaft angenommen.
+In diesem Abschnitt werden einige für das weitere Verständnis hilfreiche Begrifflichkeiten und Grundlagen kurz erklärt und eingeordnet. Dabei wird als Zielgruppe der Seminararbeit, eine zumindest in IT-Grundlagen versierte, Leserschaft angenommen.
 
 
 \subsection{REST API}
 
-Die Abkürzung \acs{API} bedeutet \acl{API}, ins deutsche übersetzt also \enquote{Schnitstelle zur Programmierung von Anwendungen}. Eine API ist damit eine Schnittstelle zu einem Programm oder zu einer Programmierung und erlaubt es, meist anhand detailierten Dokumentation, den Zugriff auf die  bzw. die Verarbeitung von Daten aus der Schnittstelle. Im heutigen Sprachgebrauch ist mit API  meist der Zugriff auf einen Webservice gemeint. Grundsätzlich aber, umfasst der Begriff API nicht nur die vorgenantnen Webservices, die eine Protokollorientierte Schnittstelle sind, sondern auch API anderer Typenklassen wie Datei-, Funktions- oder Objektorientierte APIs.
+Die Abkürzung \acs{API} bedeutet \acl{API}, ins Deutsche übersetzt also \enquote{Schnittstelle zur Programmierung von Anwendungen}. Eine API ist damit eine Schnittstelle zu einem Programm oder zu einer Programmierung und erlaubt es, meist anhand detaillierten Dokumentation, den Zugriff auf die  bzw. die Verarbeitung von Daten aus der Schnittstelle. Im heutigen Sprachgebrauch ist mit API  meist der Zugriff auf einen Webservice gemeint. Grundsätzlich aber, umfasst der Begriff API nicht nur die vorgenannten Webservices, die eine Protokollorientierte Schnittstelle sind, sondern auch API anderer Typenklassen wie Datei-, Funktions- oder Objektorientierte APIs.
 
 Mit \ac{REST} beschreibt \citeauthor[]{51-fielding-rest} erstmals im Jahr \citeyear[]{51-fielding-rest} in seiner Arbeit \citetitle[]{51-fielding-rest} einen hybriden Architekturansatz aus der Vermischung verschiedener netzwerkbasierter Architekturansätze für Schnittstellen. Dieser Ansatz hat sich zwischenzeitlich durchgesetzt und wird vielfach in modernen Webservices verwendet. \citeauthor[]{51-fielding-rest} beschreibt in seiner Arbeit umfassend wie eine zustandslose Kommunikation zwischen Client und Server über eine einheitliche Schnittstelle (API) mittels bekannter und bewährter \ac{HTTP/S}-Methoden, wie GET, POST, PUT und DELETE, umgesetzt wird.
 
-Heute werden REST APIs vielfälig eingesetzt: Ob zum Datenaustausch zwischen Unternehmen oder auch der Realisierung verschiedener Frontends bzw. Endgeräte für eine Anwendung -- Aus der Praxis sind Schnittstellen dieser Art heute nicht mehr wegzudenken. 
+Heute werden REST APIs vielfältig eingesetzt: Ob zum Datenaustausch zwischen Unternehmen oder auch der Realisierung verschiedener Frontends bzw. Endgeräte für eine Anwendung -- Aus der Praxis sind Schnittstellen dieser Art heute nicht mehr wegzudenken. 
 
 \subsection{KI-Anwendungen und -Frameworks}
-\subsection{Django Web-framework}
+
+\citeauthor[]{52-wangermann2020ki}(\citeyear[]{52-wangermann2020ki}) für die Konrad-Adenauer-Stiftung e. V., wie auch das \citeauthor[]{53-ki-strat}(\citeyear[]{53-ki-strat}) selbst, beschreiben in ihren jüngsten Veröffentlichungen in ausführlicher Breite wie wichtig die Entwicklung von KI in allen Bereichen und auf allen Ebenen ist.
+
+Dabei ist der parktische Einstieg in das Thema KI-Entwicklung im Vergleich zu anderen Forschungsfeldern ungelich leichter. Es werden, für einen Start in den Themenbereich, nicht viel mehr als ein Rechner und eine Internetverbindung bennötigt. Die Entwickler der gängigen bzw. etwa weiter verbreiteten KI-Frameworks, stellen umfangreiche Dokumentation mit die anhand praxsisnahmer Beispiele und Anleitungen, den Einstieg leicht machen sollen. 
+
+Die KI-Frameworks TensorFlow, Keras und PyTorch haben sich über die letzten Jahre nicht nur auf dem Markt gehalten, sondern wurden von der Entwicklergemeinde deutlich mehr genutzt. Besonders die positive Entwicklung von PyTorch, hier mit einem Zuwachs von 468\% gemessen an Aktivitätsindikatoren auf Github.com, hebt sich hier noch weiter von den beiden anderen, vorgenannten mit jeweils etwa 50\% ab. 
+
+\begin{figure}[H]
+	\caption{Entwicklung der KI-Framework Nutzung auf Github.com}\label{fig:ki-framework-nutzung}
+	\includegraphics[width=0.98\textwidth]{ki-framework-nutzung.pdf}
+	\\
+	Quelle: Eigene Darstellung
+\end{figure}
+	
+
+%Doch neben den dort auch beschriebenen technischen Hürden, wie allein dem Netzausbau, gibt es für Entwickler beim Einsatz von KI-Frameworks andere, ganz praktische Hürden. Denn wie eingangs beschrieben, gibt es verschiedenste Frameworks, in unterscheidlichsten Versionen.
+
+
+\subsection{Django Web-Framework}
+
+
 \subsection{Dialogarten Direkt-, Dienst- und Jobverarbeitung}
+
+
 \subsection{Synchrone- und Asynchrone Verarbeitung}
+
+
 
 % \subsection{Stand der Technik}
 
