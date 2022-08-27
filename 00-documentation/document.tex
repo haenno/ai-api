@@ -671,6 +671,7 @@
 
 \begin{acronym}[Beispiel]\itemsep0pt %der Parameter in Klammern sollte die längste Abkürzung sein. Damit wird der Abstand zwischen Abkürzung und Übersetzung festgelegt
   \acro{API}{Application Programming Interface}
+  \acro{HTTP/S}{Hypertext Transfer Protocol (Secure)}
   \acro{KI}{Künstliche Intelligenz}
   \acro{REST}{Representational State Transfer}
   \acro{Beispiel}{Nicht verwendet, taucht nicht im Abkürzungsverzeichnis auf}
@@ -773,12 +774,15 @@
 
 
 
-\section{Einleitung}
+\section{Einleitung und Zielsetzung}
 % In dieser Seminararbeit sollen Grundlagen ermittelt werden die einen geeigneten Aufbau der IT-Infrastruktur zum diaglobasierten Zugriff auf eine \ac{KI} erlauben. Der Zugriff soll dabei für Anwendungen aus dem Bereich der Web-Technologien ermöglicht werden. Dazu soll  eine \acs{API}\footnote{\acl{API}, Programmierschnittstelle} bereit gestellt werden, die dem \acs{REST}-Architekturansatz \footnote{\acl{REST}, für Webservices konzipierte und entwickelte API} entspricht. Die Lösung soll dabei innerhalb von Django, einem weit verbreiteten und intensiv in anspruchsvollem Produktivumfeld eingesetzem Framework, umgesetzt werden. 
 
 In dieser Seminararbeit soll eine \ac{KI}-Anwendung über eine \acs{REST}\footnote{\acl{REST}, API-Architekturansatz, konzipiert und entwickelt für Webservices} \acs{API}\footnote{\acl{API}, Programmierschnittstelle} aufrubar gemacht werden. Eine \ac{KI}-Anwendung muss dazu in einer Art eingebunden werden, die es erlaubt auf diese selbst in geeigneter Weise über die Endpunkte einer API zuzugreifen. Das bedeutet, dass die \ac{KI}-Anwendung als Webservice zur Verfügung gestellt wird und damit auch einen diaglobasierten Zugriff auf die \ac{KI}-Anwendung und dessen Funktionen selbst ermöglicht. 
 
-Verwendet werden dazu soll Django, ein quelloffenes Web-Framework das weit verbreitet im produktiven Einsatz ist und ebenso wie viele \ac{KI}-Anwendungen in der Programmiersprache Python geschrieben wurde. Dieses zusammenführen und bereitstellen als eine Lösung im Softwarebereich, bzw. hier als Dienst, stellt dabei einen typischen Arbeitsbereich der IT-Infrastruktur dar. 
+Verwendet werden dazu soll Django, ein quelloffenes Web-Framework das weit verbreitet im produktiven Einsatz ist und ebenso wie viele \ac{KI}-Anwendungen in der Programmiersprache Python geschrieben wurde. Dieses zusammenführen und bereitstellen als eine Lösung im Softwarebereich, bzw. hier als Dienst, stellt dabei einen typischen Arbeitsbereich der IT-Infrastruktur dar. Die \ac{KI}-Anwendung muss also in eine geeignete IT-Infrastruktur eingebunden werden. Ein sicherer und belastbarer Webservice, ist das angestrebte Ziel dieser Seminararbeit. 
+
+%In dieser Seminararbeit soll eine \ac{KI}-Anwendung durch die Bereitstellung für den dialogbasierten Zugriff über eine REST API leichter für Dritte zugänglich gemacht werden. 
+
 
 \subsection{Praktische Relevanz und Problemstellung}
 
@@ -787,11 +791,11 @@ Aktuell werden in vielen Bereichen neue Projekte und Lösungen mit \ac{KI} entwo
 Entwürfe und Testentwicklungen von \ac{KI}-Anwendungen erfolgen insbesondere in frühen Phasen meist lokal in einer Entwicklungsumgebung. Ergebnisse zu präsentieren oder ein Austausch mit Dritten darüber ist damit nicht immer einfach möglich. Zumeist müssten Dritte erst einen Python-Interpreter sowie umfangreiche weitere Äbhänigkeiten, wie z.B. das verwendete \ac{KI}-Framework selbst, installieren um die \ac{KI}-Anwendung überhaupt erst Ausführen zu können. Das fällt nicht jedem interessieren leicht. Auch gibt es, durch die dynmaische Entwicklung, meist verscheidenste Versionen der Software und Komponenten die zu unbeabsichtigen und unerwarteten Problemen und Hürden führen können.
 
 
-\subsection{Zielsetzung}
+%\subsection{Zielsetzung}
 
-In dieser Seminararbeit soll eine \ac{KI}-Anwendung durch die Bereitstellung für den dialogbasierten Zugriff über eine REST API leichter für Dritte zugänglich gemacht werden. Durch die Bereitstellung als Webservice in schon sehr frühen Entwicklungs- und Testphasen, wird ein sehr einfacher Zugriff auf die KI-Anwendung selbst ermöglicht. 
+% In dieser Seminararbeit soll eine \ac{KI}-Anwendung durch die Bereitstellung für den dialogbasierten Zugriff über eine REST API leichter für Dritte zugänglich gemacht werden. Durch die Bereitstellung als Webservice in schon sehr frühen Entwicklungs- und Testphasen, wird ein sehr einfacher Zugriff auf die KI-Anwendung selbst ermöglicht. 
 
-Die \ac{KI}-Anwendung muss dazu in eine geeignete IT-Infrastruktur eingebunden werden. Ein sicherer und belastbarer Webservice, ist das angestrebte Ziel dieser Seminararbeit. 
+% Die \ac{KI}-Anwendung muss dazu in eine geeignete IT-Infrastruktur eingebunden werden. Ein sicherer und belastbarer Webservice, ist das angestrebte Ziel dieser Seminararbeit. 
 
 
 \subsection{Methodik}
@@ -807,15 +811,26 @@ Die schrittweise Einrichtung einer Django-Installation wird analog durchgeführt
 Im Schlussschritt werden die Django-Installation und die, für die Einbindung vorbereitete, KI-Anwendung zusammengeführt. Der dann mögliche, dialogbasierte Zugriff auf die KI-Anwendung als Webservice, die Django REST API, soll durch den Einsatz eines dynamischen Frontends, belegt werden. 
 
 
-\section{Theoretischer Teil}
- \subsection{Begrifflichkeiten und Grundlagen}
-  \subsubsection{API}
-  \subsubsection{REST}
-  \subsubsection{KI}
-  \subsubsection{Django}
-  \subsubsection{Dialogarten Direkt-, Dienst- und Jobverarbeitung}
-  \subsubsection{Synchrone- und Asynchrone Verarbeitung}
- \subsection{Stand der Technik}
+\newpage
+\section{Theorie: Begrifflichkeiten und Grundlagen}
+
+In diesem Abschnitt werden einige für das weieter Verständnis hilfreiche Begrifflichkeiten und Grundlagen kurz erklärt und eingeordnet. Dabei wird als Zielgruppe der Seminararbeit, eine zumindest in IT-Grundlagen versierte, Leserschaft angenommen.
+
+
+\subsection{REST API}
+
+Die Abkürzung \acs{API} bedeutet \acl{API}, ins deutsche übersetzt also \enquote{Schnitstelle zur Programmierung von Anwendungen}. Eine API ist damit eine Schnittstelle zu einem Programm oder zu einer Programmierung und erlaubt es, meist anhand detailierten Dokumentation, den Zugriff auf die  bzw. die Verarbeitung von Daten aus der Schnittstelle. Im heutigen Sprachgebrauch ist mit API  meist der Zugriff auf einen Webservice gemeint. Grundsätzlich aber, umfasst der Begriff API nicht nur die vorgenantnen Webservices, die eine Protokollorientierte Schnittstelle sind, sondern auch API anderer Typenklassen wie Datei-, Funktions- oder Objektorientierte APIs.
+
+Mit \ac{REST} beschreibt \citeauthor[]{51-fielding-rest} erstmals im Jahr \citeyear[]{51-fielding-rest} in seiner Arbeit \citetitle[]{51-fielding-rest} einen hybriden Architekturansatz aus der Vermischung verschiedener netzwerkbasierter Architekturansätze für Schnittstellen. Dieser Ansatz hat sich zwischenzeitlich durchgesetzt und wird vielfach in modernen Webservices verwendet. \citeauthor[]{51-fielding-rest} beschreibt in seiner Arbeit umfassend wie eine zustandslose Kommunikation zwischen Client und Server über eine einheitliche Schnittstelle (API) mittels bekannter und bewährter \ac{HTTP/S}-Methoden, wie GET, POST, PUT und DELETE, umgesetzt wird.
+
+Heute werden REST APIs vielfälig eingesetzt: Ob zum Datenaustausch zwischen Unternehmen oder auch der Realisierung verschiedener Frontends bzw. Endgeräte für eine Anwendung -- Aus der Praxis sind Schnittstellen dieser Art heute nicht mehr wegzudenken. 
+
+\subsection{KI-Anwendungen und -Frameworks}
+\subsection{Django Web-framework}
+\subsection{Dialogarten Direkt-, Dienst- und Jobverarbeitung}
+\subsection{Synchrone- und Asynchrone Verarbeitung}
+
+% \subsection{Stand der Technik}
 
 \section{Praktischer Teil}
  \subsection{Einrichtung Django-Basissystem }
