@@ -1,0 +1,38 @@
+{
+  "intents": [
+    {
+      "tag": "Begrüßung",
+      "patterns": ["Hi", "Hallo", "Guten Tag"],
+      "responses": ["Hallo auch!", "Schön dich zu sehen!", "Willkommen!"],
+      "context_set": ""
+    },
+    {
+      "tag": "Verabschiedung",
+      "patterns": ["Tschüss", "Bis bald", "Bye"],
+      "responses": [
+        "Danke für das Gespräch -- Tschüss!",
+        "Pass auf das die Tür zu geht. Nodda."
+      ]
+    },
+    {
+      "tag": "Dank",
+      "patterns": ["Danke", "Dankeschön"],
+      "responses": ["Immer gern!", "Jederzeit :-)"]
+    },
+    {
+      "tag": "Öffnungszeiten",
+      "patterns": [
+        "Wann ist der Laden geöffnet?",
+        "Wann öffnet Ihr?",
+        "Wann schließt Ihr?",
+        "Wie lange habt Ihr offen?",
+        "Ab wann seid Ihr im Geschäft?",
+        "Wie sind eure Öffnungszeiten?"
+      ],
+      "responses": [
+        "Wir haben immer von 9-12 Uhr offen.",
+        "Wir haben Vormittags offen."
+      ]
+    }
+  ]
+}
