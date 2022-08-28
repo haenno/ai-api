@@ -1,0 +1,25 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+
+Django = "==4.1" # Django itself 
+djangorestframework = "==3.13.1" # Django toolkit for rest api
+drf-yasg = "==1.21.3" # Swagger for Django / OpenAPI 2.0 fits perfectly
+django-cors-headers = "==3.13.0" # for cross site access from a frontend
+daphne = "==3.0.2" # to serve django 
+whitenoise = "==6.2.0" # to serve static files
+tzdata = "==2022.2" # to fix depency error on some systems
+
+# for the chatbot module
+numpy = "==1.23.2" 
+nltk = "==3.7"
+HanTa = "==0.2.0" # 0.2.1 does not work well at this time, fallback to 0.2.0
+torch = "==1.12.1"
+
+[dev-packages]
+
+[requires]
+python_version = "3"

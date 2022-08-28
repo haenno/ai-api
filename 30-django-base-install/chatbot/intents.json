@@ -1,0 +1,107 @@
+{
+  "intents": [
+    {
+      "tag": "Begrüßung",
+      "patterns": ["Hi", "Hallo", "Guten Tag"],
+      "responses": ["Hallo auch!", "Schön dich zu sehen!", "Willkommen!"]
+    },
+    {
+      "tag": "Verabschiedung",
+      "patterns": ["Tschüss", "Bis bald", "Bye"],
+      "responses": [
+        "Danke für das Gespräch -- Tschüss!",
+        "Pass auf das die Tür zu geht. Nodda."
+      ]
+    },
+    {
+      "tag": "Dank",
+      "patterns": ["Danke", "Dankeschön"],
+      "responses": ["Immer gern!", "Jederzeit :-)"]
+    },
+    {
+      "tag": "Öffnungszeiten",
+      "patterns": [
+        "Wann ist der Laden geöffnet?",
+        "Wann öffnet Ihr?",
+        "Wann schließt Ihr?",
+        "Wie lange habt Ihr offen?",
+        "Ab wann seid Ihr im Geschäft?",
+        "Wie sind eure Öffnungszeiten?"
+      ],
+      "responses": [
+        "Wir haben immer von 9-12 Uhr offen.",
+        "Wir haben Vormittags offen."
+      ]
+    },
+    {
+      "tag": "Wetter",
+      "patterns": ["Wie ist das Wetter?"],
+      "responses": ["Sonne :)", "Regen :("]
+    },
+    {
+      "tag": "Wie gehts?",
+      "patterns": [
+        "Wie geht es dir?",
+        "Wie gehts dir?",
+        "Geht es dir gut?",
+        "Wie fühlst du dich?"
+      ],
+      "responses": ["Tippi toppi! Danke der Nachfrage :-)"]
+    },
+    {
+      "tag": "Wer bist du?",
+      "patterns": ["Wer bist du?", "Was bist du?", "Wie ist dein Name?"],
+      "responses": [
+        "Ich bin ein einfaches Programm -- Meist verstehe ich dich recht gut, das macht mich aus..."
+      ]
+    },
+    {
+      "tag": "Lebenssinn",
+      "patterns": [
+        "Was ist der Sinn des Lebens?",
+        "Wozu leben wir?",
+        "Kennst du den Sinn des Lebens?",
+        "Erkläre mir den Sinn des Lebens!"
+      ],
+      "responses": ["42."]
+    },
+    {
+      "tag": "Katzenmensch",
+      "patterns": [
+        "Magst du Katzen?",
+        "Hast du lieber Hunde oder Katzen?",
+        "Würdest du dir eine Katze anschaffen?",
+        "Hast du eine Katze?"
+      ],
+      "responses": ["≧◔◡◔≦", "=^..^=", "⦿⽘⦿"]
+    },
+    {
+      "tag": "Echt lebendig fühlen als Mensch",
+      "patterns": [
+        "Lebst du?",
+        "Bist du lebendig?",
+        "Bist du echt?",
+        "Bist du ein Mensch?",
+        "Fühlst du etwas?",
+        "Hast du Gefühle?"
+      ],
+      "responses": [
+        "Sorry, nein, ich bin nur ein  c[○┬●]כ -- Aber vielliecht doch etwas moderner 🤖",
+        "Beep beep, bitte Eingabe wiederholen, Beep!   d[ o_0 ]b "
+      ]
+    },
+    {
+      "tag": "Fähigkeiten",
+      "patterns": [
+        "Was kannst du?",
+        "Was machst du?",
+        "Verstehst du mich?",
+        "Welche Fähigkeiten hast du?",
+        "Welche Wörter kannst du verstehen?"
+      ],
+      "responses": [
+        "Ich kann nur wenige Themen verstehen, da ich nur ein technischer Prototyp bin. Gut bin ich bei Small Talk: Über das Wetter und Katzen kann man immer reden :-) "
+      ]
+    }
+  ]
+}
