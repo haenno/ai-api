@@ -9,11 +9,12 @@ In addition to the allready made changes, i here combined all functions in one s
 1. Install Python and pipenv.
 2. Install necessary packages by running ``pipenv install`` on the terminal in this folder.
 3. Maybe add some topics, questions and answers to the ``intents.json`` file.
-4. Then call the help on parameters wirh  ``pipenv run python cdmod.py --help`` and follow the given instructions.
+4. Then call the help on parameters wirh  ``pipenv run python -m chatbot --help`` and follow the given instructions.
+5. Hint: Dont forget to train the Chatot bevor talking to it with ``pipenv run python -m chatbot -t`
 
 ## My changes and additions
 
-- Refactored the code to collect all functions in one file. 
+- Refactored the code to collect all functions in one file.
 - Put every line of logic in functions, so that it can be called from a ``main()``-function.
 - Added **'argparse'** for parsing arguments given from console calls of the script.
 - Upgraded the logging.

@@ -5,4 +5,4 @@ SRC_FILE = 'intents.json'
 OUT_FILE = 'data.pth'
 OPEN_QUESTIONS_FILE = 'to_answer.csv'
 DIALOG_LOG_FILE = 'dialog_log.csv'
-MIN_PROB = 0.97
+MIN_PROB = 0.95

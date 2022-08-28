@@ -23,7 +23,7 @@ SRC_FILE = 'intents.json'
 OUT_FILE = 'data.pth'
 OPEN_QUESTIONS_FILE = 'to_answer.csv'
 DIALOG_LOG_FILE = 'dialog_log.csv'
-MIN_PROB = 0.96
+MIN_PROB = 0.95
 
 # nltk.download('punkt')  # run only once (uncomment once, to init a new system)
 tagger = ht.HanoverTagger('morphmodel_ger.pgz')    
@@ -393,7 +393,7 @@ def train():
 
 
 def main():
-    parser = ArgumentParser(description='Allows the use of a chatbot with pyTorch.')
+    parser = ArgumentParser(description='Allows the use of a chatbot with PyTorch.')
 
     parser.add_argument('-u', '--newuuid',  action='store_true',
                         help='Get a new, unique id for a conversation.')

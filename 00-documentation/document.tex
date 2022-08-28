@@ -952,9 +952,13 @@
 \section{Einleitung und Zielsetzung}
 % In dieser Seminararbeit sollen Grundlagen ermittelt werden die einen geeigneten Aufbau der IT-Infrastruktur zum diaglobasierten Zugriff auf eine \ac{KI} erlauben. Der Zugriff soll dabei für Anwendungen aus dem Bereich der Web-Technologien ermöglicht werden. Dazu soll  eine \acs{API}\footnote{\acl{API}, Programmierschnittstelle} bereit gestellt werden, die dem \acs{REST}-Architekturansatz \footnote{\acl{REST}, für Webservices konzipierte und entwickelte API} entspricht. Die Lösung soll dabei innerhalb von Django, einem weit verbreiteten und intensiv in anspruchsvollem Produktivumfeld eingesetzem Framework, umgesetzt werden. 
 
-In dieser Seminararbeit soll eine \ac{KI}-Anwendung über eine \acs{REST}\footnote{\acl{REST}, API-Architekturansatz, konzipiert und entwickelt für Webservices} \acs{API}\footnote{\acl{API}, Programmierschnittstelle} aufrufar gemacht werden. Eine \ac{KI}-Anwendung muss dazu in einer Art eingebunden werden, die es erlaubt auf diese selbst in geeigneter Weise über die Endpunkte einer API zuzugreifen. Das bedeutet, dass die \ac{KI}-Anwendung als Webservice zur Verfügung gestellt wird und damit auch einen dialogbasierten Zugriff auf die \ac{KI}-Anwendung und dessen Funktionen selbst ermöglicht. 
+In dieser Seminararbeit soll eine \ac{KI}-Anwendung über eine \ac{REST} \ac{API} aufrufbar gemacht werden. Eine \ac{REST} \ac{API} ist eine Programmierschnittstelle mit einem Architekturansatz der speziell Webservices entwickelt und konzipiert wurde.  Eine \ac{KI}-Anwendung muss dazu in einer Art eingebunden werden, die es erlaubt auf diese selbst in geeigneter Weise über die Endpunkte einer \ac{API} zuzugreifen. Das bedeutet, dass die \ac{KI}-Anwendung als Webservice zur Verfügung gestellt wird und damit auch einen dialogbasierten Zugriff auf die \ac{KI}-Anwendung und dessen Funktionen selbst ermöglicht. 
 
 Verwendet werden dazu soll Django, ein quelloffenes Web-Framework das weit verbreitet im produktiven Einsatz ist und ebenso wie viele \ac{KI}-Anwendungen in der Programmiersprache Python geschrieben wurde. Dieses zusammenführen und bereitstellen als eine Lösung im Softwarebereich, bzw. hier als Dienst, stellt dabei einen typischen Arbeitsbereich der IT-Infrastruktur dar. Die \ac{KI}-Anwendung muss also in eine geeignete IT-Infrastruktur eingebunden werden. Ein sicherer und belastbarer Webservice, ist das angestrebte Ziel dieser Seminararbeit. 
+
+Die Seminararbeit mit allen Anlagen, dem Programmcode, allen Skripten und Quellen wird auch auf Github.com unter \code{\url{https://github.com/haenno/ai-api/}} zur Verfügung gestellt um den Zugriff auf darauf zu erleichtern. Ebenso findet sich unter \code{\url{https://ai-api.tstsrv.de/}} eine laufende Instanz der fertigen Lösung zum einfachen ausprobieren. 
+
+
 
 %In dieser Seminararbeit soll eine \ac{KI}-Anwendung durch die Bereitstellung für den dialogbasierten Zugriff über eine REST API leichter für Dritte zugänglich gemacht werden. 
 
@@ -1121,7 +1125,7 @@ Weitere Anpassungen durch mich in dieser allerersten Entwicklungsstufe der KI-An
 
 Alle Einstellungen und Parameter der KI-Anwendung habe ich in der Datei \code{config.py} zusammengefasst. Abschließend habe ich die für das Starten der KI-Anwendung notwendigen Abhängigkeiten und Pakete für die Verwendung mit dem Python Tool \enquote{Pipenv} in der Datei \enquote{Pipfile} zusammengefasst. 
 
-Den gesammten ersten Entwicklungsstand, wie er bis hier beschrieben wurde, habe ich in den Anlagen zur Seminararbeit sowie auf Github\footnote{\url{https://github.com/haenno/ai-api/tree/main/10-example-ai-app}} im Unterorder \code{10-example-ai-app} dokumentiert. Die KI-Anwendung in diesem Entwicklungsstand kann ausgeführt und getestet werden indem der Ordner  \code{10-example-ai-app} mit einem Terminal betreten wird und unten stehende Befehle ausgeführt werden:
+Den gesammten ersten Entwicklungsstand, wie er bis hier beschrieben wurde, habe ich in den Anlagen zur Seminararbeit sowie auf Github.com im Unterorder \code{10-example-ai-app} dokumentiert. Die KI-Anwendung in diesem Entwicklungsstand kann ausgeführt und getestet werden indem der Ordner  \code{10-example-ai-app} mit einem Terminal betreten wird und unten stehende Befehle ausgeführt werden:
 
 
 \begin{lstlisting}[language=bash]
@@ -1131,6 +1135,113 @@ pipenv run python chat.py
 \end{lstlisting}
 
 Vorraussetzung dafür ist ein installierter Python-Interpreter ab Version 3.9 und das Python-Tool \enquote{Pipenv}.
+
+
+
+Für die Einbindung dieser KI-Anwendung, muss diese nun aber in einer Form vorliegen, die es erlaubt das Programm oder Programmteile an anderen Stellen einzubinden oder Teile davon aufzurufen. Die bisher vorliegende Datei- bzw. Skriptsammlung ist dazu so nicht nutzbar. Die KI-Anwendung muss daher umgebaut werden zu einem Python Modul. Ein Python Modul zeichnet sich dadurch aus, dass die notwendigen Dateien incl. einer \code{__init.py__}-Datei in einem entsprechenden Dateiordner liegen. Der Aufruf kann dann aus anderen Python Skripten mittels \code{import \textbf{NameDesModulOrdners}} aufgerufen werden. Programmfunktionen aus dem Moduls können dann mit \code{NameDesModulOrdners.\textbf{FunktionsName}} aufgerufen und gestartet werden.
+
+Ich habe die notwendigen Anpassungen an der KI-Anwendung vorgenommen, alle Inhalte in einer Datei  zusammengetragen, gesamte Logik in passende Funktionen verpackt und aufrufbar über eine \code{main()}-Funktion gemacht. 
+
+Als weitere Möglichkeit zum Aufruf der KI-Anwendung wurde das Modul \code{argparse} in das Modul eingebunden. Damit ist der Aufruf von Programmteilen direkt über die Konsole möglich. Das Modul \code{argparse} stellt dabei Funktionen zur Verfügung die an die Anwendung übergebene Parameter auf der Konsole parst, also Verarbeitet. Außerdem werden automatisiert, nützliche Hilfetexte für die Kommandozeile erzeugt.
+
+Hier im Detail ein Auszug aus der Datei \code{__init.py__} des Moduls \code{chatbot}:
+\begin{figure}[H]
+	\caption{Programmcode: Main()-Funktion aus KI-Anwendung}
+	\label{fig:code-main-func}
+\begin{lstlisting}[language=python]
+def main():
+    parser = ArgumentParser(description='Allows the use of a chatbot with PyTorch.')
+
+    parser.add_argument('-u', '--newuuid',  action='store_true',
+                        help='Get a new, unique id for a conversation.')
+
+    parser.add_argument('-t', '--train',  action='store_true',
+                        help='Trains the NN model based on current data.')
+
+    parser.add_argument('-c', '--chat',  action='store_true',
+                        help='Chat with the chatbot.')
+
+    parser.add_argument('-i', '--textinput',  type=str,
+                        help='Give an text input to the chatbot and recive a answer. \
+                            Provide a UUID for the conversation with -cu or --conversationuuid \
+                                followed by the UUID.')
+
+    parser.add_argument('-cu', '--conversationuuid',  type=str,
+                        help='Needed when using -i, --textinput. Provide a UUID to a conversation.')
+
+    args = parser.parse_args()
+
+    
+    if vars(args)['newuuid']:
+        print(str(get_new_uuid()))
+        quit()
+
+    if vars(args)['train']:
+        train()
+        quit()    
+
+    if vars(args)['chat']:
+        chat()
+        quit()
+    
+    # check for complete input for a 'singlechat' call
+    complete_text_input = 0
+    if vars(args)['textinput']:
+        complete_text_input += 1 
+    if vars(args)['conversationuuid']:       
+        complete_text_input += 1 
+
+    if complete_text_input == 1:
+        parser.error("Too few arguments: -cu/--conversationuuid and -i/--textinput are both needed.")
+    
+    if complete_text_input == 2:
+        print(str(singlechat(str(args.conversationuuid), str(args.textinput))))
+        quit()
+
+    parser.print_help()
+
+
+if __name__ == '__main__':
+    main()
+\end{lstlisting}
+\end{figure}
+
+Anhand des strukturierten Aufbaus kann man die Programmlogik und die wesentlichen Aufrufe, gut ablesen. Wird das Modul aufgerufen, springt Pyhton in die \code{main()}-Funktion (Zeilen 53 und 54). In dieser Funktion dann, wird zuerst das Modul \code{ArgumentParser} initialisiert (Zeile 2) und dann die möglichen Aufrufe über Konsolenparameter konfiguriert (Zeilen 4 bis 19). In Zeile 20 werden tatsächlich beim Programmaufruf mitgegebenen Parameter verarbeitet (geparst). Entsprechend der mitgegebenen Parameter werden dann in den Zeilen 24 bis 48 die jeweiligen je nach Programmfunktionen gestartet und das Skript beendet. Fand keine Auswahl statt, wird durch Zeile 50 das hier zu sehende Hilfemenü auf der Konsole ausgegeben:
+
+\begin{figure}[H]
+	\caption{Hilfemenü der KI-Anwendung bei Konsolenaufruf}
+	\label{fig:code-help-para}
+\begin{lstlisting}[language=bash]
+pipenv run python -m chatbot       
+usage: __main__.py [-h] [-u] [-t] [-c] [-i TEXTINPUT] [-cu CONVERSATIONUUID]
+
+Allows the use of a chatbot with PyTorch.
+
+options:
+  -h, --help            show this help message and exit
+  -u, --newuuid         Get a new, unique id for a conversation.
+  -t, --train           Trains the NN model based on current data.
+  -c, --chat            Chat with the chatbot.
+  -i TEXTINPUT, --textinput TEXTINPUT
+                        Give an text input to the chatbot and recive a answer. Provide a UUID for the conversation with  
+                        -cu or --conversationuuid followed by the UUID.
+  -cu CONVERSATIONUUID, --conversationuuid CONVERSATIONUUID
+                        Needed when using -i, --textinput. Provide a UUID to a conversation.
+\end{lstlisting} \end{figure}
+
+Neben dem Umbau zur Python Modul und der Einbindung der Konsolenparameter, wurde noch das Logging weiter verfeinert und vervollständigt. Dieser Entwicklungsstand findet sich im Unterorder \code{20-prepared-ai-app}. Der Inhalt ist ebensfalls wieder in Anlage zu dieser Seminararbeit sowie auch auf Github.com zu finden. Der Aufruf kann wieder über die Konsole mit folgenden Befehlen erfolgen: 
+
+\begin{lstlisting}[language=bash]
+pipenv install
+pipenv run python -m chatbot -t
+pipenv run python -m chatbot
+\end{lstlisting}
+
+Dieser Aufruf führt dann dem oben sichtbaren Hilfemenü. Mit dem Befehl \code{pipenv run python -m chatbot -c} kann ein Chat auf der Konsole im direkten Dialog gestartet werden. 
+
+Die Vorbereitung der KI-Anwendung, des Chatbots, kann damit an dieser Stelle abgeschlossen werden. Die Einbundung in ein anderes Pyhton Skript und auch der Aufruf über die Konsole sind möglich.
+	
+
 
 \subsection{Einrichtung Django-Basissystem }
 \subsection{Erweiterungen für API}
