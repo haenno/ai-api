@@ -86,7 +86,7 @@ This folder provides a ready to use installation of Django with the AI-Applicati
     MIDDLEWARE = [
         'corsheaders.middleware.CorsMiddleware', # add cors as the first line
         ...
-        'django.middleware.security.SecurityMiddleware', # keep this line an insert whitenoise below
+        'django.middleware.security.SecurityMiddleware', # look out for this line and insert whitenoise below
         'whitenoise.middleware.WhiteNoiseMiddleware', # for static files
         ...
 

@@ -831,8 +831,8 @@
 %-----------------------------------
 % Tabellenverzeichnis
 %-----------------------------------
-\listoftables
-\newpage
+%\listoftables
+%\newpage
 %-----------------------------------
 % Abkürzungsverzeichnis
 %-----------------------------------
@@ -849,6 +849,7 @@
   \acro{HTTP/S}{Hypertext Transfer Protocol (Secure)}
   \acro{KI}{Künstliche Intelligenz}
   \acro{REST}{Representational State Transfer}
+  \acro{UUID}{Universally Unique Identifier}
   \acro{foobalouhuhu}{Nicht verwendet, taucht nicht im Abkürzungsverzeichnis auf}
 \end{acronym}
 % haenno-apa6-slim: End
@@ -1063,7 +1064,7 @@ Zuerst wurde das gesamte Tutorial von mir durchgeführt und die KI-Anwendung lok
 
 \begin{figure}[H]
 	\caption{Programmcode: model.py aus Chatbot Tutorial}
-	\label{fig:code-nn-basis}
+	\label{fig:code-model-py-chatbot-tut}
 \begin{lstlisting}[language=python]
 import torch
 import torch.nn as nn
@@ -1121,7 +1122,7 @@ Der Vollständigkeit halber verweise ich noch kurz auf den Teil der KI-Anwendung
 
 In einem nächsten Schritt werden diese Wörter dann auf Ihren Wortstamm zurückgeführt. Dies war eine der ersten Stellen an denen ich das Ergebnis des Tutorials angepasst habe. Ich habe ein entsprechendes Paket für die Verarbeitung deutscher Sprache gesucht und mit \enquote{HanTa} gefunden \parencite[]{57-wartena2019probabilistic}. Dieser Programmablauf erfolgt nicht nur beim Trainung des KI-Modells, sondern auch beim Gespräch mit Chatbot über die \code{chat.py}.
 
-Weitere Anpassungen durch mich in dieser allerersten Entwicklungsstufe der KI-Anwendung direkt nach Abschluss des Tutorials waren das Hinzufügen einer Log-Funktion die alle Eingaben und Antworten in Log-Dateien (hier als CSV) abspeichert. Ebenso erzeuge ich für jedes geführte Gespräch einen eindeutigen Identifikator (hier als UUID, Universally Unique Identifier), der es erlaubt geführte Gespräche in den Log-Dateien anhand der UUID vollständig nachzuvollziehen. 
+Weitere Anpassungen durch mich in dieser allerersten Entwicklungsstufe der KI-Anwendung direkt nach Abschluss des Tutorials waren das Hinzufügen einer Log-Funktion die alle Eingaben und Antworten in Log-Dateien (hier als CSV) abspeichert. Ebenso erzeuge ich für jedes geführte Gespräch einen eindeutigen Identifikator (hier als \ac{UUID}), der es erlaubt geführte Gespräche in den Log-Dateien anhand der \ac{UUID} vollständig nachzuvollziehen. 
 
 Alle Einstellungen und Parameter der KI-Anwendung habe ich in der Datei \code{config.py} zusammengefasst. Abschließend habe ich die für das Starten der KI-Anwendung notwendigen Abhängigkeiten und Pakete für die Verwendung mit dem Python Tool \enquote{Pipenv} in der Datei \enquote{Pipfile} zusammengefasst. 
 
@@ -1243,15 +1244,134 @@ Die Vorbereitung der KI-Anwendung, des Chatbots, kann damit an dieser Stelle abg
 	
 
 
-\subsection{Einrichtung Django-Basissystem }
+\subsection{Einrichtung Django Grundinstallation}
 
-Die Bereitstellung des Webservices als REST API soll über Django erfolgen. Daher wird zuerst eine Grundinstallation von Django vorgenommen. Soweit möglich wurden dabei bereits alle notwendigen Pakete und Abhängigkeiten mit berücksichtigt.
+Die Bereitstellung des Webservices als REST API soll über Django erfolgen. Daher wird zuerst eine Grundinstallation von Django vorgenommen. Eine fertige Django Grundinstallation sowie die Dokumentation über die Installation findet sich in den Anlagen zur Seminararbeit und auf Github.com im Ordner \code{30-django-base-install} in der Datei \code{README.md}.
+
+Bei dieser Installation wurden alle notwendigen Pakete und Abhängigkeiten mit berücksichtigt, die für die Einbindung der zuvor vorbereiteten KI-Anwendung notwendig waren. Auch einige weitere Pakete und Funktionen wurden vorrausschauend bereits mit installiert. Neben zwingend für die Umsetzung notwendigen Paketen wie dem \enquote{Django Toolkit für REST API}, dem \enquote{Django REST framework}, wurden voralem Pakete installiert die Funktionen bereitstellen, die den Zugriff auf die API erleichtern. 
 
 
+\begin{figure}[H]
+	\caption{Dateiinhalt der \enquote{Pipfile} für die Django Grundinstallation}
+	\label{fig:code-nn-basis}
+\begin{lstlisting}[language=python]
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
 
-\subsection{Erweiterungen für API}
- 
-\subsection{Pyhton Module und Pakete}
+[packages]
+
+Django = "==4.1" # Django itself 
+djangorestframework = "==3.13.1" # Django toolkit for rest api
+drf-yasg = "==1.21.3" # Swagger for Django / OpenAPI 2.0 
+django-cors-headers = "==3.13.0" # for cross site access from a frontend
+daphne = "==3.0.2" # to serve django 
+whitenoise = "==6.2.0" # to serve static files
+tzdata = "==2022.2" # to fix dependency error on some systems
+
+# for the chatbot module
+numpy = "==1.23.2" 
+nltk = "==3.7"
+HanTa = "==0.2.0" # 0.2.1 seems broken, fallback to 0.2.0
+torch = "==1.12.1"
+
+[dev-packages]
+
+[requires]
+python_version = "3"
+\end{lstlisting}
+\end{figure}
+
+Über das Paket \code{drf-yasg} bzw. \enquote{Yet another Swagger generator} z.B. wird vollautomatisch eine Webseite generiert (Swagger), die der OpenAPI 2.0 Spezifikationen entspricht und Dritten damit eine vollständige Dokumentation der API bereitstellt und die Verwendung der API damit ermöglicht. 
+
+\begin{figure}[H]
+	\caption{Bildschirmfoto von lokal laufender Swagger Instanz}\label{fig:local-swagger}
+	\includegraphics[width=0.60\textwidth]{swagger.png}
+	\\
+	Quelle: Eigenes Bildschirmfoto
+\end{figure}
+
+
+Der Installations- und Einrichtungsporzess ist bei Django gut zu dokumentiern. Die Schritte sind kleinteilig und führen, in der korrekten Abfolge ausgeführt, regelmäßig zum gleichen Ergebnis. Für diese Grundinstallation sind 14 Schritte erforderlich, die in einem Zeitraum von etwa 30 Minuten von einer  Person mit IT-Kenntnissen gut abgearbeitet werden können. Es müssen z.B. verschiedene Konsolenbefehle, wie z.B. \code{pipenv run python manage.py createsuperuser} für die Anlage eines Administratoraccounts oder \code{pipenv run python -m chatbot -t} zum initialen Training des KI-Modells, eingegeben werden. Auch müssen verschiedene Dateien angelegt oder bestehenden Datein Inhalte an der korrekten Stelle hinzugefügt werden. Dazu ein Auszug aus der Anleitung: 
+
+\begin{figure}[H]
+	\caption{Auszug der \enquote{README.md}-Datei: Zeilenweise Konfiguration}
+	\label{fig:code-django-readme}
+\begin{lstlisting}[language=python]
+# Pay attention to the order:
+MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware', # add cors as the first line
+    ...
+    'django.middleware.security.SecurityMiddleware', # look out for this line and insert whitenoise below
+    'whitenoise.middleware.WhiteNoiseMiddleware', # for static files
+    ...
+\end{lstlisting}
+\end{figure}
+
+Neben diesen einfacherern Schritten, war es aber auch notwendig die KI-Anwendung selbst einzubinden. Dazu wird während des Installationprozesses die KI-Anwendung aus dem Ordner \code{20-prepared-ai-app} in den Ordner der Django Grundinstallation kopiert. Damit können Funktionen der KI-Anwendung als Modul an jeder Stelle von Django importiert und aufgerufen werden. 
+
+Dann folgend müssen für die Funktionen der KI-Anwendung entsprechende Programmierungen in Django erstellt werden: Das Datenmodell muss abgebildet werden, die Sichten auf die Daten müssen ertellt werden und die entsprechenden Einstiegspunkte konfiguriert werden. Innerhalb von Django finden sich diese Programmierungen bzw. Konfigurationen in den Dateien \code{models.py}, \code{views.py} und \code{urls.py} wieder. Je nach Organisation finden sich diese Dateien an unterscheidlichen Stellen von Django wieder. Auch lassen sich die Inhalte auf verschiedene Hirachien aufteilen und damit nach Programmteil getrennt hinterlegen. Das kann die Organisation von Anwendungen deutlich erleichtern.
+
+In den in Django agelegten Datenmodellen erkennt mal z.B. schnell, dass diese vom Aufbau im wesentlichen den bisherigen Log-Dateien entsprechen. Folgend sind die beiden Klassen zu den Datenmodellen zu sehen. Wie man erkennt, können diese auch mit Informationen angereichert werden, die im Webservice wichtige Hinweise zur korrekten Nutzung geben:
+
+\begin{figure}[H]
+	\caption{Auszug der \enquote{models.py}-Datei: Das Django Datenmodell}
+	\label{fig:code-django-data-modell}
+\begin{lstlisting}[language=python]
+class ChatUuid(models.Model):
+    chatuuid = models.UUIDField(unique=True, default=uuid.uuid4,
+                                editable=False, help_text="The UUID for a Chatbot conversation.")
+    created = models.DateTimeField(auto_now_add=True)
+    agreed = models.TextField(
+        blank=True, help_text="If user agreed to the service terms (http://...), send 'Einverstanden'.")
+
+    def __str__(self):
+        return str(self.chatuuid)
+
+class ChatDialogue(models.Model):
+    chatuuid = models.UUIDField(blank=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    input = models.TextField(blank=False)
+    probability = models.FloatField(blank=True)
+    understood = models.BooleanField(blank=True)
+    output = models.TextField(blank=True)
+
+    def __str__(self):
+        return str(self.input)
+\end{lstlisting}
+\end{figure}
+
+So kann man durch die Angaben im Attribut \code{help_text='...'} in den Zeilen 3 und 6 der Abbildung \ref{fig:code-django-data-modell} hinterlegen, was für Nutzer der API relevant ist. Hier wird z.B. der Klasse \code{ChatUuid} die Information mitgegeben, dass es sich dabei um eine \ac{UUID} für ein Gespräch mit dem Chatbot handelt. Eine ChatUuid aber, wird nur vergeben, so das Einverständnis zu den Nutzungsbedinungen erteilt wurde. Hier indem der Parameter \code{agreed} mit dem Inhalt \enquote{Einverstanden} übergeben wurde. Eine entsprechende Fehlermeldung wurde über einen Inhalt in der Datei \code{views.py} programmiert: 
+
+\begin{figure}[H]
+	\caption{Auszug der \enquote{views.py}-Datei: Die Django Sichten}
+	\label{fig:code-django-views}
+\begin{lstlisting}[language=python]
+class ChatUuidNewAPIView(CreateAPIView):
+    model = ChatUuid
+    serializer_class = ChatUuidSerializer
+    queryset = ChatUuid.objects.all()
+
+    def post(self, request, *args, **kwargs):
+        request.data["chatuuid"] = get_new_uuid()
+
+        if request.data["agreed"] != "Einverstanden":
+            return Response(data="If 'agreed' is not 'Einverstanden' you can not use the services.",
+                            status=status.HTTP_400_BAD_REQUEST)
+
+        return self.create(request, *args, **kwargs)
+\end{lstlisting}
+\end{figure}
+
+In Abbildung \ref{fig:code-django-views} findet man ein Klasse des Typs \code{CreateAPIView}. Diese stellt über des \enquote{Djangao Rest framework} einen Endpunkt für POST Anfragen bereit. In der Zeile 6 sieht man entsprechend ein die Methode \code{def post(...):}. Die Programmlogik für die Fehlermeldung findet sich in der Zeilen 9: Hier wird überprüft ob der bereits bekannte Parameter \code{agreed} mit dem Inhalt \enquote{Einverstanden} befüllt ist. Ist das nicht der Fall, wird über Zeile 10 eine Rückgabe mit Fehlermeldung und HTTP-Statuscode 400 (keine Verarbeitung aufgrund clientseitigem Fehler) zurückgegeben.
+
+Nach diese Systematik wurden für alle Funktionen der KI-Anwendung entsprechend Sichten und Einstiegspunkte programmiert, die der Installationsanleitung \code{30-django-base-install\README.md} in den Anlagen und auf Github.com entnommen werden kann. Auch finden sich natürlich alle Programmierungen und Konfigurationen in dem Ordner zur Django Grundinstallation selbst (\code{30-django-base-install}).
+
+
+% \subsection{Erweiterungen für API}
+% \subsection{Pyhton Module und Pakete}
 % \subsection{Aufruf als Subprozess}
 % \subsection{Zugriff}
 % \subsubsection{Konsolenbasiert mit Zeitmessung}
@@ -1265,29 +1385,29 @@ Die Bereitstellung des Webservices als REST API soll über Django erfolgen. Dahe
 %-----------------------------------
 % Apendix / Anhang
 %-----------------------------------
-\newpage
-\section*{\AppendixName} %Überschrift "Anhang", ohne Nummerierung
-\addcontentsline{toc}{section}{\AppendixName} %Den Anhang ohne Nummer zum Inhaltsverzeichnis hinzufügen
+%\newpage
+%\section*{\AppendixName} %Überschrift "Anhang", ohne Nummerierung
+%\addcontentsline{toc}{section}{\AppendixName} %Den Anhang ohne Nummer zum Inhaltsverzeichnis hinzufügen
 
-\begin{appendices}
+%\begin{appendices}
 % Nachfolgende Änderungen erfolgten aufgrund von Issue 163
-\makeatletter
-\renewcommand\@seccntformat[1]{\csname the#1\endcsname:\quad}
-\makeatother
-\addtocontents{toc}{\protect\setcounter{tocdepth}{0}} %
-	\renewcommand{\thesection}{\AppendixName\ \arabic{section}}
-	\renewcommand\thesubsection{\AppendixName\ \arabic{section}.\arabic{subsection}}
+%\makeatletter
+%\renewcommand\@seccntformat[1]{\csname the#1\endcsname:\quad}
+%\makeatother
+%\addtocontents{toc}{\protect\setcounter{tocdepth}{0}} %
+%	\renewcommand{\thesection}{\AppendixName\ \arabic{section}}
+	%\renewcommand\thesubsection{\AppendixName\ \arabic{section}.\arabic{subsection}}
 	% haenno-apa6-slim: Start
 	% \input{kapitel/anhang/anhang}
 
-	\section{Beispielanhang}\label{Beispielanhang}
-	Dieser Abschnitt dient nur dazu zu demonstrieren, wie ein Anhang aufgebaut seien kann.
-	\subsection{Weitere Gliederungsebene}
-	Auch eine zweite Gliederungsebene ist möglich.
+	%\section{Beispielanhang}\label{Beispielanhang}
+	%Dieser Abschnitt dient nur dazu zu demonstrieren, wie ein Anhang aufgebaut seien kann.
+	%\subsection{Weitere Gliederungsebene}
+	%Auch eine zweite Gliederungsebene ist möglich.
 
 	% haenno-apa6-slim: End
-\end{appendices}
-\addtocontents{toc}{\protect\setcounter{tocdepth}{2}}
+%\end{appendices}
+%\addtocontents{toc}{\protect\setcounter{tocdepth}{2}}
 
 
 %-----------------------------------
