@@ -21,9 +21,6 @@ This folder provides a ready to use installation of Django with the AI-Applicati
 
 4. Open the backend on <http://127.0.0.1:8000>.
 
-
-
-
 ## The installation process
 
 1. Install Python and Pipenv.
@@ -319,7 +316,7 @@ This folder provides a ready to use installation of Django with the AI-Applicati
 
 12. Then copy over the chatbot AI-Application module folder. Here it was the contents of ``chatbot``-Folder in ``20-prepared-ai-app``. Copy it in the folder, that contains the ``manage.py``-File.
 
-13. Then initialize Django with the following coammnds. Note the superuser credentials! 
+13. Then initialize Django with the following coammnds. Note the superuser credentials!
 
     ```bash
     pipenv run python manage.py makemigrations
