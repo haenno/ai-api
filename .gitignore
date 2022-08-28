@@ -109,8 +109,8 @@ db.sqlite3-journal
 develop-eggs/
 dist
 dist/
-django/apiapp/migrations/*
-django/staticfiles/*
+
+*/staticfiles/*
 dmypy.json
 docs/_build/
 downloads/
