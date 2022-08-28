@@ -1367,7 +1367,48 @@ class ChatUuidNewAPIView(CreateAPIView):
 
 In Abbildung \ref{fig:code-django-views} findet man ein Klasse des Typs \code{CreateAPIView}. Diese stellt über des \enquote{Djangao Rest framework} einen Endpunkt für POST Anfragen bereit. In der Zeile 6 sieht man entsprechend ein die Methode \code{def post(...):}. Die Programmlogik für die Fehlermeldung findet sich in der Zeilen 9: Hier wird überprüft ob der bereits bekannte Parameter \code{agreed} mit dem Inhalt \enquote{Einverstanden} befüllt ist. Ist das nicht der Fall, wird über Zeile 10 eine Rückgabe mit Fehlermeldung und HTTP-Statuscode 400 (keine Verarbeitung aufgrund clientseitigem Fehler) zurückgegeben.
 
-Nach diese Systematik wurden für alle Funktionen der KI-Anwendung entsprechend Sichten und Einstiegspunkte programmiert, die der Installationsanleitung \code{30-django-base-install\README.md} in den Anlagen und auf Github.com entnommen werden kann. Auch finden sich natürlich alle Programmierungen und Konfigurationen in dem Ordner zur Django Grundinstallation selbst (\code{30-django-base-install}).
+Nach dieser Systematik wurden für alle Funktionen der KI-Anwendung entsprechend Sichten und Einstiegspunkte programmiert, die der Installationsanleitung \code{30-django-base-install\\README.md} in den Anlagen und auf Github.com entnommen werden kann. Auch finden sich natürlich alle Programmierungen und Konfigurationen in dem Ordner zur Django Grundinstallation selbst (\code{30-django-base-install}). 
+
+Den vollständigen Ordnerinhalt zeigt die folgende Abbildung: 
+
+\begin{figure}[H]
+	\caption{Ordnerinhalt Django Grundinstallation}\label{fig:img-django-base-install}
+	\includegraphics[width=0.5\textwidth]{django-folder.png}
+	\\
+	Quelle: Eigenes Bildschirmfoto
+\end{figure}
+
+Für die API wurden insgesamt vier Endpunkte, also die Zugriffspunkte auf die KI-Anwendung, erstellt. Zwei der Endpunkte, \code{input} und \code{newchatuuid}, sind dabei für das Gespräch mit dem Chatbot notwendig. Mittels einer POST HTTP-Anfrage an \code{/api/v1/chatbot/input} können schon mit den beiden Pflichtparametern \code{input} und \code{chatuuid} Eingaben an die KI-Anwendung übergeben werden. Der Chatbot verarbeitet diese dann über den Modulaufruf aus einer Django Sicht bzw. View heraus, und gibt die Antwort im Feld \code{output}, zusammen mit eineigen anderen Feldern wie z.B. der Wahrscheinlichkeit des Verständnisses, im direkten Dialog als Antwort auf die Anfrage selbst, mit einem HTTP-Statuscode 200 (erfolgreich) zurück wie die folgende Abbildung zeigt:
+
+\begin{figure}[H]
+	\caption{Antwort des Webservices auf Chatbot-Eingabe}\label{fig:img-cb-200-input}
+	\includegraphics[width=0.7\textwidth]{status200-input.png}
+	\\
+	Quelle: Eigenes Bildschirmfoto
+\end{figure}
+
+
+Einen weiteren Endpunkt gibt es zum Trainung des KI-Modells, den \code{/api/v1/chatbot/train}. Dieser Endpunk ist für die Verwendung mit einer GET Methode angelegt. Der Aufruf jedoch, wird nur erlaubt wenn über eine HTTP Basis Authentifizierung ein Benutzername und das entsprechende Passwort eines Administratorkontos der Anfrage mitegegeben wird. Bei fehlenden Authentifizierungsdaten erfolgt die Antwort mit HTTP-Statuscode 403 (verboten) und der Fehlermeldung \code{ \{ "detail": "Authentication credentials were not provided." \}}. Werden falsche Angaben gemacht, eroflgt die Antwort mit geleichem Statuscode, jedoch der Fehlermeldung \code{ \{ "detail": "Invalid username/password." \}}. Diese Fehlermeldungen werden dabei von Django bzw. dem \enquote{Django Rest framework} automatisch erzeugt und übermittelt. Die einzige Einstellung dazu erfolgte in den Sichten, der Datei \code{views.py}, in Zeile 2 durch eine Angabe im Parameter \code{permission_classes}:
+
+\begin{figure}[H]
+	\caption{Auszug der \enquote{views.py}-Datei: Berechtigungen einer Klasse}
+	\label{fig:code-django-views-admin-only}
+\begin{lstlisting}[language=python]
+class ChatTrainAPIView(views.APIView):
+    permission_classes = [permissions.IsAdminUser]
+
+    def get(self, request, format=None):
+        """
+        Returns the console output from the training process.
+        Only Admin Users can start the training.
+        """
+        trainoutput = train()
+        
+        return Response(data=str(trainoutput), status=status.HTTP_200_OK)
+\end{lstlisting}
+\end{figure}
+
+
 
 
 % \subsection{Erweiterungen für API}
