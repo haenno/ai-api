@@ -1150,59 +1150,59 @@ Hier im Detail ein Auszug aus der Datei \code{__init.py__} des Moduls \code{chat
 	\label{fig:code-main-func}
 \begin{lstlisting}[language=python]
 def main():
-    parser = ArgumentParser(description='Allows the use of a chatbot with PyTorch.')
+  parser = ArgumentParser(description='Allows the use of a chatbot with PyTorch.')
 
-    parser.add_argument('-u', '--newuuid',  action='store_true',
-                        help='Get a new, unique id for a conversation.')
+  parser.add_argument('-u', '--newuuid',  action='store_true',
+            help='Get a new, unique id for a conversation.')
 
-    parser.add_argument('-t', '--train',  action='store_true',
-                        help='Trains the NN model based on current data.')
+  parser.add_argument('-t', '--train',  action='store_true',
+            help='Trains the NN model based on current data.')
 
-    parser.add_argument('-c', '--chat',  action='store_true',
-                        help='Chat with the chatbot.')
+  parser.add_argument('-c', '--chat',  action='store_true',
+            help='Chat with the chatbot.')
 
-    parser.add_argument('-i', '--textinput',  type=str,
-                        help='Give an text input to the chatbot and recive a answer. \
-                            Provide a UUID for the conversation with -cu or --conversationuuid \
-                                followed by the UUID.')
+  parser.add_argument('-i', '--textinput',  type=str,
+            help='Give an text input to the chatbot and recive a answer. \
+              Provide a UUID for the conversation with -cu or --conversationuuid \
+                followed by the UUID.')
 
-    parser.add_argument('-cu', '--conversationuuid',  type=str,
-                        help='Needed when using -i, --textinput. Provide a UUID to a conversation.')
+  parser.add_argument('-cu', '--conversationuuid',  type=str,
+            help='Needed when using -i, --textinput. Provide a UUID to a conversation.')
 
-    args = parser.parse_args()
+  args = parser.parse_args()
 
+  
+  if vars(args)['newuuid']:
+    print(str(get_new_uuid()))
+    quit()
+
+  if vars(args)['train']:
+    train()
+    quit()  
+
+  if vars(args)['chat']:
+    chat()
+    quit()
     
-    if vars(args)['newuuid']:
-        print(str(get_new_uuid()))
-        quit()
+  # check for complete input for a 'singlechat' call
+  complete_text_input = 0
+  if vars(args)['textinput']:
+    complete_text_input += 1 
+  if vars(args)['conversationuuid']:     
+    complete_text_input += 1 
 
-    if vars(args)['train']:
-        train()
-        quit()    
+  if complete_text_input == 1:
+    parser.error("Too few arguments: -cu/--conversationuuid and -i/--textinput are both needed.")
+  
+  if complete_text_input == 2:
+    print(str(singlechat(str(args.conversationuuid), str(args.textinput))))
+    quit()
 
-    if vars(args)['chat']:
-        chat()
-        quit()
-    
-    # check for complete input for a 'singlechat' call
-    complete_text_input = 0
-    if vars(args)['textinput']:
-        complete_text_input += 1 
-    if vars(args)['conversationuuid']:       
-        complete_text_input += 1 
-
-    if complete_text_input == 1:
-        parser.error("Too few arguments: -cu/--conversationuuid and -i/--textinput are both needed.")
-    
-    if complete_text_input == 2:
-        print(str(singlechat(str(args.conversationuuid), str(args.textinput))))
-        quit()
-
-    parser.print_help()
+  parser.print_help()
 
 
 if __name__ == '__main__':
-    main()
+  main()
 \end{lstlisting}
 \end{figure}
 
@@ -1239,7 +1239,7 @@ pipenv run python -m chatbot
 
 Dieser Aufruf führt dann dem oben sichtbaren Hilfemenü. Mit dem Befehl \code{pipenv run python -m chatbot -c} kann ein Chat auf der Konsole im direkten Dialog gestartet werden. 
 
-Die Vorbereitung der KI-Anwendung, des Chatbots, kann damit an dieser Stelle abgeschlossen werden. Die Einbundung in ein anderes Pyhton Skript und auch der Aufruf über die Konsole sind möglich.
+Die Vorbereitung der KI-Anwendung, des Chatbots, kann damit an dieser Stelle abgeschlossen werden. Die Einbindung in ein anderes Pyhton Skript und auch der Aufruf über die Konsole sind möglich.
 	
 
 
