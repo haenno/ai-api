@@ -1,3 +1,4 @@
+# same base container as the frontend to save traffic and space 
 FROM node:18-bullseye
 WORKDIR /usr/src/ai_api_backend
 COPY . .
