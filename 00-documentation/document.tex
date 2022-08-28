@@ -208,7 +208,7 @@
 
 \lstdefinelanguage{python}{
     morekeywords={access,and,break,class,continue,def,del,elif,else,except,exec,finally,for,from,global,if,import,in,is,lambda,not,or,pass,print,raise,return,try,while},
-    morekeywords=[2]{abs,all,any,basestring,bin,bool,bytearray,callable,chr,classmethod,cmp,compile,complex,delattr,dict,dir,divmod,enumerate,eval,execfile,file,filter,float,format,frozenset,getattr,globals,hasattr,hash,help,hex,id,input,int,isinstance,issubclass,iter,len,list,locals,long,map,max,memoryview,min,next,object,oct,open,ord,pow,property,range,raw_input,reduce,reload,repr,reversed,round,set,setattr,slice,sorted,staticmethod,str,sum,super,tuple,type,unichr,unicode,vars,xrange,zip,apply,buffer,coerce,intern},
+    morekeywords=[2]{abs,all,any,basestring,bin,bool,bytearray,callable,chr,classmethod,cmp,compile,complex,delattr,dict,dir,divmod,enumerate,eval,execfile,file,filter,float,format,frozenset,getattr,globals,hasattr,hash,help,hex,id,input,int,isinstance,issubclass,iter,len,list,locals,long,map,max,memoryview,min,next,object,oct,open,ord,pow,property,range,raw_input,reduce,reload,repr,reversed,round,set,setattr,slice,sorted,staticmethod,str,sum,super,tuple,type,unichr,unicode,vars,xrange,zip,apply,buffer,coerce,intern,export},
     sensitive=true,
     morecomment=[l]\#,
     morestring=[b]',
@@ -1418,11 +1418,53 @@ Der Aufruf des \code{train}-Endpunkts dauert meist zumindest einige Sekunden. Es
 % \subsubsection{Konsolenbasiert mit Zeitmessung}
 \subsection{Zugriff mit einem Web-Frontend (Vue.js und Axios)}
 
-Für den einfachen Zugriff und um die Funktionalität abschließend zu bestätigen, soll auch ein Zugriff auf den neues Webservice der KI-Anwendung über ein Web-Frontend durchgeführt werden. Dazu wurde eine einfache Webseite erstellt, die Schrittweise die diaglobasierte Kommunikation mit der KI-Anwendung, also dem Chatbot, aufbaut und durchführt. Die Auswahl des zum Einsatz kommenden Frameworks, fiel hier auf \enquote{Vue.js} das als leichtgewichtiges, quelloffenes und schnell einzurichtendes Framework ideal für diesen Anwendungsfall ist. Ein Chatdialog erfordert hier keinen besonders komplexen oder aufwändigen Aufbau. Lediglich HTTP-Anfragen müssen an eine REST API gestellt werden können. Dazu kommt \enquote{Axios} als HTTP-Bibliothek auf der Web-Seite zum Einsatz.
+Für den einfachen Zugriff und um die Funktionalität abschließend zu bestätigen, soll auch ein Zugriff auf den neues Webservice der KI-Anwendung über ein Web-Frontend durchgeführt werden. Dazu wurde eine einfache Webseite erstellt, die Schrittweise die diaglobasierte Kommunikation mit der KI-Anwendung, also dem Chatbot, aufbaut und durchführt. Die Auswahl des zum Einsatz kommenden Frameworks, fiel hier auf \enquote{Vue.js} das als leichtgewichtiges, quelloffenes und schnell einzurichtendes Framework ideal für diesen Anwendungsfall ist. Ein Chatdialog erfordert hier keinen besonders komplexen oder aufwändigen Aufbau. Lediglich HTTP-Anfragen müssen an eine REST API gestellt werden können. Dazu kommt \enquote{Axios} als HTTP-Bibliothek auf der Web-Seite zum Einsatz.  
 
-Die Erstellung der Webseite erfolgte durch Nutzung einer, auf eine einfache und in den Funktionen leicht nachvollziehbare, Beispielanwendung \parencite{58-howto-vue}. Die dort erstellte Anwendung wurde gründlich gesichtet und konnte in der Funktiosnweise nachvollzegen werden. Weitere Anpassungen und Optimierungen konnten darauf erfolgen, insbesondere der Funktionsumfang konnte noch weiter zusammengeschrumpft werden. Dies da in dem Anwendungsfall des Chatbot, nur noch PUT- und GET-Methoden zum Einsatz kommen. 
+Die Erstellung der Webseite erfolgte durch Nutzung einer, auf eine einfache und in den Funktionen leicht nachvollziehbare, Beispielanwendung \parencite{58-howto-vue}. Die dort erstellte Anwendung wurde gründlich gesichtet und konnte in der Funktiosnweise nachvollzegen werden. Weitere Anpassungen und Optimierungen konnten darauf erfolgen, insbesondere der Funktionsumfang konnte noch weiter zusammengeschrumpft werden. Dies da in dem Anwendungsfall des Chatbot, nur noch POST-Methoden zum Einsatz kommen. 
 
-Die erstellte Webseite befindet sich in den Anlagen und auf Github.com im Ordner \code{40-vue-axios-webpage}. 
+Die erstellte Webseite befindet sich in den Anlagen und auf Github.com im Ordner \code{40-vue-axios-webpage}. Der Start der Webseite erfolte nach installtion von \enquote{node.js} mittels Eingabe von \code{npm install} und \code{npm run server} im Projektordner. 
+
+Die Verbindung zwischen dem Frontend (Webseite, Vue.js mit Axios) und Backend (Django, KI-Anwendung) wird in der Datei \code{http-common.js} eingestellt: 
+
+\begin{figure}[H]
+	\caption{Programmcode: Verbindungskonfiguration Back- und Frontend}
+	\label{fig:code-http-backend-frontend-connection}
+\begin{lstlisting}[language=python]
+import axios from "axios";
+
+export default axios.create({
+  baseURL: "http://127.0.0.1:8000/api/v1",
+  headers: {
+    "Content-type": "application/json",
+  },
+});
+\end{lstlisting}
+\end{figure}
+
+Das Web-Frontend wurde passend zum Webservice entworfen. Damit das Durchführen von Tests und ein Eingriff in die Abläufe leicht möglich ist sowie zur leichten Fehlersuche, wurde die Webseite bewusst nicht als fertige Chatanwendung mit nur einer Eingabezeile und einem Ausgabefenster entworfen. Die Webseite bildet den mehrstufigen Verbindungsauf zwischen dem Client und Server. Zuerst muss eine Chat-UUID durch Übermittlung des Einverständnis zu den Nutzungsbedinungen abgeholt werden. Dies ist in Abbildung \ref{web-frontend-leer} unten, links zu sehen. Erst dann kann mit dieser Chat-UUID mit dem Chatbot gesprochen werden. Im mittleren Teil der Webseite, kann dann die Chat-UUID sowie die Nachricht an den Chatbot eingetragen werden. Die Antwort wird dann im rechten Teil der Webseite dargestellt. 
+
+
+\begin{figure}[H]
+	\caption{Bildschirmfoto: Mit Vue.js und Axios erstellte Webseite}\label{fig:web-frontend-leer}
+	\includegraphics[width=0.95\textwidth]{web-frontend.png}
+	\\
+	Quelle: Eigenes Bildschirmfoto
+\end{figure}
+
+
+In der Abbildung \ref{fig:web-frontend-genutzt} erkennt man dann, das Ergebnis eines erfolten Dialogs. Die Antworten incl. technischer Details werden jeweils unter der Aktion dargestellt. Sichtbar in den grauen Feldern der linken und mittleren Teil der Webseite. Im rechten Bereich wird der erfolgte dialog mit dem Chatbot dargestellt.
+
+
+\begin{figure}[H]
+	\caption{Bildschirmfoto: Das Web-Frontend wurde für Dialog genutzt}\label{fig:web-frontend-genutzt}
+	\includegraphics[width=1\textwidth]{web-frontend-genutzt.png}
+	\\
+	Quelle: Eigenes Bildschirmfoto
+\end{figure}
+
+
+
+
 
 
 \section{Fazit und Reﬂexion}

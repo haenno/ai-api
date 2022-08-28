@@ -4,7 +4,7 @@ A simple Webpage created with Vue.js and Axios to access a REST API which provid
 
 ## Usage
 
-1. Install node.js.
+1. Install **node.js**.
 2. Run ``npm install`` in this folder.
 3. Start the webpage with  ``npm run serve`` also from within this project folder.
 

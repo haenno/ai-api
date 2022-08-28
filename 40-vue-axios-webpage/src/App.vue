@@ -13,7 +13,8 @@
               gespeichert und weiterverarbeitet (<a href="">Datenschutzerklärung und Nutzungsbedingungen</a>).
               Wenn du damit einverstanden bist, schreibe "Einverstanden" in den Chat.
             </p>
-            <input type="text" class="form-control mb-2" ref="post_einverstanden" placeholder="Eingabe?" @keypress.enter="postData"/>
+            <input type="text" class="form-control mb-2" ref="post_einverstanden" placeholder="Eingabe?"
+              @keypress.enter="postData" />
           </div>
           <div class="input-group input-group-sm mb-2">
             <button class="btn btn-sm btn-primary" @click="postData">
@@ -40,7 +41,7 @@
             <input v-model="the_new_chat_uuid" type="text" class="form-control mb-2" ref="post2_chat_uuid"
               placeholder="Chat-UUID?" />
             <input type="text" class="form-control mb-2" ref="post2_chat_input"
-              placeholder="Deine Nachricht an den Chatbot..."  @keypress.enter="post2Data"/>
+              placeholder="Deine Nachricht an den Chatbot..." @keypress.enter="post2Data" />
           </div>
           <div class="input-group input-group-sm">
             <button class="btn btn-sm btn-primary" @click="post2Data">
@@ -57,19 +58,19 @@
       </div>
 
 
-    <div class="card mt-3">
-      <div class="card-header">Chatverlauf</div>
-      <div class="card-body">
-        <div class="input-group input-group-sm">
-          <button class="btn btn-sm btn-danger ml-2" @click="clearChatLog">
-            Chatverlauf löschen
-          </button>
-        </div>
-        <div v-if="chatLog" class="mt-2">
-          <p class="text-left font-monospace" v-html="chatLog"></p>
+      <div class="card mt-3">
+        <div class="card-header">Chatverlauf</div>
+        <div class="card-body">
+          <div class="input-group input-group-sm">
+            <button class="btn btn-sm btn-danger ml-2" @click="clearChatLog">
+              Chatverlauf löschen
+            </button>
+          </div>
+          <div v-if="chatLog" class="mt-2">
+            <p class="text-left font-monospace" v-html="chatLog"></p>
+          </div>
         </div>
       </div>
-    </div>
 
     </div>
 
