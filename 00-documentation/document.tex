@@ -1408,7 +1408,7 @@ class ChatTrainAPIView(views.APIView):
 \end{lstlisting}
 \end{figure}
 
-
+Der Aufruf des \code{train}-Endpunkts dauert meist zumindest einige Sekunden. Es wird dadurch klar, dass die direkte, dialogbasierte Kommunikation vorallem durch Antwortzeiten beschränke Grenzen hat. Anfragen die in aller Regel länger aus den Bruchteil einer Sekunde dauern, könnten über die API eine Rückmeldung geben, die anzeigt, dass die finale Antwort noch nicht in der nun erhaltenen Rückmeldung enthalten war. Es könnte dabei ein Token zur Nachfrage zum Bearbeitungsstand und Abholung des finalen Ergebnisses bei dem Webservice übergeben werden. Auch sehr lange laufende Verarbeitungen, könnten damit für Nutzer der API transparent verarbeitet werden. Eine Umsetzung dieser Idee, erfolgte hier jedoch aus Gründen des Umfangs der Seminararbeit nicht. 
 
 
 % \subsection{Erweiterungen für API}
@@ -1416,11 +1416,22 @@ class ChatTrainAPIView(views.APIView):
 % \subsection{Aufruf als Subprozess}
 % \subsection{Zugriff}
 % \subsubsection{Konsolenbasiert mit Zeitmessung}
-\subsection{Zugriff mit Vue.js und Axios auf Web-Frontend}
+\subsection{Zugriff mit einem Web-Frontend (Vue.js und Axios)}
+
+Für den einfachen Zugriff und um die Funktionalität abschließend zu bestätigen, soll auch ein Zugriff auf den neues Webservice der KI-Anwendung über ein Web-Frontend durchgeführt werden. Dazu wurde eine einfache Webseite erstellt, die Schrittweise die diaglobasierte Kommunikation mit der KI-Anwendung, also dem Chatbot, aufbaut und durchführt. Die Auswahl des zum Einsatz kommenden Frameworks, fiel hier auf \enquote{Vue.js} das als leichtgewichtiges, quelloffenes und schnell einzurichtendes Framework ideal für diesen Anwendungsfall ist. Ein Chatdialog erfordert hier keinen besonders komplexen oder aufwändigen Aufbau. Lediglich HTTP-Anfragen müssen an eine REST API gestellt werden können. Dazu kommt \enquote{Axios} als HTTP-Bibliothek auf der Web-Seite zum Einsatz.
+
+Die Erstellung der Webseite erfolgte durch Nutzung einer, auf eine einfache und in den Funktionen leicht nachvollziehbare, Beispielanwendung \parencite{58-howto-vue}. Die dort erstellte Anwendung wurde gründlich gesichtet und konnte in der Funktiosnweise nachvollzegen werden. Weitere Anpassungen und Optimierungen konnten darauf erfolgen, insbesondere der Funktionsumfang konnte noch weiter zusammengeschrumpft werden. Dies da in dem Anwendungsfall des Chatbot, nur noch PUT- und GET-Methoden zum Einsatz kommen. 
+
+Die erstellte Webseite befindet sich in den Anlagen und auf Github.com im Ordner \code{40-vue-axios-webpage}. 
+
 
 \section{Fazit und Reﬂexion}
 
+Es hat gut geklappt. Alles geht wie gewünscht. 
 
+Herausforderung und Schwierigkeit bei der Bereistsellung ist es, eine Grezne zwischen der API und der Anwendung aufrecht zu erhalten. Die Inhalte verschwimmen und verwachsen sehr schnell miteinander. Während der Umsetzung war es sehr schwer, die Funktionen der KI-Anwendung im Stand der Konsolenanwendung voll umfänglich in die API einzubinden, ohne an den Funktionen der KI-Anwendung im vorliegenden Zustand Veränderungen vorzunehmen. 
+
+Die Vorstellung die KI-Anwendung selbst vollständig in Django zu integrieren war dabei verlockend. Alle Daten und Logs hätten statt in einer Datei direkt über die Djnago Datenmodelle und Abstraktion bequem in einer Datenbank gespeichert werden können.  
 
 
 %-----------------------------------
