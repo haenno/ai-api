@@ -1,0 +1,25 @@
+version: '3'
+services:
+
+  ai_api_backend:
+    build:
+      context: ./ai_api_backend
+      dockerfile: Dockerfile
+    command: bash -c '/usr/src/app/ai_api_backend/start_api.sh'
+    ports:
+      - "8000:8000"
+    container_name: ai_api_backend
+    volumes:
+      - ./ai_api_backend:/usr/src/app/ai_api_backend
+      - /usr/src/app/ai_api_backend/node_modules
+
+  ai_api_frontend:
+    build:
+      context: ./ai_api_frontend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    container_name: ai_api_frontend
+    volumes:
+      - ./ai_api_frontend:/usr/src/app/ai_api_frontend
+      - /usr/src/app/ai_api_frontend/node_modules
