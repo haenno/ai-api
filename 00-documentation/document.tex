@@ -309,6 +309,48 @@
       {]}{{{\color{ipython_purple}{]}}}}{1},
 }
 
+\lstdefinelanguage{bash}{
+    %basicstyle=\normalfont\ttfamily,
+    identifierstyle=\color{black}\ttfamily,
+    commentstyle=\color{ipython_cyan}\ttfamily,
+    stringstyle=\color{ipython_red}\ttfamily,
+    keepspaces=true,
+    showspaces=false,
+    showstringspaces=false,
+    rulecolor=\color{ipython_frame},
+    frame=lines,
+    frameround={t}{t}{t}{t},
+    framexleftmargin=6mm,
+    numbers=none,
+    numberstyle=\tiny\color{halfgray},
+    backgroundcolor=\color{ipython_bg},
+    % extendedchars=true,
+    basicstyle=\scriptsize,
+    keywordstyle=\color{ipython_green}\ttfamily,
+    literate=
+     *{0}{{{\color{ipython_cyan}0}}}{1}
+      {1}{{{\color{ipython_cyan}1}}}{1}
+      {2}{{{\color{ipython_cyan}2}}}{1}
+      {3}{{{\color{ipython_cyan}3}}}{1}
+      {4}{{{\color{ipython_cyan}4}}}{1}
+      {5}{{{\color{ipython_cyan}5}}}{1}
+      {6}{{{\color{ipython_cyan}6}}}{1}
+      {7}{{{\color{ipython_cyan}7}}}{1}
+      {8}{{{\color{ipython_cyan}8}}}{1}
+      {9}{{{\color{ipython_cyan}9}}}{1}
+      {:}{{{\color{ipython_red}{:}}}}{1}
+      {,}{{{\color{ipython_red}{,}}}}{1}
+      {\{}{{{\color{ipython_purple}{\{}}}}{1}
+      {\}}{{{\color{ipython_purple}{\}}}}}{1}
+      {[}{{{\color{ipython_purple}{[}}}}{1}
+      {]}{{{\color{ipython_purple}{]}}}}{1},
+}
+
+
+
+% Better inline directory listings
+\definecolor{code-gray}{gray}{0.95}
+\newcommand{\code}[1]{\colorbox{code-gray}{\texttt{#1}}}
 
 %\lstset{
 %	language=JavaScript,
@@ -1013,7 +1055,7 @@ Für die Seminararbeit hier, wird jedoch nur eine sehr einfache Ausführung eine
 
 Speziell dieses Tutorial wurde gewählt, da es als KI-Framework PyTorch verwendet. PyTorch ist neben TensorFlow eines der aktuelle führenden KI-Frameworks (siehe auch Abbildung \ref{fig:ki-framework-nutzung}), hat jedoch für diesen Anwendungsfall den Vorteil, dass es deutlich weniger Abhängigkeiten hat und kleiner in der Grundinstallation ist. 
 
-Zuerst wurde das gesamte Tutorial von mir durchgeführt und die KI-Anwendung lokal nachgebaut und getestet. Hier bei gab es keine nennenswerten Besonderheiten. Die vom Autor verwendete KI ist in diesem Fall ein künstliches, neuronales Netz mit drei Ebenen:
+Zuerst wurde das gesamte Tutorial von mir durchgeführt und die KI-Anwendung lokal nachgebaut und getestet. Hier bei gab es keine nennenswerten Besonderheiten. Das vom Autor aufgebaute KI-Modell in der Datei \code{model.py} ist in diesem Fall ein künstliches, neuronales Netz mit drei Ebenen:
 
 \begin{figure}[H]
 	\caption{Programmcode: model.py aus Chatbot Tutorial}
@@ -1044,7 +1086,7 @@ class NeuralNet(nn.Module):
 
 Man erkennt hier in Zeile 14 die sichtbare Eingabeebene, folgend eine verborgene Ebene Zeiel 16 sowie Ausgabeebene in Zeile 18. Da hier eine verborgene Ebene verwendet wird, spricht man von einem \enquote{Deep Learning}-Modell. Es handelt sich bei dieser \acl{KI} um ein künstliches neuronales Netz (KNN), das mit maschinellen Lernen (ML) ein mehrschichtiges bzw. tiefes Lernen (Deep Learning) durchführt. Mehr und tiefer soll in dieser Seminararbeit jedoch nicht darauf eingegangen werden, da es den Rahmen der Seminararbeit sprengen würde und nicht zum Thema selbst gehört. Deutlich wird aber, dass schon mit einer einfachen KI-Anwendung, also hier dem Einsatz des KI-Frameworks PyTorch, direkt wesentliche und grundlegnde Anwendungsfälle und mögliche Anforderungen abgedeckt werden können. Deutlich komplexere Modelle sind hier nun also nur noch eine Frage der tatsächlichen Umsetzung und eine Umsetzung scheitert hier nicht mehr an einer fehlenden IT-Infrastruktur.
 
-Mit Abschluss des Tutorials umfasst die Anwendung nicht nur die Datei \enquote{model.py}, sondern auch eine \enquote{train.py} die er erlaubt, dass KI-Modell anhand der Eingabedaten in der Datei \enquote{intents.json} zu trainieren. Die Eingabedaten sind dabei wie folgt aufgebaut:
+Mit Abschluss des Tutorials umfasst die Anwendung nicht nur die Datei \code{model.py}, sondern auch eine \code{train.py} die er erlaubt, dass KI-Modell anhand der Eingabedaten in der Datei \code{intents.json} zu trainieren. Die Eingabedaten sind dabei wie folgt aufgebaut:
 
 
 \begin{figure}[H] \caption{Auszug der Eingabedatei für das KI-Modell \enquote{intents.json}}
@@ -1073,13 +1115,22 @@ An der Struktur dieser Daten kann die Funktionsweise nachvollzogen werden: Die K
 
 Der Vollständigkeit halber verweise ich noch kurz auf den Teil der KI-Anwendung die die in dieser Eingabedatei vorhandene, natürliche Sprache verarbeitet. Bevor diese Daten für das Trainung und die Verwendung im Gespräch mit dem Chatbot verwendet werden können, müssen die mittels Algorithmen der Verarbeitung natürlicher Sprache (Natural Language Processing, NLP) für die KI aufbereitet werden. Dazu weden die Sprachdaten tokenisiert, also die Eingabe in Sätze und die Sätze in Wörter aufgeteilt. In diesem Tutorial mithilfe des Paketes \enquote{nltk} (Natural Language Toolkit).
 
-In einem nächsten Schritt werden diese Wörter dann auf Ihren Wortstamm zurückgeführt. Dies war eine der ersten Stellen an denen ich das Ergebnis des Tutorials angepasst habe. Ich habe ein entsprechendes Paket für die Verarbeitung deutscher Sprache gesucht und mit \enquote{HanTa} gefunden \parencite[]{57-wartena2019probabilistic}. Dieser Programmablauf erfolgt nicht nur beim Trainung des KI-Modells, sondern auch beim Gespräch mit Chatbot über die \enquote{chat.py}.
+In einem nächsten Schritt werden diese Wörter dann auf Ihren Wortstamm zurückgeführt. Dies war eine der ersten Stellen an denen ich das Ergebnis des Tutorials angepasst habe. Ich habe ein entsprechendes Paket für die Verarbeitung deutscher Sprache gesucht und mit \enquote{HanTa} gefunden \parencite[]{57-wartena2019probabilistic}. Dieser Programmablauf erfolgt nicht nur beim Trainung des KI-Modells, sondern auch beim Gespräch mit Chatbot über die \code{chat.py}.
 
 Weitere Anpassungen durch mich in dieser allerersten Entwicklungsstufe der KI-Anwendung direkt nach Abschluss des Tutorials waren das Hinzufügen einer Log-Funktion die alle Eingaben und Antworten in Log-Dateien (hier als CSV) abspeichert. Ebenso erzeuge ich für jedes geführte Gespräch einen eindeutigen Identifikator (hier als UUID, Universally Unique Identifier), der es erlaubt geführte Gespräche in den Log-Dateien anhand der UUID vollständig nachzuvollziehen. 
 
-Alle Einstellungen und Parameter der KI-Anwendung habe ich in der Datei \enquote{config.py} zusammengefasst. Abschließend habe ich die für das Starten der KI-Anwendung notwendigen Abhängigkeiten und Pakete für die Verwendung mit dem Python Tool \enquote{Pipenv} in der Datei \enquote{Pipfile} zusammengefasst.
+Alle Einstellungen und Parameter der KI-Anwendung habe ich in der Datei \code{config.py} zusammengefasst. Abschließend habe ich die für das Starten der KI-Anwendung notwendigen Abhängigkeiten und Pakete für die Verwendung mit dem Python Tool \enquote{Pipenv} in der Datei \enquote{Pipfile} zusammengefasst. 
 
-Den gesammten ersten Entwicklungsstand, wie er bis hier beschrieben wurde, habe ich in den Anlagen zur Seminararbeit sowie auf Github\footnote{\url{https://github.com/haenno/ai-api/tree/main/10-example-ai-app}} im Unterorder \enquote{10-example-ai-app} dokumentiert.
+Den gesammten ersten Entwicklungsstand, wie er bis hier beschrieben wurde, habe ich in den Anlagen zur Seminararbeit sowie auf Github\footnote{\url{https://github.com/haenno/ai-api/tree/main/10-example-ai-app}} im Unterorder \code{10-example-ai-app} dokumentiert. Die KI-Anwendung in diesem Entwicklungsstand kann ausgeführt und getestet werden indem der Ordner  \code{10-example-ai-app} mit einem Terminal betreten wird und unten stehende Befehle ausgeführt werden:
+
+
+\begin{lstlisting}[language=bash]
+pipenv install
+pipenv run python train.py
+pipenv run python chat.py
+\end{lstlisting}
+
+Vorraussetzung dafür ist ein installierter Python-Interpreter ab Version 3.9 und das Python-Tool \enquote{Pipenv}.
 
 \subsection{Einrichtung Django-Basissystem }
 \subsection{Erweiterungen für API}

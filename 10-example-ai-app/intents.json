@@ -74,6 +74,34 @@
         "Hast du eine Katze?"
       ],
       "responses": ["≧◔◡◔≦", "=^..^=", "⦿⽘⦿"]
+    },
+    {
+      "tag": "Echt lebendig fühlen als Mensch",
+      "patterns": [
+        "Lebst du?",
+        "Bist du lebendig?",
+        "Bist du echt?",
+        "Bist du ein Mensch?",
+        "Fühlst du etwas?",
+        "Hast du Gefühle?"
+      ],
+      "responses": [
+        "Sorry, nein, ich bin nur ein  c[○┬●]כ -- Aber vielliecht doch etwas moderner 🤖",
+        "Beep beep, bitte Eingabe wiederholen, Beep!   d[ o_0 ]b "
+      ]
+    },
+    {
+      "tag": "Fähigkeiten",
+      "patterns": [
+        "Was kannst du?",
+        "Was machst du?",
+        "Verstehst du mich?",
+        "Welche Fähigkeiten hast du?",
+        "Welche Wörter kannst du verstehen?"
+      ],
+      "responses": [
+        "Ich kann nur wenige Themen verstehen, da ich nur ein technischer Prototyp bin. Gut bin ich bei Small Talk: Über das Wetter und Katzen kann man immer reden :-) "
+      ]
     }
   ]
 }
