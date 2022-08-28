@@ -54,6 +54,26 @@
       "responses": [
         "Ich bin ein einfaches Programm -- Meist verstehe ich dich recht gut, das macht mich aus..."
       ]
+    },
+    {
+      "tag": "Lebenssinn",
+      "patterns": [
+        "Was ist der Sinn des Lebens?",
+        "Wozu leben wir?",
+        "Kennst du den Sinn des Lebens?",
+        "Erkläre mir den Sinn des Lebens!"
+      ],
+      "responses": ["42."]
+    },
+    {
+      "tag": "Katzenmensch",
+      "patterns": [
+        "Magst du Katzen?",
+        "Hast du lieber Hunde oder Katzen?",
+        "Würdest du dir eine Katze anschaffen?",
+        "Hast du eine Katze?"
+      ],
+      "responses": ["≧◔◡◔≦", "=^..^=", "⦿⽘⦿"]
     }
   ]
 }
