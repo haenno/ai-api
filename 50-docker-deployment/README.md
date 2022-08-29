@@ -14,6 +14,11 @@ Dockerized Django backend and a nginx frontend to start with docker-compse. Live
 
 For docker-compose hints to <https://medium.com/bb-tutorials-and-thoughts/vue-js-local-development-with-docker-compose-275304534f7c> and details for Vue.js deployment to <https://v2.vuejs.org/v2/cookbook/dockerize-vuejs-app.html>.
 
+## Errata: Known errors / hickups
+
+Sometimes the backend container will not start, presenting a error message like "bash not found" or "no permissions". In that case try making the ``start_api.sh``-file in the ``ai_api_backend``-folder executable with ``chmod +x start_api.sh``. 
+Also check the encoding of this file: It should be UNIX like and not Windows like. That means that the line endings should be **LF** and not **CRLF**. The tool *Notepad++* can help with that.
+
 ## License
 
 MIT License: Copyright (c) 2022 Henning 'haenno' Beier, haenno@web.de, <https://github.com/haenno/ai-api>
