@@ -12,7 +12,7 @@ Dockerized Django backend and a nginx frontend to start with docker-compse. Live
 
 ## Inspiration and credit
 
-For docker-compose hintes to <https://medium.com/bb-tutorials-and-thoughts/vue-js-local-development-with-docker-compose-275304534f7c> and details for Vue.js deployment to <https://v2.vuejs.org/v2/cookbook/dockerize-vuejs-app.html>.
+For docker-compose hints to <https://medium.com/bb-tutorials-and-thoughts/vue-js-local-development-with-docker-compose-275304534f7c> and details for Vue.js deployment to <https://v2.vuejs.org/v2/cookbook/dockerize-vuejs-app.html>.
 
 ## License
 

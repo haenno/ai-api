@@ -208,7 +208,7 @@
 
 \lstdefinelanguage{python}{
     morekeywords={access,and,break,class,continue,def,del,elif,else,except,exec,finally,for,from,global,if,import,in,is,lambda,not,or,pass,print,raise,return,try,while},
-    morekeywords=[2]{abs,all,any,basestring,bin,bool,bytearray,callable,chr,classmethod,cmp,compile,complex,delattr,dict,dir,divmod,enumerate,eval,execfile,file,filter,float,format,frozenset,getattr,globals,hasattr,hash,help,hex,id,input,int,isinstance,issubclass,iter,len,list,locals,long,map,max,memoryview,min,next,object,oct,open,ord,pow,property,range,raw_input,reduce,reload,repr,reversed,round,set,setattr,slice,sorted,staticmethod,str,sum,super,tuple,type,unichr,unicode,vars,xrange,zip,apply,buffer,coerce,intern,export},
+    morekeywords=[2]{abs,all,any,basestring,bin,bool,bytearray,callable,chr,classmethod,cmp,compile,complex,delattr,dict,dir,divmod,enumerate,eval,execfile,file,filter,float,format,frozenset,getattr,globals,hasattr,hash,help,hex,id,input,int,isinstance,issubclass,iter,len,list,locals,long,map,max,memoryview,min,next,object,oct,open,ord,pow,property,range,raw_input,reduce,reload,repr,reversed,round,set,setattr,slice,sorted,staticmethod,str,sum,super,tuple,type,unichr,unicode,vars,xrange,zip,apply,buffer,coerce,intern,export,FROM,WORKDIR,COPY,RUN,CMD,EXPOSE},
     sensitive=true,
     morecomment=[l]\#,
     morestring=[b]',
@@ -1465,16 +1465,85 @@ In der Abbildung \ref{fig:web-frontend-genutzt} erkennt man dann, das Ergebnis e
 
 \subsection{Verteilung durch Containerisierung (Docker-Compose)}
 
-foo
+Zur einfacheren Verteilung der bisher erstellten Lösungen, gleich ob an Interessierte, zum fachlichen  Austausch oder zu Zwecken der Veröffentlichung, muss das bisher erstellte (Django im Backend und Vue.js im Frontend) noch in Container überführt werden. Dadurch kann der Transport auf andere Systeme und IT-Umgebebungen deutlich vereinfacht werden. Durch den Einsatz einer \code{docker-compose.yml}-Datei kann, nach Einrichtung, durch nur ein Kommando die gesamte, bennötigte IT-Infrastruktur von  Frontend und Backend gestartet werden.
+
+In einem letzten Ordner \code{50-docker-deployment}, der ebenfalls wieder in den Alagen zur Seminararbeit und auch auf Github.com zu finden ist, wurden zwei Unterordner erstellt. In diesen beiden Ordnern, Backend und Frontend, wurden die bisherigen Ergebnisse aus den Abschnitten zur Django Grundinstallation und der Vue.js Webseite übernommen. Ergänzt wurden diese Ordner jeweils durch passende \code{Dockerfile}-Dateien in denen der Erstellungsprozess der Container anhand eine vorgegebenen Reihenfolge von Befehlen konfiguriert wurde. 
+
+Die Erstellung des Frontends folgt dabei einem 2-stufigen Plan, der zuerst über \code{npm run build} alle Inhalte für die Bereitstellung über \enquote{nginx} erzeugt und damm im zweiten Schritt diese mit \code{CMD ["nginx", "-g", "daemon off;"]} als Webserver bereit stellt:
+
+\begin{figure}[H]
+	\caption{Programmcode: Dockerfile für das Frontend}
+	\label{fig:code-dockerfile-frontend}
+\begin{lstlisting}[language=python]
+  # build stage
+  FROM node:18-bullseye as build-stage
+  WORKDIR /usr/src/app/ai_api_frontend
+  COPY package*.json ./
+  RUN npm install
+  COPY . .
+  RUN npm run build
+  
+  # production stage
+  FROM nginx:stable-alpine as production-stage
+  COPY --from=build-stage /usr/src/app/ai_api_frontend/dist /usr/share/nginx/html
+  EXPOSE 80
+  CMD ["nginx", "-g", "daemon off;"]
+\end{lstlisting}
+\end{figure}
+
+
+Die Erstellung des Contains für das Backend erfolgt auch über eine \code{Dockerfile}. Es fällt hier vielleicht auf, dass auch der \code{node:18-bullseye}-Container als Grundlage verwendet wird. Dieser wird hier verwendet, da es schon Anwendung im Frontend findet und dadurch, dass er auch auf Debian basiert, sehr gut auch für das Backend verwendet werden kann. 
+
+
+\begin{figure}[H]
+	\caption{Programmcode: Dockerfile für das Backend}
+	\label{fig:code-dockerfile-backend}
+\begin{lstlisting}[language=python]
+# same base container as the frontend to save traffic and space 
+FROM node:18-bullseye
+WORKDIR /usr/src/ai_api_backend
+COPY . .
+RUN apt-get update -y
+RUN apt-get upgrade -y
+RUN apt-get install pipenv -y
+RUN pipenv install
+RUN chmod +x start_api.sh
+CMD ["sh", "start_api.sh"]
+\end{lstlisting}
+\end{figure}
+
+Neben der \code{Dockerfile} für das Backend, ist für den Start des Backends noch Skript nötig, dass die bei Django notwendigen Schritte ausführen kann. Dazu wurde die Datei \code{start_api.sh} erstellt und die notwendigen Abläufe (Datenbankmigrationen, statische Dateien einsammeln, KI-Modell trainieren usw.) demenstprechend hinterlegt. Auch der Start des Backends selbst, erfolgt über das Skript. Für die Bereitstellung des Webservices habe ich die Anwendung \enquote{daphne} gewählt. Dies, da sie nicht unbedingt einen vorangestellten Proxy bennötigt und auf eine modernere, asynchrone Schnittstelle setzt (ASGI). 
+
+\begin{figure}[H]
+	\caption{Programmcode: \enquote{start_api.sh}-Skript zum Start des Backends}
+	\label{fig:code-start-api-backend}
+\begin{lstlisting}[language=python]
+#!/bin/bash
+
+echo 'Django startup...'
+pipenv run python manage.py makemigrations
+pipenv run python manage.py migrate --run-syncdb  # Apply database migrations
+pipenv run python manage.py collectstatic --noinput  # Collect static files
+pipenv run python -m chatbot -t  # train AI model
+
+echo 'Starting Django in production mode (Daphne):'
+exec pipenv run daphne -b 0.0.0.0 -p 8000 aiapiproject.asgi:application
+\end{lstlisting}
+\end{figure}
+
+Für das Bereitstellen der statischen Inhalte wurde schon in einem früheren Schritt das Django Paket \code{whitenoise} installiert und konfiguriert, so dass hier im übrigen keine weiteren Anpassungen mehr notwendig waren. Grundlage für die Erstellung dieser Containerisierung waren eine Teil der Vue.js-Dokumentation\parencite{60-docker-vue2}, ein Artikel zu Docker-Compose und Vue.js\parencite{59-docker-vue} sowie Inhalte aus den Vorlesungen zum Modul \enquote{IT-Infrastruktur}.
+
+Aufgrund des beschränkten Umfangs dieser Seminararbeit muss an dieser Stell auf weitere Ausführungen zu Docker-compose verzichtet werden. Ebenso kann auch keine Beschreibung der Produktivenahme dieser Lösung mit einem Proxy wie \enquote{Traefik} und auch nicht die Konfiguration einer HTTPS-Verbindung mittels Zertifikaten von \enquote{Let's Encrypt} erfolgen. 
 
 \section{Fazit und Reﬂexion}
 
-Es hat gut geklappt. Alles geht wie gewünscht. 
+Das gewünschte Ziel dieser Seminararbeit konnte erreicht werden: Eine KI-Anwendung konnte über eine REST API, die über Django bereitgestllt wurde, erreicht werden. Auch konnten die sich daraus ergebenden Vorzüge dargestellt und nutzbar gemacht werden: Die KI-Anwendung ist durch die Bereitstellung als Webservice deutlich leichter für Dritte zu erreichen. Auch ist die Lösung in ihrer Gesamtheit, ja als ein Stück IT-Infrastruktur, durch die erfolgreiche Containerisierung transportabel und verteilbar geworden.
 
-Herausforderung und Schwierigkeit bei der Bereistsellung ist es, eine Grezne zwischen der API und der Anwendung aufrecht zu erhalten. Die Inhalte verschwimmen und verwachsen sehr schnell miteinander. Während der Umsetzung war es sehr schwer, die Funktionen der KI-Anwendung im Stand der Konsolenanwendung voll umfänglich in die API einzubinden, ohne an den Funktionen der KI-Anwendung im vorliegenden Zustand Veränderungen vorzunehmen. 
+Eine Herausforderung und Schwierigkeit bei der Entwicklung war es, die Grezne zwischen der API und der KI-Anwendung aufrecht zu erhalten. Bei dem zusammenführen der Teile, also der KI-Anwendung in Django,  verschwimmen und verwachsen Programmteile sehr schnell miteinander. Während der Umsetzung musste daher stets mit Bedacht und größter Sorgfalt vorgegangen werden um die Funktionen der KI-Anwendung in die API einzubinden, ohne dabei Veränderungen an der KI-Anwendung selbst vorzunehmen. Eine Vermischung war hier aufgrund der Aufgabenstellung und Zielsetzung dringend zu vermeiden und war auch gelungen. 
 
-Die Vorstellung die KI-Anwendung selbst vollständig in Django zu integrieren war dabei verlockend. Alle Daten und Logs hätten statt in einer Datei direkt über die Djnago Datenmodelle und Abstraktion bequem in einer Datenbank gespeichert werden können.  
+Die Vorstellung jedoch, die KI-Anwendung selbst vollständig in Django zu integrieren war dabei stets präsent. Alle Daten und Logs hätten statt in einer Datei, direkt über die Djnago Datenmodelle und Abstraktion bequem in einer Datenbank gespeichert werden können.  Für die Zukunft ist zu überlegen, ob eine solch strike Trennung nicht den aufgezeigten Vorzügen gegenüber, aufgegeben werden sollte. 
 
+Die Seminararbeit war für mich persönlch eine höchst interessante und  spannende Aufgabe. Ich konnte durch die Umsetzung ich viele Details und Hintergründe, zu den im Modul \enquote{IT-Infrastruktur} vermittelten Grundlagen, erlernen und auch mein Wissen um Funktionen in Python deutlich erweitern. 
 
 %-----------------------------------
 % Apendix / Anhang
