@@ -123,7 +123,7 @@
 \usepackage{courier}
 \usepackage{amsmath}
 \usepackage[table]{xcolor}
-\usepackage{marvosym}			% Verwendung von Symbolen, z.B. perfektes Eurozeichen
+\usepackage{marvosym}			% Verwendung von Symbolen, bspswse perfektes Eurozeichen
 
 \renewcommand\familydefault{\sfdefault}
 \usepackage{ragged2e}
@@ -847,7 +847,7 @@
 \begin{acronym}[foobalouhuhu]\itemsep0pt %der Parameter in Klammern sollte die längste Abkürzung sein. Damit wird der Abstand zwischen Abkürzung und Übersetzung festgelegt
   \acro{API}{Application Programming Interface}
   \acro{HTTP/S}{Hypertext Transfer Protocol (Secure)}
-  \acro{KI}{Künstliche Intelligenz}
+  \acro{KI}{Künstliche-Intelligenz}
   \acro{REST}{Representational State Transfer}
   \acro{UUID}{Universally Unique Identifier}
   \acro{foobalouhuhu}{Nicht verwendet, taucht nicht im Abkürzungsverzeichnis auf}
@@ -951,13 +951,13 @@
 
 
 \section{Einleitung und Zielsetzung}
-% In dieser Seminararbeit sollen Grundlagen ermittelt werden die einen geeigneten Aufbau der IT-Infrastruktur zum diaglobasierten Zugriff auf eine \ac{KI} erlauben. Der Zugriff soll dabei für Anwendungen aus dem Bereich der Web-Technologien ermöglicht werden. Dazu soll  eine \acs{API}\footnote{\acl{API}, Programmierschnittstelle} bereit gestellt werden, die dem \acs{REST}-Architekturansatz \footnote{\acl{REST}, für Webservices konzipierte und entwickelte API} entspricht. Die Lösung soll dabei innerhalb von Django, einem weit verbreiteten und intensiv in anspruchsvollem Produktivumfeld eingesetzem Framework, umgesetzt werden. 
+% In dieser Seminararbeit sollen Grundlagen ermittelt werden die einen geeigneten Aufbau der IT-Infrastruktur zum dialogbasierten Zugriff auf eine \ac{KI} erlauben. Der Zugriff soll dabei für Anwendungen aus dem Bereich der Web-Technologien ermöglicht werden. Dazu soll  eine \acs{API}\footnote{\acl{API}, Programmierschnittstelle} bereit gestellt werden, die dem \acs{REST}-Architekturansatz \footnote{\acl{REST}, für Webservices konzipierte und entwickelte API} entspricht. Die Lösung soll dabei innerhalb von Django, einem weit verbreiteten und intensiv in anspruchsvollem Produktivumfeld eingesetzem Framework, umgesetzt werden. 
 
-In dieser Seminararbeit soll eine \ac{KI}-Anwendung über eine \ac{REST} \ac{API} aufrufbar gemacht werden. Eine \ac{REST} \ac{API} ist eine Programmierschnittstelle mit einem Architekturansatz der speziell Webservices entwickelt und konzipiert wurde.  Eine \ac{KI}-Anwendung muss dazu in einer Art eingebunden werden, die es erlaubt auf diese selbst in geeigneter Weise über die Endpunkte einer \ac{API} zuzugreifen. Das bedeutet, dass die \ac{KI}-Anwendung als Webservice zur Verfügung gestellt wird und damit auch einen dialogbasierten Zugriff auf die \ac{KI}-Anwendung und dessen Funktionen selbst ermöglicht. 
+In dieser Seminararbeit soll eine \ac{KI}-Anwendung über eine \textit{\ac{REST}} \textit{\ac{API}} aufrufbar gemacht werden. Eine \ac{REST}-\ac{API} ist eine Programmierschnittstelle mit einem Architekturansatz, der speziell für Webservices entwickelt und konzipiert wurde. Eine \ac{KI}-Anwendung muss dazu in einer Art eingebunden werden, die es erlaubt, auf diese selbst in geeigneter Weise über die Endpunkte einer \ac{API} zuzugreifen. Das bedeutet, dass die \ac{KI}-Anwendung als Webservice zur Verfügung gestellt wird und damit auch einen dialogbasierten Zugriff auf die \ac{KI}-Anwendung und deren Funktionen selbst ermöglicht. 
 
-Verwendet werden dazu soll Django, ein quelloffenes Web-Framework das weit verbreitet im produktiven Einsatz ist und ebenso wie viele \ac{KI}-Anwendungen in der Programmiersprache Python geschrieben wurde. Dieses zusammenführen und bereitstellen als eine Lösung im Softwarebereich, bzw. hier als Dienst, stellt dabei einen typischen Arbeitsbereich der IT-Infrastruktur dar. Die \ac{KI}-Anwendung muss also in eine geeignete IT-Infrastruktur eingebunden werden. Ein sicherer und belastbarer Webservice, ist das angestrebte Ziel dieser Seminararbeit. 
+Verwendet werden dazu soll Django, ein quelloffenes Web-Framework, das weit verbreitet im produktiven Einsatz ist und ebenso wie viele \ac{KI}-Anwendungen in der Programmiersprache Python geschrieben wurde. Dieses Zusammenführen und Bereitstellen als eine Lösung im Softwarebereich, bzw. hier als Dienst, stellt dabei einen typischen Arbeitsbereich der IT-Infrastruktur dar. Die \ac{KI}-Anwendung muss also in eine geeignete IT-Infrastruktur eingebunden werden. Ein sicherer und belastbarer Webservice ist das angestrebte Ziel dieser Seminararbeit. 
 
-Die Seminararbeit mit allen Anlagen, dem Programmcode, allen Skripten und Quellen wird auch auf Github.com unter \code{\url{https://github.com/haenno/ai-api/}} zur Verfügung gestellt um den Zugriff auf darauf zu erleichtern. Ebenso findet sich unter \code{\url{https://ai-api.tstsrv.de/}} eine laufende Instanz der fertigen Lösung zum einfachen ausprobieren. 
+Die Seminararbeit mit allen Anlagen, dem Programmcode, allen Skripten und Quellen wird auch auf Github.com unter \code{\url{https://github.com/haenno/ai-api/}} zur Verfügung gestellt, um den Zugriff darauf zu erleichtern. Ebenso findet sich unter \code{\url{https://ai-api.tstsrv.de/}} eine laufende Instanz der fertigen Lösung zum einfachen Ausprobieren. 
 
 
 
@@ -966,9 +966,9 @@ Die Seminararbeit mit allen Anlagen, dem Programmcode, allen Skripten und Quelle
 
 \subsection{Praktische Relevanz und Problemstellung}
 
-Aktuell werden in vielen Bereichen neue Projekte und Lösungen mit \ac{KI} entworfen, entwickelt und getestet. Dazu werden \ac{KI}-Frameworks wie TensorFlow, PyTorch oder Keras benutzt. Für die vorgenannten, aber ebenso wie auch für andere \ac{KI}-Frameworks, hat sich Python als Programmiersprache durchgesetzt. Dies, da sich mit Pyhton große Datenmengen vergleichsweise einfach aufnehmen, verarbeiten und ausgeben lassen. Große Datenmengen sind für die \ac{KI}-Entwicklung, häufig z.B. als Trainingsdatensätze, unverzichtbar. 
+Aktuell werden in vielen Bereichen neue Projekte und Lösungen mit \ac{KI} entworfen, entwickelt und getestet. Dazu werden \ac{KI}-Frameworks wie TensorFlow, PyTorch oder Keras benutzt. Für die vorgenannten, aber ebenso wie auch für andere \ac{KI}-Frameworks hat sich Python als Programmiersprache durchgesetzt. Dies ist darin begründet, da sich mit Python große Datenmengen vergleichsweise einfach aufnehmen, verarbeiten und ausgeben lassen. Große Datenmengen sind für die \ac{KI}-Entwicklung, häufig \zb als Trainingsdatensätze, unverzichtbar. 
 
-Entwürfe und Testentwicklungen von \ac{KI}-Anwendungen erfolgen insbesondere in frühen Phasen meist lokal in einer Entwicklungsumgebung. Ergebnisse zu präsentieren oder ein Austausch mit Dritten darüber ist damit nicht immer einfach möglich. Zumeist müssten Dritte erst einen Python-Interpreter sowie umfangreiche weitere Abhängigkeiten, wie z.B. das verwendete \ac{KI}-Framework selbst, installieren um die \ac{KI}-Anwendung überhaupt erst Ausführen zu können. Das fällt nicht jedem interessieren leicht. Auch gibt es, durch die dynamische Entwicklung, meist verschiedenste Versionen der Software und Komponenten die zu unbeabsichtigten und unerwarteten Problemen und Hürden führen können.
+Entwürfe und Testentwicklungen von \ac{KI}-Anwendungen erfolgen insbesondere in frühen Phasen meist lokal in einer Entwicklungsumgebung. Ergebnisse zu präsentieren oder ein Austausch mit Dritten darüber ist damit nicht immer einfach möglich. Zumeist müssten Dritte erst einen Python-Interpreter sowie umfangreiche weitere Abhängigkeiten, wie das verwendete \ac{KI}-Framework selbst, installieren, um die \ac{KI}-Anwendung überhaupt erst ausführen zu können. Das fällt nicht jedem Interessierten leicht. Auch gibt es durch die dynamische Entwicklung meist verschiedene Versionen der Software und Komponenten, die zu unbeabsichtigten und unerwarteten Problemen und Hürden führen können.
 
 
 %\subsection{Zielsetzung}
@@ -980,41 +980,41 @@ Entwürfe und Testentwicklungen von \ac{KI}-Anwendungen erfolgen insbesondere in
 
 \subsection{Methodik}
 
-Die Seminararbeit soll das gewünschte Ziel, durch exploratives, vertikalen  Prototyping erreichen. Vertikal bedeutet dabei, dass von der einfachen Konsolen KI-Anwendung bis hin zum dialogbasierten Aufruf über den Webserver, alle Ebenen durchdrungen werden sollen. Dabei sollen alle Schritte, jede eingesetzte Software und Lösung gründlich betrachtet und alle Schritte und Entscheidungen nachvollziehbar dokumentiert werden.
+Die Seminararbeit soll das gewünschte Ziel durch exploratives, vertikales Prototyping erreichen. Vertikal bedeutet dabei, dass von der einfachen Konsolen-KI-Anwendung bis hin zum dialogbasierten Aufruf über den Webserver alle Ebenen durchdrungen werden sollen. Dabei sollen alle Schritte, jede eingesetzte Software und Lösung gründlich betrachtet und alle Schritte und Entscheidungen nachvollziehbar dokumentiert werden.
 
-Zuerst soll eine einfache KI-Anwendung, die als Konsolenanwendung lokal in einer Entwicklungsumgebung, lauffähig ist erstellt werden. Hier ist ein üblicher Prototyp einer KI-Anwendung, z.B. aus einem einfach Tutorial, aus. Zum erreichen des Ziels, reicht es dabei aus, wenn nur wenige einfache Funktionen des verwendeten KI-Frameworks zum Einsatz kommen.
+Zuerst soll eine einfache KI-Anwendung, die als Konsolenanwendung lokal in einer Entwicklungsumgebung lauffähig ist, erstellt werden. Hier ist ein üblicher Prototyp einer KI-Anwendung, \zb aus einem einfachen Tutorial, aus. Zum Erreichen des Ziels reicht es dabei aus, wenn nur wenige einfache Funktionen des verwendeten KI-Frameworks zum Einsatz kommen.
 
-Im Anschluss daran, soll ermittelt werden auf welche Arten die Einbindung einer solchen KI-Anwendung in das Django-Framework möglich ist. Mögliche Lösungsansätze sollen ermittelt, betrachtet und bewertet werden. 
+Im Anschluss daran soll ermittelt werden, auf welche Arten die Einbindung einer solchen KI-Anwendung in das Django-Framework möglich ist. Mögliche Lösungsansätze sollen ermittelt, betrachtet und bewertet werden. 
 
-Die schrittweise Einrichtung einer Django-Installation wird analog durchgeführt und alle gemachten Einstellungen, eingerichteten Erweiterungen und Anpassungen nachvollziehbar dokumentiert. Dies umfasst dabei auch die notwendigen Module für Bereitstellung der API sowie den Einsatz von Django in einem produktiven Umfeld. 
+Die schrittweise Einrichtung einer Django-Installation wird analog durchgeführt und alle gemachten Einstellungen, eingerichteten Erweiterungen und Anpassungen werden nachvollziehbar dokumentiert. Dies umfasst dabei auch die notwendigen Module für Bereitstellung der API sowie den Einsatz von Django in einem produktiven Umfeld. 
 
-Im Schlussschritt werden die Django-Installation und die, für die Einbindung vorbereitete, KI-Anwendung zusammengeführt. Der dann mögliche, dialogbasierte Zugriff auf die KI-Anwendung als Webservice, die Django REST API, soll durch den Einsatz eines dynamischen Frontends, belegt werden. 
+Im Schlussschritt werden die Django-Installation und die für die Einbindung vorbereitete KI-Anwendung zusammengeführt. Der dann mögliche, dialogbasierte Zugriff auf die KI-Anwendung als Webservice, die Django-REST-API, soll durch den Einsatz eines dynamischen Frontends belegt werden. 
 
 
 \newpage
 \section{Theorie: Begrifflichkeiten und Grundlagen}
 
-In diesem Abschnitt werden einige für das weitere Verständnis hilfreiche Begrifflichkeiten und Grundlagen kurz erklärt und eingeordnet. Dabei wird als Zielgruppe der Seminararbeit, eine zumindest in IT-Grundlagen versierte, Leserschaft angenommen.
+In diesem Abschnitt werden einige für das weitere Verständnis hilfreiche Begrifflichkeiten und Grundlagen kurz erklärt und eingeordnet. Dabei wird als Zielgruppe der Seminararbeit eine zumindest in IT-Grundlagen versierte Leserschaft angenommen.
 
 
-\subsection{REST API}
+\subsection{REST-API}
 
-Die Abkürzung \acs{API} bedeutet \acl{API}, ins Deutsche übersetzt also \enquote{Schnittstelle zur Programmierung von Anwendungen}. Eine API ist damit eine Schnittstelle zu einem Programm oder zu einer Programmierung und erlaubt es, meist anhand detaillierten Dokumentation, den Zugriff auf die  bzw. die Verarbeitung von Daten aus der Schnittstelle. Im heutigen Sprachgebrauch ist mit API  meist der Zugriff auf einen Webservice gemeint. Grundsätzlich aber, umfasst der Begriff API nicht nur die vorgenannten Webservices, die eine Protokollorientierte Schnittstelle sind, sondern auch API anderer Typenklassen wie Datei-, Funktions- oder Objektorientierte APIs.
+Die Abkürzung \acs{API} bedeutet \enquote{\acl{API}}, ins Deutsche übersetzt also \enquote{Schnittstelle zur Programmierung von Anwendungen}. Eine API ist damit eine Schnittstelle zu einem Programm oder zu einer Programmierung und erlaubt meist anhand detaillierter Dokumentation den Zugriff auf die  bzw. die Verarbeitung von Daten aus der Schnittstelle. Im heutigen Sprachgebrauch ist mit API  meist der Zugriff auf einen Webservice gemeint. Grundsätzlich aber umfasst der Begriff API nicht nur die vorgenannten Webservices, die eine protokollorientierte Schnittstelle sind, sondern auch API anderer Typenklassen wie datei-, funktions- oder objektorientierte APIs.
 
-Mit \ac{REST} beschreibt \citeauthor[]{51-fielding-rest} erstmals im Jahr \citeyear[]{51-fielding-rest} in seiner Arbeit \citetitle[]{51-fielding-rest} einen hybriden Architekturansatz aus der Vermischung verschiedener netzwerkbasierter Architekturansätze für Schnittstellen. Dieser Ansatz hat sich zwischenzeitlich durchgesetzt und wird vielfach in modernen Webservices verwendet. \citeauthor[]{51-fielding-rest} beschreibt in seiner Arbeit umfassend wie eine zustandslose Kommunikation zwischen Client und Server über eine einheitliche Schnittstelle (API) mittels bekannter und bewährter \ac{HTTP/S}-Methoden, wie GET, POST, PUT und DELETE, umgesetzt wird.
+Mit \ac{REST} beschreibt \citeauthor[]{51-fielding-rest} im Jahr \citeyear[]{51-fielding-rest} in seiner Arbeit \citetitle[]{51-fielding-rest} einen hybriden Architekturansatz aus der Vermischung verschiedener netzwerkbasierter Architekturansätze für Schnittstellen. Dieser Ansatz hat sich zwischenzeitlich durchgesetzt und wird vielfach in modernen Webservices verwendet. \citeauthor[]{51-fielding-rest} beschreibt in seiner Arbeit umfassend, wie eine zustandslose Kommunikation zwischen Client und Server über eine einheitliche Schnittstelle (API) mittels bekannter und bewährter \textit{\ac{HTTP/S}}-Methoden, wie GET, POST, PUT und DELETE, umgesetzt wird.
 
-Heute werden REST APIs vielfältig eingesetzt: Ob zum Datenaustausch zwischen Unternehmen oder auch der Realisierung verschiedener Frontends bzw. Endgeräte für eine Anwendung -- Aus der Praxis sind Schnittstellen dieser Art heute nicht mehr wegzudenken. 
+Heute werden REST-APIs vielfältig eingesetzt: ob zum Datenaustausch zwischen Unternehmen oder auch der Realisierung verschiedener Frontends bzw. Endgeräte für eine Anwendung. Aus der Praxis sind Schnittstellen dieser Art heute nicht mehr wegzudenken. 
 
 \subsection{KI-Anwendungen und -Frameworks}
 
-Die Konrad-Adenauer-Stiftung e. V. \parencite{52-wangermann2020ki} wie auch das \citeauthor[]{53-ki-strat} (\citeyear[]{53-ki-strat}) selbst, beschreiben in ihren jüngsten Veröffentlichungen in ausführlicher Breite wie wichtig die Entwicklung von KI in allen Bereichen und auf allen Ebenen ist.
+Die Konrad-Adenauer-Stiftung e. V. \parencite{52-wangermann2020ki} wie auch das \citeauthor[]{53-ki-strat} (\citeyear[]{53-ki-strat}) selbst beschreiben in ihren jüngsten Veröffentlichungen in ausführlicher Breite, wie wichtig die Entwicklung von KI in allen Bereichen und auf allen Ebenen ist.
 
-Dabei ist der parktische Einstieg in das Thema KI-Entwicklung im Vergleich zu anderen Forschungsfeldern ungelich leichter. Es werden, für einen Start in den Themenbereich, nicht viel mehr als ein Rechner und eine Internetverbindung bennötigt. Die Entwickler der gängigen bzw. etwa weiter verbreiteten KI-Frameworks, stellen umfangreiche Dokumentation mit die anhand praxsisnahmer Beispiele und Anleitungen, den Einstieg leicht machen sollen. 
+Dabei ist der praktische Einstieg in das Thema KI-Entwicklung im Vergleich zu anderen Forschungsfeldern ungleich  leichter. Es werden für einen Start in den Themenbereich nicht viel mehr als ein Rechner und eine Internetverbindung benötigt. Die Entwickler der gängigen bzw. etwas weiter verbreiteten KI-Frameworks stellen umfangreiche Dokumentationen,  die anhand praxisnaher Beispiele und nleitungen, den Einstieg erleichtern sollen. 
 
-Die KI-Frameworks TensorFlow, Keras und PyTorch haben sich über die letzten Jahre nicht nur auf dem Markt gehalten, sondern wurden von der Entwicklergemeinde deutlich mehr genutzt. Besonders die positive Entwicklung von PyTorch, hier mit einem Zuwachs von 468\% gemessen an Aktivitätsindikatoren auf Github.com, hebt sich hier noch weiter von den beiden anderen, vorgenannten mit jeweils etwa 50\% ab. 
+Die KI-Frameworks TensorFlow, Keras und PyTorch haben sich über die letzten Jahre nicht nur auf dem Markt gehalten, sondern wurden von der Entwicklergemeinde deutlich mehr genutzt. Besonders die positive Entwicklung von PyTorch, hier mit einem Zuwachs von \mbox{468\space\%} gemessen an Aktivitätsindikatoren auf Github.com, hebt sich hier noch stärker von den beiden anderen, vorgenannten mit jeweils etwa \mbox{50\space\%} ab. 
 
 \begin{figure}[H]
-	\caption{Entwicklung der KI-Framework Nutzung auf Github.com}\label{fig:ki-framework-nutzung}
+	\caption{Entwicklung der KI-Framework-Nutzung auf Github.com}\label{fig:ki-framework-nutzung}
 	\includegraphics[width=0.98\textwidth]{ki-framework-nutzung.pdf}
 	\\
 	Quelle: Eigene Darstellung
@@ -1026,7 +1026,7 @@ Die KI-Frameworks TensorFlow, Keras und PyTorch haben sich über die letzten Jah
 
 \subsection{Django Web-Framework}
 
-Django ist ein quelloffenes und frei verfügbares Web-Framework, dass nach eigenen Angaben schnell, vollständig, sicher, skalierbar und vielseitig ist \parencite[]{54-django-overview}. Untermauert wird diese eigene Behauptung von Django durch bekannte Anwendern und Nutzer wie z.B. Instagram, Pinterest und Delivery Hero \parencite{56-django-stackshare}. Eine Studie bestätigt Django weiter eine große Gemeinsachft an Entwicklern, eine bedeutsame Anzahl an Fragen und Antworten bei Stackoverflow und wird auch als gute Lösung für größere Projekte betrachtet \parencite{55-djnago-ghimire}. 
+Django ist ein quelloffenes und frei verfügbares Web-Framework, das nach eigenen Angaben schnell, vollständig, sicher, skalierbar und vielseitig ist \parencite[]{54-django-overview}. Untermauert wird diese eigene Behauptung von Django durch bekannte Anwender und Nutzer wie Instagram, Pinterest und Delivery Hero \parencite{56-django-stackshare}. Eine Studie bestätigt Django weiter eine große Gemeinschaft an Entwicklern, eine bedeutsame Anzahl an Fragen und Antworten bei Stackoverflow und Django wird auch als gute Lösung für größere Projekte betrachtet \parencite{55-djnago-ghimire}. 
 
 \begin{figure}[H]
 	\caption{Logo des Web-Frameworks Django}\label{fig:django-logo}
@@ -1035,7 +1035,7 @@ Django ist ein quelloffenes und frei verfügbares Web-Framework, dass nach eigen
 	Quelle: Django Software Foundation, \url{https://www.djangoproject.com/community/logos/}
 \end{figure}
 
-Django lässt sich dabei einfach um Funktionen und Pakete erweitern. Der Modulare Aufbau mit Datenmodellen, Sichten und Einstiegspunkten lässt zusammen mit dem Template-System und der einfachen Abstraktion für verschiedene Datenbanken sowie einer praktischen Administrationsoberfläche lässt dabei dennoch eine schnelle Entwicklung von Webseiten zu.
+Django lässt sich dabei einfach um Funktionen und Pakete erweitern. Der modulare Aufbau mit Datenmodellen, Sichten und Einstiegspunkten lässt zusammen mit dem Template-System und der einfachen Abstraktion für verschiedene Datenbanken sowie einer praktischen Administrationsoberfläche dabei dennoch eine schnelle Entwicklung von Webseiten zu.
 
 
 % Aktuell ~1.200 / 1.300 Wörter -- Wenn am Ende noch Raum ist, hierzu mehr:
@@ -1047,23 +1047,23 @@ Django lässt sich dabei einfach um Funktionen und Pakete erweitern. Der Modular
 \newpage
 \section{Praktischer Teil: Vom Skript zum Webservice}
 
-Die Entwicklung erfolgt in verschiedenen Phasen, die aufeinander aufbauen. Erkenntnisse aus einer Phase, bedingen darauf folgende Schritte. Ein Wechsel zwischen den Bereichen und ein wiederholtes Aufgreifen einer Teils der Lösung, ist daher nicht als Zeichen von Unstrukturierheit zu verstehen, sondern als für den Prozess des hier angebwendeten, vertikalen Protoypings schlicht notwendig. 
+Die Entwicklung erfolgt in verschiedenen Phasen, die aufeinander aufbauen. Erkenntnisse aus einer Phase bedingen darauf folgende Schritte. Ein Wechsel zwischen den Bereichen und ein wiederholtes Aufgreifen eines Teils der Lösung ist daher nicht als Zeichen von Unstrukturiertheit zu verstehen, sondern als für den Prozess des hier angewendeten, vertikalen Prototypings schlicht notwendig. 
 
 
 \subsection{Vorbereitung einer KI-Anwendung}
 
 
 
-Als Beispiel für bereitzustellende die KI-Anwendung wurde ein Chatbot gewählt. Eine Chatbotanwendung bietet sich an, da die Verarbeitung von menschlicher Sprache ein bedeutets Forschungsfeld innerhlab der \ac{KI} ist. Bereits seit Jahrzehnten wird in diesem Berich intensiv Forschung betrieben: Von Mitte der 1960er Jahre an mit z.B. ELIZA, einer Sprachverarbeitung die im wesentlichen auf Mustererkennung abzielt und seinerzeit vorallem durch den fehlenden Zugriff auf Informationen beschränkt war \parencite{20-weizenbaum1983eliza}. Bis hin zu jüngsten Entwicklungen die auch durch Schlagzeilen in der allegmeinen Presse Aufmerksamkeit erlangten: Microsofts Chatbot Tay funktionierte technisch, wurde aber bereits nach wenigen Tagen wieder abgeschaltet, da sich ihr Charkter in unerwünschte Richtungen entwicklte: Sie verbreitete Hassbotschaften und leugnete den Holocaust \parencite{14-heise-tay-abschaltung}. Noch mehr Aufmerksamkeit erlangte jüngst der Chatbot LaMDA von Google. Dies, da einer der Entickler, zu der Überzeugung gelangte, dass der Chatbot ein Bewusstsein und sogar eine Seele entwickelt habe \parencite[]{10-heise-google-chatbot}.
+Als Beispiel für bereitzustellende KI-Anwendung wurde ein Chatbot gewählt. Eine Chatbotanwendung bietet sich an, da die Verarbeitung von menschlicher Sprache ein bedeutendes Forschungsfeld innerhalb der \ac{KI} ist. Bereits seit Jahrzehnten wird in diesem Bereich intensiv Forschung betrieben: von Mitte der 1960er Jahre an mit \zb ELIZA, einer Sprachverarbeitung, die im Wesentlichen auf Mustererkennung abzielt und vor allem durch den fehlenden Zugriff auf Informationen beschränkt war \parencite{20-weizenbaum1983eliza}, bis hin zu jüngsten Entwicklungen, die auch durch Schlagzeilen in der Presse Aufmerksamkeit erlangten: Microsofts Chatbot Tay funktionierte technisch, wurde aber bereits nach wenigen Tagen wieder abgeschaltet, da sich ihr Charakter in unerwünschte Richtungen entwickelte: Sie verbreitete Hassbotschaften und leugnete den Holocaust \parencite{14-heise-tay-abschaltung}. Noch mehr Aufmerksamkeit erlangte vor kurz Kurzem der Chatbot LaMDA von Google. Dies lag daran, da einer der Entwickler, zu der Überzeugung gelangte, dass der Chatbot ein Bewusstsein und sogar eine Seele entwickelt habe \parencite[]{10-heise-google-chatbot}.
 
-Für die Seminararbeit hier, wird jedoch nur eine sehr einfache Ausführung eines Chatbots herangzogen. Grundlage dafür ist ein Tutorial in dem der Autor \citeauthor[]{50-howto-cahtbot} Grundlagen über den  Aufbaus einer KI-Anwendung näher bringt \parencite{50-howto-cahtbot}. 
+Für die vorliegende Seminararbeit, wird jedoch nur eine sehr einfache Ausführung eines Chatbots herangezogen. Grundlage dafür ist ein Tutorial in dem der Autor \citeauthor[]{50-howto-cahtbot} Grundlagen über den  Aufbau einer KI-Anwendung näher bringt \parencite{50-howto-cahtbot}. 
 
-Speziell dieses Tutorial wurde gewählt, da es als KI-Framework PyTorch verwendet. PyTorch ist neben TensorFlow eines der aktuelle führenden KI-Frameworks (siehe auch Abbildung \ref{fig:ki-framework-nutzung}), hat jedoch für diesen Anwendungsfall den Vorteil, dass es deutlich weniger Abhängigkeiten hat und kleiner in der Grundinstallation ist. 
+Speziell dieses Tutorial wurde gewählt, da es als KI-Framework PyTorch verwendet. PyTorch ist neben TensorFlow eines der aktuell führenden KI-Frameworks (siehe auch Abbildung \ref{fig:ki-framework-nutzung}), hat jedoch für diesen Anwendungsfall den Vorteil, dass es deutlich weniger Abhängigkeiten hat und kleiner in der Grundinstallation ist. 
 
-Zuerst wurde das gesamte Tutorial von mir durchgeführt und die KI-Anwendung lokal nachgebaut und getestet. Hier bei gab es keine nennenswerten Besonderheiten. Das vom Autor aufgebaute KI-Modell in der Datei \code{model.py} ist in diesem Fall ein künstliches, neuronales Netz mit drei Ebenen:
+Zuerst wurde das gesamte Tutorial von mir durchgeführt und die KI-Anwendung lokal nachgebaut und getestet. Hierbei gab es keine nennenswerten Besonderheiten. Das vom Autor aufgebaute KI-Modell in der Datei \code{model.py} ist in diesem Fall ein künstliches, neuronales Netz mit drei Ebenen:
 
 \begin{figure}[H]
-	\caption{Programmcode: model.py aus Chatbot Tutorial}
+	\caption{Programmcode: model.py aus Chatbot-Tutorial}
 	\label{fig:code-model-py-chatbot-tut}
 \begin{lstlisting}[language=python]
 import torch
@@ -1089,9 +1089,9 @@ class NeuralNet(nn.Module):
 \end{lstlisting}
 \end{figure}
 
-Man erkennt hier in Zeile 14 die sichtbare Eingabeebene, folgend eine verborgene Ebene Zeiel 16 sowie Ausgabeebene in Zeile 18. Da hier eine verborgene Ebene verwendet wird, spricht man von einem \enquote{Deep Learning}-Modell. Es handelt sich bei dieser \acl{KI} um ein künstliches neuronales Netz (KNN), das mit maschinellen Lernen (ML) ein mehrschichtiges bzw. tiefes Lernen (Deep Learning) durchführt. Mehr und tiefer soll in dieser Seminararbeit jedoch nicht darauf eingegangen werden, da es den Rahmen der Seminararbeit sprengen würde und nicht zum Thema selbst gehört. Deutlich wird aber, dass schon mit einer einfachen KI-Anwendung, also hier dem Einsatz des KI-Frameworks PyTorch, direkt wesentliche und grundlegnde Anwendungsfälle und mögliche Anforderungen abgedeckt werden können. Deutlich komplexere Modelle sind hier nun also nur noch eine Frage der tatsächlichen Umsetzung und eine Umsetzung scheitert hier nicht mehr an einer fehlenden IT-Infrastruktur.
+Man erkennt hier in Zeile 14 die sichtbare Eingabeebene, folgend eine verborgene Ebene Zeile 16 sowie Ausgabeebene in Zeile 18. Da hier eine verborgene Ebene verwendet wird, spricht man von einem \enquote{Deep Learning}-Modell. Es handelt sich bei dieser künstlichen Intelligenz um ein künstliches neuronales Netz (KNN), das mit maschinellem Lernen (ML) ein mehrschichtiges bzw. tiefes Lernen (Deep Learning) durchführt. Mehr und tiefer soll in dieser Seminararbeit jedoch nicht darauf eingegangen werden, da es den Rahmen der Seminararbeit sprengen würde und nicht zum Thema selbst gehört. Deutlich wird aber, dass schon mit einer einfachen KI-Anwendung, also hier dem Einsatz des KI-Frameworks PyTorch, direkt wesentliche und grundlegende Anwendungsfälle und mögliche Anforderungen abgedeckt werden können. Deutlich komplexere Modelle sind hier nun also nur noch eine Frage der tatsächlichen Umsetzung und eine Umsetzung scheitert hier nicht mehr an einer fehlenden IT-Infrastruktur.
 
-Mit Abschluss des Tutorials umfasst die Anwendung nicht nur die Datei \code{model.py}, sondern auch eine \code{train.py} die er erlaubt, dass KI-Modell anhand der Eingabedaten in der Datei \code{intents.json} zu trainieren. Die Eingabedaten sind dabei wie folgt aufgebaut:
+Mit Abschluss des Tutorials umfasst die Anwendung nicht nur die Datei \code{model.py} sondern auch eine \code{train.py} die es erlaubt, das KI-Modell anhand der Eingabedaten in der Datei \code{intents.json} zu trainieren. Die Eingabedaten sind dabei wie folgt aufgebaut:
 
 
 \begin{figure}[H] \caption{Auszug der Eingabedatei für das KI-Modell \enquote{intents.json}}
@@ -1116,17 +1116,17 @@ Mit Abschluss des Tutorials umfasst die Anwendung nicht nur die Datei \code{mode
 }
 \end{lstlisting} \end{figure}
 
-An der Struktur dieser Daten kann die Funktionsweise nachvollzogen werden: Die KI-Anwendung überprüft Eingaben und versucht diese Anhand der erlernten Muster (Zeilen 5 und 10) einem Thema (Zeilen 4 und 9) zuzuordnen. Gelingt dies mit einer bestimmten Sicherheit, werden Antworten entsprechend dem Thema (Zeilen 6 und 11-13) zurückgegeben.
+An der Struktur dieser Daten kann die Funktionsweise nachvollzogen werden: Die KI-Anwendung überprüft Eingaben und versucht diese anhand der erlernten Muster (Zeilen 5 und 10) einem Thema (Zeilen 4 und 9) zuzuordnen. Gelingt dies mit einer bestimmten Sicherheit, werden Antworten entsprechend dem Thema (Zeilen 6 und 11--13) zurückgegeben.
 
-Der Vollständigkeit halber verweise ich noch kurz auf den Teil der KI-Anwendung die die in dieser Eingabedatei vorhandene, natürliche Sprache verarbeitet. Bevor diese Daten für das Trainung und die Verwendung im Gespräch mit dem Chatbot verwendet werden können, müssen die mittels Algorithmen der Verarbeitung natürlicher Sprache (Natural Language Processing, NLP) für die KI aufbereitet werden. Dazu weden die Sprachdaten tokenisiert, also die Eingabe in Sätze und die Sätze in Wörter aufgeteilt. In diesem Tutorial mithilfe des Paketes \enquote{nltk} (Natural Language Toolkit).
+Der Vollständigkeit halber verweise ich noch kurz auf den Teil der KI-Anwendung, der die in dieser Eingabedatei vorhandene, natürliche Sprache verarbeitet. Bevor diese Daten für das Training und die Verwendung im Gespräch mit dem Chatbot verwendet werden können, müssen diese mittels Algorithmen der Verarbeitung natürlicher Sprache (Natural Language Processing, NLP) für die KI aufbereitet werden. Dazu werden die Sprachdaten tokenisiert, \dah, also die Eingabe wird in Sätze und die Sätze werden in Wörter aufgeteilt. In diesem Tutorial geschieht dies mithilfe des Paketes \enquote{nltk} (Natural Language Toolkit).
 
-In einem nächsten Schritt werden diese Wörter dann auf Ihren Wortstamm zurückgeführt. Dies war eine der ersten Stellen an denen ich das Ergebnis des Tutorials angepasst habe. Ich habe ein entsprechendes Paket für die Verarbeitung deutscher Sprache gesucht und mit \enquote{HanTa} gefunden \parencite[]{57-wartena2019probabilistic}. Dieser Programmablauf erfolgt nicht nur beim Trainung des KI-Modells, sondern auch beim Gespräch mit Chatbot über die \code{chat.py}.
+In einem nächsten Schritt werden diese Wörter dann auf ihren Wortstamm zurückgeführt. Dies war eine der ersten Stellen, an denen ich das Ergebnis des Tutorials angepasst habe. Ich habe ein entsprechendes Paket für die Verarbeitung deutscher Sprache gesucht und mit \enquote{HanTa} gefunden \parencite[]{57-wartena2019probabilistic}. Dieser Programmablauf erfolgt nicht nur beim Training des KI-Modells, sondern auch beim Gespräch mit Chatbot über die \code{chat.py}.
 
-Weitere Anpassungen durch mich in dieser allerersten Entwicklungsstufe der KI-Anwendung direkt nach Abschluss des Tutorials waren das Hinzufügen einer Log-Funktion die alle Eingaben und Antworten in Log-Dateien (hier als CSV) abspeichert. Ebenso erzeuge ich für jedes geführte Gespräch einen eindeutigen Identifikator (hier als \ac{UUID}), der es erlaubt geführte Gespräche in den Log-Dateien anhand der \ac{UUID} vollständig nachzuvollziehen. 
+Weitere Anpassungen durch mich in dieser allerersten Entwicklungsstufe der KI-Anwendung direkt nach Abschluss des Tutorials waren das Hinzufügen einer Log-Funktion, die alle Eingaben und Antworten in Log-Dateien (hier als CSV) abspeichert. Ebenso erzeuge ich für jedes geführte Gespräch einen eindeutigen Identifikator (hier als \ac{UUID}), der es erlaubt, geführte Gespräche in den Log-Dateien anhand der \ac{UUID} vollständig nachzuvollziehen. 
 
-Alle Einstellungen und Parameter der KI-Anwendung habe ich in der Datei \code{config.py} zusammengefasst. Abschließend habe ich die für das Starten der KI-Anwendung notwendigen Abhängigkeiten und Pakete für die Verwendung mit dem Python Tool \enquote{Pipenv} in der Datei \enquote{Pipfile} zusammengefasst. 
+Alle Einstellungen und Parameter der KI-Anwendung habe ich in der Datei \code{config.py} zusammengefasst. Abschließend habe ich die für das Starten der KI-Anwendung notwendigen Abhängigkeiten und Pakete für die Verwendung mit dem Python-Tool \enquote{Pipenv} in der Datei \enquote{Pipfile} zusammengefasst. 
 
-Den gesammten ersten Entwicklungsstand, wie er bis hier beschrieben wurde, habe ich in den Anlagen zur Seminararbeit sowie auf Github.com im Unterorder \code{10-example-ai-app} dokumentiert. Die KI-Anwendung in diesem Entwicklungsstand kann ausgeführt und getestet werden indem der Ordner  \code{10-example-ai-app} mit einem Terminal betreten wird und unten stehende Befehle ausgeführt werden:
+Der gesamte erste Entwicklungsstand, wie er bis hier beschrieben wurde, ist in den Anlagen zur Seminararbeit sowie auf Github.com im Unterordner \code{10-example-ai-app} dokumentiert. Die KI-Anwendung in diesem Entwicklungsstand kann ausgeführt und getestet werden, indem der Ordner  \code{10-example-ai-app} mit einem Terminal betreten wird und unten stehende Befehle ausgeführt werden:
 
 
 \begin{lstlisting}[language=bash]
@@ -1135,15 +1135,15 @@ pipenv run python train.py
 pipenv run python chat.py
 \end{lstlisting}
 
-Vorraussetzung dafür ist ein installierter Python-Interpreter ab Version 3.9 und das Python-Tool \enquote{Pipenv}.
+Voraussetzung dafür sind ein installierter Python-Interpreter ab Version 3.9 und das Python-Tool \enquote{Pipenv}.
 
 
 
-Für die Einbindung dieser KI-Anwendung, muss diese nun aber in einer Form vorliegen, die es erlaubt das Programm oder Programmteile an anderen Stellen einzubinden oder Teile davon aufzurufen. Die bisher vorliegende Datei- bzw. Skriptsammlung ist dazu so nicht nutzbar. Die KI-Anwendung muss daher umgebaut werden zu einem Python Modul. Ein Python Modul zeichnet sich dadurch aus, dass die notwendigen Dateien incl. einer \code{__init.py__}-Datei in einem entsprechenden Dateiordner liegen. Der Aufruf kann dann aus anderen Python Skripten mittels \code{import \textbf{NameDesModulOrdners}} aufgerufen werden. Programmfunktionen aus dem Moduls können dann mit \code{NameDesModulOrdners.\textbf{FunktionsName}} aufgerufen und gestartet werden.
+Für die Einbindung dieser KI-Anwendung muss diese nun aber in einer Form vorliegen, die es erlaubt, das Programm oder Programmteile an anderen Stellen einzubinden oder Teile davon aufzurufen. Die bisher vorliegende Datei- bzw. Skriptsammlung ist dazu so nicht nutzbar. Die KI-Anwendung muss daher zu einem Python-Modul umgebaut werden. Ein Python-Modul zeichnet sich dadurch aus, dass die notwendigen Dateien inkl. einer \code{__init.py__}-Datei in einem entsprechenden Dateiordner liegen. Der Aufruf kann dann aus anderen Python-Skripten mittels \code{import \textbf{NameDesModulOrdners}} aufgerufen werden. Programmfunktionen aus dem Modul können dann mit \code{NameDesModulOrdners.\textbf{FunktionsName}} aufgerufen und gestartet werden.
 
 Ich habe die notwendigen Anpassungen an der KI-Anwendung vorgenommen, alle Inhalte in einer Datei  zusammengetragen, gesamte Logik in passende Funktionen verpackt und aufrufbar über eine \code{main()}-Funktion gemacht. 
 
-Als weitere Möglichkeit zum Aufruf der KI-Anwendung wurde das Modul \code{argparse} in das Modul eingebunden. Damit ist der Aufruf von Programmteilen direkt über die Konsole möglich. Das Modul \code{argparse} stellt dabei Funktionen zur Verfügung die an die Anwendung übergebene Parameter auf der Konsole parst, also Verarbeitet. Außerdem werden automatisiert, nützliche Hilfetexte für die Kommandozeile erzeugt.
+Als weitere Möglichkeit zum Aufruf der KI-Anwendung wurde das Modul \code{argparse} in das Modul eingebunden. Damit ist der Aufruf von Programmteilen direkt über die Konsole möglich. Das Modul \code{argparse} stellt dabei Funktionen zur Verfügung, die an die Anwendung übergebene Parameter auf der Konsole parst, also verarbeitet. Außerdem werden automatisierte, nützliche Hilfetexte für die Kommandozeile erzeugt.
 
 Hier im Detail ein Auszug aus der Datei \code{__init.py__} des Moduls \code{chatbot}:
 \begin{figure}[H]
@@ -1207,7 +1207,7 @@ if __name__ == '__main__':
 \end{lstlisting}
 \end{figure}
 
-Anhand des strukturierten Aufbaus kann man die Programmlogik und die wesentlichen Aufrufe, gut ablesen. Wird das Modul aufgerufen, springt Pyhton in die \code{main()}-Funktion (Zeilen 53 und 54). In dieser Funktion dann, wird zuerst das Modul \code{ArgumentParser} initialisiert (Zeile 2) und dann die möglichen Aufrufe über Konsolenparameter konfiguriert (Zeilen 4 bis 19). In Zeile 20 werden tatsächlich beim Programmaufruf mitgegebenen Parameter verarbeitet (geparst). Entsprechend der mitgegebenen Parameter werden dann in den Zeilen 24 bis 48 die jeweiligen je nach Programmfunktionen gestartet und das Skript beendet. Fand keine Auswahl statt, wird durch Zeile 50 das hier zu sehende Hilfemenü auf der Konsole ausgegeben:
+Anhand des strukturierten Aufbaus kann man die Programmlogik und die wesentlichen Aufrufe gut ablesen. Wird das Modul aufgerufen, springt Python in die \code{main()}-Funktion (Zeile 53 und 54). In dieser Funktion wird zuerst das Modul \code{ArgumentParser} initialisiert (Zeile 2), im Anschluss werden die möglichen Aufrufe über Konsolenparameter konfiguriert (Zeile 4 bis 19). In Zeile 20 werden tatsächlich die beim Programmaufruf mitgegebenen Parameter verarbeitet (geparst). Entsprechend der mitgegebenen Parameter werden dann in den Zeilen 24 bis 48 die jeweiligen je nach Programmfunktionen gestartet und das Skript wird beendet. Fand keine Auswahl statt, wird durch Zeile 50 das hier zu sehende Hilfemenü auf der Konsole ausgegeben:
 
 \begin{figure}[H]
 	\caption{Hilfemenü der KI-Anwendung bei Konsolenaufruf}
@@ -1230,7 +1230,7 @@ options:
                         Needed when using -i, --textinput. Provide a UUID to a conversation.
 \end{lstlisting} \end{figure}
 
-Neben dem Umbau zur Python Modul und der Einbindung der Konsolenparameter, wurde noch das Logging weiter verfeinert und vervollständigt. Dieser Entwicklungsstand findet sich im Unterorder \code{20-prepared-ai-app}. Der Inhalt ist ebensfalls wieder in Anlage zu dieser Seminararbeit sowie auch auf Github.com zu finden. Der Aufruf kann wieder über die Konsole mit folgenden Befehlen erfolgen: 
+Neben dem Umbau zum Python-Modul und der Einbindung der Konsolenparameter, wurde noch das Logging weiter verfeinert und vervollständigt. Dieser Entwicklungsstand befindet sich im Unterordner \code{20-prepared-ai-app}. Der Inhalt ist ebenfalls wieder in Anlage der zu dieser Seminararbeit sowie auch auf Github.com zu finden. Der Aufruf kann wieder über die Konsole mit folgenden Befehlen erfolgen: 
 
 \begin{lstlisting}[language=bash]
 pipenv install
@@ -1238,21 +1238,21 @@ pipenv run python -m chatbot -t
 pipenv run python -m chatbot
 \end{lstlisting}
 
-Dieser Aufruf führt dann dem oben sichtbaren Hilfemenü. Mit dem Befehl \code{pipenv run python -m chatbot -c} kann ein Chat auf der Konsole im direkten Dialog gestartet werden. 
+Dieser Aufruf führt dann zu dem oben sichtbaren Hilfemenü. Mit dem Befehl \code{pipenv run python -m chatbot -c} kann ein Chat auf der Konsole im direkten Dialog gestartet werden. 
 
-Die Vorbereitung der KI-Anwendung, des Chatbots, kann damit an dieser Stelle abgeschlossen werden. Die Einbindung in ein anderes Pyhton Skript und auch der Aufruf über die Konsole sind möglich.
+Die Vorbereitung der KI-Anwendung, des Chatbots kann damit an dieser Stelle abgeschlossen werden. Die Einbindung in ein anderes Python-Skript und auch der Aufruf über die Konsole sind möglich.
 	
 
 
-\subsection{Einrichtung Django Grundinstallation}
+\subsection{Einrichtung Django-Grundinstallation}
 
-Die Bereitstellung des Webservices als REST API soll über Django erfolgen. Daher wird zuerst eine Grundinstallation von Django vorgenommen. Eine fertige Django Grundinstallation sowie die Dokumentation über die Installation findet sich in den Anlagen zur Seminararbeit und auf Github.com im Ordner \code{30-django-base-install} in der Datei \code{README.md}.
+Die Bereitstellung des Webservices als REST-API soll über Django erfolgen. Daher wird zuerst eine Grundinstallation von Django vorgenommen. Eine fertige Django-Grundinstallation sowie die Dokumentation über die Installation befindet sich in den Anlagen zur Seminararbeit und auf Github.com im Ordner \code{30-django-base-install} in der Datei \code{README.md}.
 
-Bei dieser Installation wurden alle notwendigen Pakete und Abhängigkeiten mit berücksichtigt, die für die Einbindung der zuvor vorbereiteten KI-Anwendung notwendig waren. Auch einige weitere Pakete und Funktionen wurden vorrausschauend bereits mit installiert. Neben zwingend für die Umsetzung notwendigen Paketen wie dem \enquote{Django Toolkit für REST API}, dem \enquote{Django REST framework}, wurden voralem Pakete installiert die Funktionen bereitstellen, die den Zugriff auf die API erleichtern. 
+Bei dieser Installation wurden alle notwendigen Pakete und Abhängigkeiten berücksichtigt, die für die Einbindung der zuvor vorbereiteten KI-Anwendung notwendig waren. Auch einige weitere Pakete und Funktionen wurden vorausschauend bereits mit installiert. Neben zwingend für die Umsetzung notwendigen Paketen wie dem \enquote{Django Toolkit für REST API}, dem \enquote{Django REST framework} wurden vor allem Pakete installiert, die Funktionen bereitstellen, die den Zugriff auf die API erleichtern. 
 
 
 \begin{figure}[H]
-	\caption{Dateiinhalt der \enquote{Pipfile} für die Django Grundinstallation}
+	\caption{Dateiinhalt der \enquote{Pipfile} für die Django-Grundinstallation}
 	\label{fig:code-nn-basis}
 \begin{lstlisting}[language=python]
 [[source]]
@@ -1283,17 +1283,17 @@ python_version = "3"
 \end{lstlisting}
 \end{figure}
 
-Über das Paket \code{drf-yasg} bzw. \enquote{Yet another Swagger generator} z.B. wird vollautomatisch eine Webseite generiert (Swagger), die der OpenAPI 2.0 Spezifikationen entspricht und Dritten damit eine vollständige Dokumentation der API bereitstellt und die Verwendung der API damit ermöglicht. 
+Über das Paket \code{drf-yasg} bzw. \enquote{Yet another Swagger generator} \zb wird vollautomatisch eine Webseite generiert (Swagger), die der OpenAPI 2.0-Spezifikationen entspricht und Dritten damit eine vollständige Dokumentation der API bereitstellt und die Verwendung der API somit ermöglicht. 
 
 \begin{figure}[H]
-	\caption{Bildschirmfoto von lokal laufender Swagger Instanz}\label{fig:local-swagger}
+	\caption{Bildschirmfoto von lokal laufender Swagger-Instanz}\label{fig:local-swagger}
 	\includegraphics[width=0.60\textwidth]{swagger.png}
 	\\
 	Quelle: Eigenes Bildschirmfoto
 \end{figure}
 
 
-Der Installations- und Einrichtungsporzess ist bei Django gut zu dokumentiern. Die Schritte sind kleinteilig und führen, in der korrekten Abfolge ausgeführt, regelmäßig zum gleichen Ergebnis. Für diese Grundinstallation sind 14 Schritte erforderlich, die in einem Zeitraum von etwa 30 Minuten von einer  Person mit IT-Kenntnissen gut abgearbeitet werden können. Es müssen z.B. verschiedene Konsolenbefehle, wie z.B. \code{pipenv run python manage.py createsuperuser} für die Anlage eines Administratoraccounts oder \code{pipenv run python -m chatbot -t} zum initialen Training des KI-Modells, eingegeben werden. Auch müssen verschiedene Dateien angelegt oder bestehenden Datein Inhalte an der korrekten Stelle hinzugefügt werden. Dazu ein Auszug aus der Anleitung: 
+Der Installations- und Einrichtungsprozess  ist bei Django gut zu dokumentieren. Die Schritte sind kleinteilig und führen, in der korrekten Abfolge ausgeführt, regelmäßig zum gleichen Ergebnis. Für diese Grundinstallation sind 14 Schritte erforderlich, die in einem Zeitraum von etwa 30 Minuten von einer  Person mit IT-Kenntnissen gut abgearbeitet werden können. Es müssen \zb verschiedene Konsolenbefehle, wie \zb \code{pipenv run python manage.py createsuperuser} für die Anlage eines Administratoraccounts oder \code{pipenv run python -m chatbot -t} zum initialen Training des KI-Modells, eingegeben werden. Auch müssen verschiedene Dateien angelegt oder bestehenden Dateien Inhalte an der korrekten Stelle hinzugefügt werden. Dazu ein Auszug aus der Anleitung: 
 
 \begin{figure}[H]
 	\caption{Auszug der \enquote{README.md}-Datei: Zeilenweise Konfiguration}
@@ -1309,14 +1309,14 @@ MIDDLEWARE = [
 \end{lstlisting}
 \end{figure}
 
-Neben diesen einfacherern Schritten, war es aber auch notwendig die KI-Anwendung selbst einzubinden. Dazu wird während des Installationprozesses die KI-Anwendung aus dem Ordner \code{20-prepared-ai-app} in den Ordner der Django Grundinstallation kopiert. Damit können Funktionen der KI-Anwendung als Modul an jeder Stelle von Django importiert und aufgerufen werden. 
+Neben diesen einfacheren Schritten war es aber auch notwendig, die KI-Anwendung selbst einzubinden. Dazu wird während des Installationsprozesses die KI-Anwendung aus dem Ordner \code{20-prepared-ai-app} in den Ordner der Django-Grundinstallation kopiert. Damit können Funktionen der KI-Anwendung als Modul an jeder Stelle von Django importiert und aufgerufen werden. 
 
-Dann folgend müssen für die Funktionen der KI-Anwendung entsprechende Programmierungen in Django erstellt werden: Das Datenmodell muss abgebildet werden, die Sichten auf die Daten müssen ertellt werden und die entsprechenden Einstiegspunkte konfiguriert werden. Innerhalb von Django finden sich diese Programmierungen bzw. Konfigurationen in den Dateien \code{models.py}, \code{views.py} und \code{urls.py} wieder. Je nach Organisation finden sich diese Dateien an unterscheidlichen Stellen von Django wieder. Auch lassen sich die Inhalte auf verschiedene Hirachien aufteilen und damit nach Programmteil getrennt hinterlegen. Das kann die Organisation von Anwendungen deutlich erleichtern.
+Dann müssen für die Funktionen der KI-Anwendung entsprechende Programmierungen in Django erstellt werden: Das Datenmodell muss abgebildet werden, die Sichten auf die Daten müssen erstellt und die entsprechenden Einstiegspunkte konfiguriert werden. Innerhalb von Django finden sich diese Programmierungen bzw. Konfigurationen in den Dateien \code{models.py}, \code{views.py} und \code{urls.py} wieder. Je nach Organisation finden sich diese Dateien an unterschiedlichen Stellen von Django wieder. Auch lassen sich die Inhalte auf verschiedene Hierarchien aufteilen und damit nach Programmteil getrennt hinterlegen. Das kann die Organisation von Anwendungen deutlich erleichtern.
 
-In den in Django agelegten Datenmodellen erkennt mal z.B. schnell, dass diese vom Aufbau im wesentlichen den bisherigen Log-Dateien entsprechen. Folgend sind die beiden Klassen zu den Datenmodellen zu sehen. Wie man erkennt, können diese auch mit Informationen angereichert werden, die im Webservice wichtige Hinweise zur korrekten Nutzung geben:
+In den in Django angelegten Datenmodellen erkennt mal \zb schnell, dass diese vom Aufbau im Wesentlichen den bisherigen Log-Dateien entsprechen. Folgend sind die beiden Klassen zu den Datenmodellen zu sehen. Wie man erkennt, können diese auch mit Informationen angereichert werden, die im Webservice wichtige Hinweise zur korrekten Nutzung geben:
 
 \begin{figure}[H]
-	\caption{Auszug der \enquote{models.py}-Datei: Das Django Datenmodell}
+	\caption{Auszug der \enquote{models.py}-Datei: das Django-Datenmodell}
 	\label{fig:code-django-data-modell}
 \begin{lstlisting}[language=python]
 class ChatUuid(models.Model):
@@ -1343,10 +1343,10 @@ class ChatDialogue(models.Model):
 \end{lstlisting}
 \end{figure}
 
-So kann man durch die Angaben im Attribut \code{help_text='...'} in den Zeilen 3 und 6 der Abbildung \ref{fig:code-django-data-modell} hinterlegen, was für Nutzer der API relevant ist. Hier wird z.B. der Klasse \code{ChatUuid} die Information mitgegeben, dass es sich dabei um eine \ac{UUID} für ein Gespräch mit dem Chatbot handelt. Eine ChatUuid aber, wird nur vergeben, so das Einverständnis zu den Nutzungsbedinungen erteilt wurde. Hier indem der Parameter \code{agreed} mit dem Inhalt \enquote{Einverstanden} übergeben wurde. Eine entsprechende Fehlermeldung wurde über einen Inhalt in der Datei \code{views.py} programmiert: 
+So kann man durch die Angaben im Attribut \code{help_text = '...'} in den Zeilen 3 und 6 der Abbildung \ref{fig:code-django-data-modell} hinterlegen, was für Nutzer der API relevant ist. Hier wird \zb der Klasse \code{ChatUuid} die Information mitgegeben, dass es sich dabei um eine \ac{UUID} für ein Gespräch mit dem Chatbot handelt. Eine ChatUuid aber wird nur vergeben, so das Einverständnis zu den Nutzungsbedingungen erteilt wurde, hier indem der Parameter \code{agreed} mit dem Inhalt \enquote{Einverstanden} übergeben wurde. Eine entsprechende Fehlermeldung wurde über einen Inhalt in der Datei \code{views.py} programmiert: 
 
 \begin{figure}[H]
-	\caption{Auszug der \enquote{views.py}-Datei: Die Django Sichten}
+	\caption{Auszug der \enquote{views.py}-Datei: die Django-Sichten}
 	\label{fig:code-django-views}
 \begin{lstlisting}[language=python]
 class ChatUuidNewAPIView(CreateAPIView):
@@ -1365,20 +1365,20 @@ class ChatUuidNewAPIView(CreateAPIView):
 \end{lstlisting}
 \end{figure}
 
-In Abbildung \ref{fig:code-django-views} findet man ein Klasse des Typs \code{CreateAPIView}. Diese stellt über des \enquote{Djangao Rest framework} einen Endpunkt für POST Anfragen bereit. In der Zeile 6 sieht man entsprechend ein die Methode \code{def post(...):}. Die Programmlogik für die Fehlermeldung findet sich in der Zeilen 9: Hier wird überprüft ob der bereits bekannte Parameter \code{agreed} mit dem Inhalt \enquote{Einverstanden} befüllt ist. Ist das nicht der Fall, wird über Zeile 10 eine Rückgabe mit Fehlermeldung und HTTP-Statuscode 400 (keine Verarbeitung aufgrund clientseitigem Fehler) zurückgegeben.
+In Abbildung \ref{fig:code-django-views} findet man eine Klasse des Typs \code{CreateAPIView}. Diese stellt über des \enquote{Djangao Rest framework} einen Endpunkt für POST-Anfragen bereit. In der Zeile 6 sieht man entsprechend die Methode \code{def post(...):}. Die Programmlogik für die Fehlermeldung findet sich in der Zeile 9: Hier wird überprüft, ob der bereits bekannte Parameter \code{agreed} mit dem Inhalt \enquote{Einverstanden} befüllt ist. Ist das nicht der Fall, wird über Zeile 10 eine Rückgabe mit Fehlermeldung und HTTP-Statuscode 400 (keine Verarbeitung aufgrund clientseitigem Fehler) zurückgegeben.
 
-Nach dieser Systematik wurden für alle Funktionen der KI-Anwendung entsprechend Sichten und Einstiegspunkte programmiert, die der Installationsanleitung \code{30-django-base-install\\README.md} in den Anlagen und auf Github.com entnommen werden kann. Auch finden sich natürlich alle Programmierungen und Konfigurationen in dem Ordner zur Django Grundinstallation selbst (\code{30-django-base-install}). 
+Nach dieser Systematik wurden für alle Funktionen der KI-Anwendung entsprechend Sichten und Einstiegspunkte programmiert, die der Installationsanleitung \code{30-django-base-install\\README.md} in den Anlagen und auf Github.com entnommen werden kann. Auch finden sich natürlich alle Programmierungen und Konfigurationen in dem Ordner zur Django-Grundinstallation selbst (\code{30-django-base-install}). 
 
 Den vollständigen Ordnerinhalt zeigt die folgende Abbildung: 
 
 \begin{figure}[H]
-	\caption{Ordnerinhalt Django Grundinstallation}\label{fig:img-django-base-install}
+	\caption{Ordnerinhalt Django-Grundinstallation}\label{fig:img-django-base-install}
 	\includegraphics[width=0.5\textwidth]{django-folder.png}
 	\\
 	Quelle: Eigenes Bildschirmfoto
 \end{figure}
 
-Für die API wurden insgesamt vier Endpunkte, also die Zugriffspunkte auf die KI-Anwendung, erstellt. Zwei der Endpunkte, \code{input} und \code{newchatuuid}, sind dabei für das Gespräch mit dem Chatbot notwendig. Mittels einer POST HTTP-Anfrage an \code{/api/v1/chatbot/input} können schon mit den beiden Pflichtparametern \code{input} und \code{chatuuid} Eingaben an die KI-Anwendung übergeben werden. Der Chatbot verarbeitet diese dann über den Modulaufruf aus einer Django Sicht bzw. View heraus, und gibt die Antwort im Feld \code{output}, zusammen mit eineigen anderen Feldern wie z.B. der Wahrscheinlichkeit des Verständnisses, im direkten Dialog als Antwort auf die Anfrage selbst, mit einem HTTP-Statuscode 200 (erfolgreich) zurück wie die folgende Abbildung zeigt:
+Für die API wurden insgesamt vier Endpunkte, also die Zugriffspunkte auf die KI-Anwendung, erstellt. Zwei der Endpunkte, \code{input} und \code{newchatuuid}, sind dabei für das Gespräch mit dem Chatbot notwendig. Mittels einer POST-HTTP-Anfrage an \code{/api/v1/chatbot/input} können schon mit den beiden Pflichtparametern \code{input} und \code{chatuuid} Eingaben an die KI-Anwendung übergeben werden. Der Chatbot verarbeitet diese dann über den Modulaufruf aus einer Django-Sicht bzw. View heraus und gibt die Antwort im Feld \code{output} zusammen mit einigen anderen Feldern wie der Wahrscheinlichkeit des Verständnisses im direkten Dialog als Antwort auf die Anfrage selbst mit einem HTTP-Statuscode 200 (erfolgreich) zurück, wie die folgende Abbildung zeigt:
 
 \begin{figure}[H]
 	\caption{Antwort des Webservices auf Chatbot-Eingabe}\label{fig:img-cb-200-input}
@@ -1388,7 +1388,7 @@ Für die API wurden insgesamt vier Endpunkte, also die Zugriffspunkte auf die KI
 \end{figure}
 
 
-Einen weiteren Endpunkt gibt es zum Trainung des KI-Modells, den \code{/api/v1/chatbot/train}. Dieser Endpunk ist für die Verwendung mit einer GET Methode angelegt. Der Aufruf jedoch, wird nur erlaubt wenn über eine HTTP Basis Authentifizierung ein Benutzername und das entsprechende Passwort eines Administratorkontos der Anfrage mitegegeben wird. Bei fehlenden Authentifizierungsdaten erfolgt die Antwort mit HTTP-Statuscode 403 (verboten) und der Fehlermeldung \code{ \{ "detail": "Authentication credentials were not provided." \}}. Werden falsche Angaben gemacht, eroflgt die Antwort mit geleichem Statuscode, jedoch der Fehlermeldung \code{ \{ "detail": "Invalid username/password." \}}. Diese Fehlermeldungen werden dabei von Django bzw. dem \enquote{Django Rest framework} automatisch erzeugt und übermittelt. Die einzige Einstellung dazu erfolgte in den Sichten, der Datei \code{views.py}, in Zeile 2 durch eine Angabe im Parameter \code{permission_classes}:
+Einen weiteren Endpunkt gibt es zum Training des KI-Modells, den \code{/api/v1/chatbot/train}. Dieser Endpunkt ist für die Verwendung mit einer GET-Methode angelegt. Der Aufruf jedoch wird nur erlaubt, wenn über eine HTTP-Basis-Authentifizierung ein Benutzername und das entsprechende Passwort eines Administratorkontos der Anfrage mitgegeben werden. Bei fehlenden Authentifizierungsdaten erfolgt die Antwort mit HTTP-Statuscode 403 (verboten) und die Fehlermeldung \code{ \{ "detail": "Authentication credentials were not provided." \}}. Werden falsche Angaben gemacht, erfolgt die Antwort mit gleichem Statuscode, jedoch mit der Fehlermeldung \code{ \{ "detail": "Invalid username/password." \}}. Diese Fehlermeldungen werden dabei von Django bzw. dem \enquote{Django Rest framework} automatisch erzeugt und übermittelt. Die einzige Einstellung dazu erfolgte in den Sichten, der Datei \code{views.py}, in Zeile 2 durch eine Angabe im Parameter \code{permission_classes}:
 
 \begin{figure}[H]
 	\caption{Auszug der \enquote{views.py}-Datei: Berechtigungen einer Klasse}
@@ -1408,21 +1408,21 @@ class ChatTrainAPIView(views.APIView):
 \end{lstlisting}
 \end{figure}
 
-Der Aufruf des \code{train}-Endpunkts dauert meist zumindest einige Sekunden. Es wird dadurch klar, dass die direkte, dialogbasierte Kommunikation vorallem durch Antwortzeiten beschränke Grenzen hat. Anfragen die in aller Regel länger aus den Bruchteil einer Sekunde dauern, könnten über die API eine Rückmeldung geben, die anzeigt, dass die finale Antwort noch nicht in der nun erhaltenen Rückmeldung enthalten war. Es könnte dabei ein Token zur Nachfrage zum Bearbeitungsstand und Abholung des finalen Ergebnisses bei dem Webservice übergeben werden. Auch sehr lange laufende Verarbeitungen, könnten damit für Nutzer der API transparent verarbeitet werden. Eine Umsetzung dieser Idee, erfolgte hier jedoch aus Gründen des Umfangs der Seminararbeit nicht. 
+Der Aufruf des \code{train}-Endpunkts dauert meist zumindest einige Sekunden. Es wird dadurch klar, dass die direkte, dialogbasierte Kommunikation vor allem durch Antwortzeiten beschränkte Grenzen hat. Anfragen, die in aller Regel länger als den Bruchteil einer Sekunde dauern, könnten über die API eine Rückmeldung geben, die anzeigt, dass die finale Antwort noch nicht in der nun erhaltenen Rückmeldung enthalten war. Es könnte dabei ein Token zur Nachfrage zum Bearbeitungsstand und Abholung des finalen Ergebnisses bei dem Webservice übergeben werden. Auch sehr lange laufende Verarbeitungen könnten damit für Nutzer der API transparent verarbeitet werden. Eine Umsetzung dieser Idee erfolgte hier jedoch aus Gründen des Umfangs der Seminararbeit nicht. 
 
 
 % \subsection{Erweiterungen für API}
-% \subsection{Pyhton Module und Pakete}
+% \subsection{Python Module und Pakete}
 % \subsection{Aufruf als Subprozess}
 % \subsection{Zugriff}
 % \subsubsection{Konsolenbasiert mit Zeitmessung}
 \subsection{Zugriff mit einem Web-Frontend (Vue.js und Axios)}
 
-Für den einfachen Zugriff und um die Funktionalität abschließend zu bestätigen, soll auch ein Zugriff auf den neues Webservice der KI-Anwendung über ein Web-Frontend durchgeführt werden. Dazu wurde eine einfache Webseite erstellt, die Schrittweise die diaglobasierte Kommunikation mit der KI-Anwendung, also dem Chatbot, aufbaut und durchführt. Die Auswahl des zum Einsatz kommenden Frameworks, fiel hier auf \enquote{Vue.js} das als leichtgewichtiges, quelloffenes und schnell einzurichtendes Framework ideal für diesen Anwendungsfall ist. Ein Chatdialog erfordert hier keinen besonders komplexen oder aufwändigen Aufbau. Lediglich HTTP-Anfragen müssen an eine REST API gestellt werden können. Dazu kommt \enquote{Axios} als HTTP-Bibliothek auf der Web-Seite zum Einsatz.  
+Für den einfachen Zugriff und um die Funktionalität abschließend zu bestätigen, soll auch ein Zugriff auf den neuen Webservice der KI-Anwendung über ein Web-Frontend durchgeführt werden. Dazu wurde eine einfache Webseite erstellt, die schrittweise die dialogbasierte Kommunikation mit der KI-Anwendung, also dem Chatbot, aufbaut und durchführt. Die Auswahl des zum Einsatz kommenden Frameworks fiel hier auf \enquote{Vue.js}, das als leichtgewichtiges, quelloffenes und schnell einzurichtendes Framework ideal für diesen Anwendungsfall ist. Ein Chatdialog erfordert hier keinen besonders komplexen oder aufwendigen Aufbau. Lediglich HTTP-Anfragen müssen an eine REST-API gestellt werden können. Dazu kommt \enquote{Axios} als HTTP-Bibliothek auf der Webseite zum Einsatz.  
 
-Die Erstellung der Webseite erfolgte durch Nutzung einer, auf eine einfache und in den Funktionen leicht nachvollziehbare, Beispielanwendung \parencite{58-howto-vue}. Die dort erstellte Anwendung wurde gründlich gesichtet und konnte in der Funktiosnweise nachvollzegen werden. Weitere Anpassungen und Optimierungen konnten darauf erfolgen, insbesondere der Funktionsumfang konnte noch weiter zusammengeschrumpft werden. Dies da in dem Anwendungsfall des Chatbot, nur noch POST-Methoden zum Einsatz kommen. 
+Die Erstellung der Webseite erfolgte durch Nutzung einer in den Funktionen leicht nachvollziehbare Beispielanwendung \parencite{58-howto-vue}. Die dort erstellte Anwendung wurde gründlich gesichtet und konnte in der Funktionsweise nachvollzogen werden. Weitere Anpassungen und Optimierungen konnten darauf erfolgen, insbesondere der Funktionsumfang konnte noch weiter komprimiert  werden. Dies war deshalb möglich, da in dem Anwendungsfall des Chatbots nur noch POST-Methoden zum Einsatz kommen. 
 
-Die erstellte Webseite befindet sich in den Anlagen und auf Github.com im Ordner \code{40-vue-axios-webpage}. Der Start der Webseite erfolte nach installtion von \enquote{node.js} mittels Eingabe von \code{npm install} und \code{npm run server} im Projektordner. 
+Die erstellte Webseite befindet sich in den Anlagen und auf Github.com im Ordner \code{40-vue-axios-webpage}. Der Start der Webseite erfolgte nach Installation von  \enquote{node.js} mittels Eingabe von \code{npm install} und \code{npm run server} im Projektordner. 
 
 Die Verbindung zwischen dem Frontend (Webseite, Vue.js mit Axios) und Backend (Django, KI-Anwendung) wird in der Datei \code{http-common.js} eingestellt: 
 
@@ -1441,7 +1441,7 @@ export default axios.create({
 \end{lstlisting}
 \end{figure}
 
-Das Web-Frontend wurde passend zum Webservice entworfen. Damit das Durchführen von Tests und ein Eingriff in die Abläufe leicht möglich ist sowie zur leichten Fehlersuche, wurde die Webseite bewusst nicht als fertige Chatanwendung mit nur einer Eingabezeile und einem Ausgabefenster entworfen. Die Webseite bildet den mehrstufigen Verbindungsauf zwischen dem Client und Server. Zuerst muss eine Chat-UUID durch Übermittlung des Einverständnis zu den Nutzungsbedinungen abgeholt werden. Dies ist in Abbildung \ref{web-frontend-leer} unten, links zu sehen. Erst dann kann mit dieser Chat-UUID mit dem Chatbot gesprochen werden. Im mittleren Teil der Webseite, kann dann die Chat-UUID sowie die Nachricht an den Chatbot eingetragen werden. Die Antwort wird dann im rechten Teil der Webseite dargestellt. 
+Das Web-Frontend wurde passend zum Webservice entworfen. Damit das Durchführen von Tests und ein Eingriff in die Abläufe leicht möglich sind sowie zur leichten Fehlersuche, wurde die Webseite bewusst nicht als fertige Chatanwendung mit nur einer Eingabezeile und einem Ausgabefenster entworfen. Die Webseite bildet den mehrstufigen Verbindungsauf zwischen dem Client und Server. Zuerst muss eine Chat-UUID durch Übermittlung des Einverständnisses zu den Nutzungsbedingungen abgeholt werden. Dies ist in Abbildung \ref{fig:web-frontend-leer} unten links zu sehen. Erst dann kann mit dieser Chat-UUID mit dem Chatbot gesprochen werden. Im mittleren Teil der Webseite können dann die Chat-UUID sowie die Nachricht an den Chatbot eingetragen werden. Die Antwort wird dann im rechten Teil der Webseite dargestellt. 
 
 
 \begin{figure}[H]
@@ -1452,7 +1452,7 @@ Das Web-Frontend wurde passend zum Webservice entworfen. Damit das Durchführen 
 \end{figure}
 
 
-In der Abbildung \ref{fig:web-frontend-genutzt} erkennt man dann, das Ergebnis eines erfolten Dialogs. Die Antworten incl. technischer Details werden jeweils unter der Aktion dargestellt. Sichtbar in den grauen Feldern der linken und mittleren Teil der Webseite. Im rechten Bereich wird der erfolgte dialog mit dem Chatbot dargestellt.
+In der Abbildung \ref{fig:web-frontend-genutzt} ist das Ergebnis eines erfolgten Dialogs zu sehen. Die Antworten inkl. technischer Details werden jeweils unter der Aktion dargestellt. Sichtbar in den grauen Feldern der linken und mittleren Teile der Webseite. Im rechten Bereich wird der erfolgte Dialog mit dem Chatbot dargestellt.
 
 
 \begin{figure}[H]
@@ -1465,11 +1465,11 @@ In der Abbildung \ref{fig:web-frontend-genutzt} erkennt man dann, das Ergebnis e
 
 \subsection{Verteilung durch Containerisierung (Docker-Compose)}
 
-Zur einfacheren Verteilung der bisher erstellten Lösungen, gleich ob an Interessierte, zum fachlichen  Austausch oder zu Zwecken der Veröffentlichung, muss das bisher erstellte (Django im Backend und Vue.js im Frontend) noch in Container überführt werden. Dadurch kann der Transport auf andere Systeme und IT-Umgebebungen deutlich vereinfacht werden. Durch den Einsatz einer \code{docker-compose.yml}-Datei kann, nach Einrichtung, durch nur ein Kommando die gesamte, bennötigte IT-Infrastruktur von  Frontend und Backend gestartet werden.
+Zur einfacheren Verteilung der bisher erstellten Lösungen, gleich ob an Interessierte, zum fachlichen  Austausch oder zu Zwecken der Veröffentlichung, muss das bisher erstellte (Django im Backend und Vue.js im Frontend) noch in Container überführt werden. Dadurch kann der Transport auf andere Systeme und IT-Umgebungen deutlich vereinfacht werden. Durch den Einsatz einer \code{docker-compose.yml}-Datei kann, nach Einrichtung, durch nur ein Kommando die gesamte, benötigte IT-Infrastruktur von  Frontend und Backend gestartet werden.
 
-In einem letzten Ordner \code{50-docker-deployment}, der ebenfalls wieder in den Alagen zur Seminararbeit und auch auf Github.com zu finden ist, wurden zwei Unterordner erstellt. In diesen beiden Ordnern, Backend und Frontend, wurden die bisherigen Ergebnisse aus den Abschnitten zur Django Grundinstallation und der Vue.js Webseite übernommen. Ergänzt wurden diese Ordner jeweils durch passende \code{Dockerfile}-Dateien in denen der Erstellungsprozess der Container anhand eine vorgegebenen Reihenfolge von Befehlen konfiguriert wurde. 
+In einem letzten Ordner \code{50-docker-deployment}, der ebenfalls wieder in den Anlagen zur Seminararbeit und auch auf Github.com zu finden ist, wurden zwei Unterordner erstellt. In diesen beiden Ordnern, Backend und Frontend, wurden die bisherigen Ergebnisse aus den Abschnitten zur Django-Grundinstallation und der Vue.js-Webseite übernommen. Ergänzt wurden diese Ordner jeweils durch passende \code{Dockerfile}-Dateien, in denen der Erstellungsprozess der Container anhand einer vorgegebenen Reihenfolge von Befehlen konfiguriert wurde. 
 
-Die Erstellung des Frontends folgt dabei einem 2-stufigen Plan, der zuerst über \code{npm run build} alle Inhalte für die Bereitstellung über \enquote{nginx} erzeugt und damm im zweiten Schritt diese mit \code{CMD ["nginx", "-g", "daemon off;"]} als Webserver bereit stellt:
+Die Erstellung des Frontends folgt dabei einem 2-stufigen Plan, der zuerst über \code{npm run build} alle Inhalte für die Bereitstellung über \enquote{nginx} erzeugt und dann im zweiten Schritt diese mit \code{CMD ["nginx", "-g", "daemon off;"]} als Webserver bereitstellt:
 
 \begin{figure}[H]
 	\caption{Programmcode: Dockerfile für das Frontend}
@@ -1492,7 +1492,7 @@ Die Erstellung des Frontends folgt dabei einem 2-stufigen Plan, der zuerst über
 \end{figure}
 
 
-Die Erstellung des Contains für das Backend erfolgt auch über eine \code{Dockerfile}. Es fällt hier vielleicht auf, dass auch der \code{node:18-bullseye}-Container als Grundlage verwendet wird. Dieser wird hier verwendet, da es schon Anwendung im Frontend findet und dadurch, dass er auch auf Debian basiert, sehr gut auch für das Backend verwendet werden kann. 
+Die Erstellung des Containers für das Backend erfolgt auch über ein \code{Dockerfile}. Es fällt hier vielleicht auf, dass auch der \code{node:18-bullseye}-Container als Grundlage verwendet wird. Dieser wird hier gebraucht, da er schon Anwendung im Frontend findet und dadurch, dass er auch auf Debian basiert, sehr gut für das Backend verwendet werden kann. 
 
 
 \begin{figure}[H]
@@ -1512,7 +1512,7 @@ CMD ["sh", "start_api.sh"]
 \end{lstlisting}
 \end{figure}
 
-Neben der \code{Dockerfile} für das Backend, ist für den Start des Backends noch Skript nötig, dass die bei Django notwendigen Schritte ausführen kann. Dazu wurde die Datei \code{start_api.sh} erstellt und die notwendigen Abläufe (Datenbankmigrationen, statische Dateien einsammeln, KI-Modell trainieren usw.) demenstprechend hinterlegt. Auch der Start des Backends selbst, erfolgt über das Skript. Für die Bereitstellung des Webservices habe ich die Anwendung \enquote{daphne} gewählt. Dies, da sie nicht unbedingt einen vorangestellten Proxy bennötigt und auf eine modernere, asynchrone Schnittstelle setzt (ASGI). 
+Neben dem \code{Dockerfile} für das Backend ist für den Start des Backends noch das Skript nötig, das die bei Django notwendigen Schritte ausführen kann. Dazu wurde die Datei \code{start_api.sh} erstellt und die notwendigen Abläufe (Datenbankmigrationen, statische Dateien einsammeln, KI-Modell trainieren usw.) wurden dementsprechend hinterlegt. Auch der Start des Backends selbst erfolgt über das Skript. Für die Bereitstellung des Webservices habe ich die Anwendung \enquote{daphne} gewählt, da sie nicht unbedingt einen vorangestellten Proxy benötigt und auf eine modernere, asynchrone Schnittstelle setzt (ASGI). 
 
 \begin{figure}[H]
 	\caption{Programmcode: \enquote{start_api.sh}-Skript zum Start des Backends}
@@ -1531,19 +1531,19 @@ exec pipenv run daphne -b 0.0.0.0 -p 8000 aiapiproject.asgi:application
 \end{lstlisting}
 \end{figure}
 
-Für das Bereitstellen der statischen Inhalte wurde schon in einem früheren Schritt das Django Paket \code{whitenoise} installiert und konfiguriert, so dass hier im übrigen keine weiteren Anpassungen mehr notwendig waren. Grundlage für die Erstellung dieser Containerisierung waren eine Teil der Vue.js-Dokumentation\parencite{60-docker-vue2}, ein Artikel zu Docker-Compose und Vue.js\parencite{59-docker-vue} sowie Inhalte aus den Vorlesungen zum Modul \enquote{IT-Infrastruktur}.
+Für das Bereitstellen der statischen Inhalte wurde schon in einem früheren Schritt das Django-Paket \code{whitenoise} installiert und konfiguriert, so dass hier im Übrigen keine weiteren Anpassungen mehr notwendig waren. Grundlage für die Erstellung dieser Containerisierung waren ein Teil der Vue.js-Dokumentation\parencite{60-docker-vue2}, ein Artikel zu Docker-Compose und Vue.js \parencite{59-docker-vue} sowie Inhalte aus den Vorlesungen zum Modul \enquote{IT-Infrastruktur}.
 
-Aufgrund des beschränkten Umfangs dieser Seminararbeit muss an dieser Stell auf weitere Ausführungen zu Docker-compose verzichtet werden. Ebenso kann auch keine Beschreibung der Produktivenahme dieser Lösung mit einem Proxy wie \enquote{Traefik} und auch nicht die Konfiguration einer HTTPS-Verbindung mittels Zertifikaten von \enquote{Let's Encrypt} erfolgen. 
+Aufgrund des beschränkten Umfangs dieser Seminararbeit muss an dieser Stelle auf weitere Ausführungen zu Docker-compose verzichtet werden. Ebenso kann auch keine Beschreibung der Produktivnahme dieser Lösung mit einem Proxy wie \enquote{Traefik} und auch nicht die Konfiguration einer HTTPS-Verbindung mittels Zertifikaten von \enquote{Let's Encrypt} erfolgen. 
 
 \section{Fazit und Reﬂexion}
 
-Das gewünschte Ziel dieser Seminararbeit konnte erreicht werden: Eine KI-Anwendung konnte über eine REST API, die über Django bereitgestllt wurde, erreicht werden. Auch konnten die sich daraus ergebenden Vorzüge dargestellt und nutzbar gemacht werden: Die KI-Anwendung ist durch die Bereitstellung als Webservice deutlich leichter für Dritte zu erreichen. Auch ist die Lösung in ihrer Gesamtheit, ja als ein Stück IT-Infrastruktur, durch die erfolgreiche Containerisierung transportabel und verteilbar geworden.
+Das gewünschte Ziel dieser Seminararbeit konnte erreicht werden: Eine KI-Anwendung konnte über eine REST-API, die über Django bereitgestellt wurde, erreicht werden. Auch war es möglich, die sich daraus ergebenden Vorzüge ddarzustellen und nutzbar zu : Die KI-Anwendung ist durch die Bereitstellung als Webservice deutlich leichter für Dritte zu erreichen. Auch ist die Lösung in ihrer Gesamtheit als ein Stück IT-Infrastruktur durch die erfolgreiche Containerisierung transportabel und verteilbar geworden.
 
-Eine Herausforderung und Schwierigkeit bei der Entwicklung war es, die Grezne zwischen der API und der KI-Anwendung aufrecht zu erhalten. Bei dem zusammenführen der Teile, also der KI-Anwendung in Django,  verschwimmen und verwachsen Programmteile sehr schnell miteinander. Während der Umsetzung musste daher stets mit Bedacht und größter Sorgfalt vorgegangen werden um die Funktionen der KI-Anwendung in die API einzubinden, ohne dabei Veränderungen an der KI-Anwendung selbst vorzunehmen. Eine Vermischung war hier aufgrund der Aufgabenstellung und Zielsetzung dringend zu vermeiden und war auch gelungen. 
+Eine Herausforderung und Schwierigkeit bei der Entwicklung war es, die Grenze zwischen der API und der KI-Anwendung aufrecht zu erhalten. Bei dem Zusammenführen der Teile, also der KI-Anwendung in Django,  verschwimmen und verwachsen Programmteile sehr schnell miteinander. Während der Umsetzung musste daher stets mit Bedacht und größter Sorgfalt vorgegangen werden, um die Funktionen der KI-Anwendung in die API einzubinden, ohne dabei Veränderungen an der KI-Anwendung selbst vorzunehmen. Eine Vermischung war hier aufgrund der Aufgabenstellung und Zielsetzung dringend zu vermeiden und war auch gelungen. 
 
-Die Vorstellung jedoch, die KI-Anwendung selbst vollständig in Django zu integrieren war dabei stets präsent. Alle Daten und Logs hätten statt in einer Datei, direkt über die Djnago Datenmodelle und Abstraktion bequem in einer Datenbank gespeichert werden können.  Für die Zukunft ist zu überlegen, ob eine solch strike Trennung nicht den aufgezeigten Vorzügen gegenüber, aufgegeben werden sollte. 
+Die Vorstellung jedoch, die KI-Anwendung selbst vollständig in Django zu integrieren, war dabei stets als sehr naheliegend präsent. Alle Daten und Logs hätten statt in einer Datei, direkt über die Django-Datenmodelle und Abstraktion bequem in einer Datenbank gespeichert werden können.  Für die Zukunft ist zu überlegen, ob eine solch strikte Trennung nicht den aufgezeigten Vorzügen gegenüber aufgegeben werden sollte. 
 
-Die Seminararbeit war für mich persönlch eine höchst interessante und  spannende Aufgabe. Ich konnte durch die Umsetzung ich viele Details und Hintergründe, zu den im Modul \enquote{IT-Infrastruktur} vermittelten Grundlagen, erlernen und auch mein Wissen um Funktionen in Python deutlich erweitern. 
+Die Seminararbeit war für mich persönlich eine höchst interessante und  spannende Aufgabe. Ich konnte durch die Umsetzung viele Details und Hintergründe zu den im Modul \enquote{IT-Infrastruktur} vermittelten Grundlagen erlernen und auch mein Wissen um Funktionen in Python deutlich erweitern. 
 
 %-----------------------------------
 % Apendix / Anhang
