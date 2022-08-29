@@ -74,6 +74,17 @@
 
     </div>
 
+    <div class="card-group mt-3">
+      <div class="card mt-3">
+        <div class="card-header">Links</div>
+
+        <div class="card-body">
+          <p class="text-center"> <a href="http://127.0.0.1:8000/">Backend lokal</a>, <a
+              href="https://ai-api.tstsrv.de">Live Demo online</a> und <a
+              href="https://github.com/haenno/ai-api">Dokumentation auf Github</a>.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
