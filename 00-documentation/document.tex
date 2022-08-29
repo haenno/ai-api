@@ -1548,29 +1548,857 @@ Die Seminararbeit war für mich persönlich eine höchst interessante und  spann
 %-----------------------------------
 % Apendix / Anhang
 %-----------------------------------
-%\newpage
-%\section*{\AppendixName} %Überschrift "Anhang", ohne Nummerierung
-%\addcontentsline{toc}{section}{\AppendixName} %Den Anhang ohne Nummer zum Inhaltsverzeichnis hinzufügen
+\newpage
+\section*{\AppendixName} %Überschrift "Anhang", ohne Nummerierung
+\addcontentsline{toc}{section}{\AppendixName} %Den Anhang ohne Nummer zum Inhaltsverzeichnis hinzufügen
 
-%\begin{appendices}
+\begin{appendices}
 % Nachfolgende Änderungen erfolgten aufgrund von Issue 163
-%\makeatletter
-%\renewcommand\@seccntformat[1]{\csname the#1\endcsname:\quad}
-%\makeatother
-%\addtocontents{toc}{\protect\setcounter{tocdepth}{0}} %
-%	\renewcommand{\thesection}{\AppendixName\ \arabic{section}}
-	%\renewcommand\thesubsection{\AppendixName\ \arabic{section}.\arabic{subsection}}
+\makeatletter
+\renewcommand\@seccntformat[1]{\csname the#1\endcsname:\quad}
+\makeatother
+\addtocontents{toc}{\protect\setcounter{tocdepth}{0}} %
+	\renewcommand{\thesection}{\AppendixName\ \arabic{section}}
+	\renewcommand\thesubsection{\AppendixName\ \arabic{section}.\arabic{subsection}}
 	% haenno-apa6-slim: Start
 	% \input{kapitel/anhang/anhang}
 
-	%\section{Beispielanhang}\label{Beispielanhang}
-	%Dieser Abschnitt dient nur dazu zu demonstrieren, wie ein Anhang aufgebaut seien kann.
-	%\subsection{Weitere Gliederungsebene}
-	%Auch eine zweite Gliederungsebene ist möglich.
+Der Anhang beschränkt sich auf die Abbildung des Inhalts von zwei umfangreichen Dateien. Diese wurden ausgewählt, da sie wesentliche Elemente der Seminararbeit sind und auch ohne weiteren Kontext anderer Dateien oder Inhalte aufschlussreich sein können. 
+
+Alle übrigen Anlagen auf die in der Seminararbeit Bezug genommen wurde, wurden bei der Abgabe der Seminararbeit als Dateien mit eingereicht. Ebenso wurden alle Inhalte aber auch auf Github.com unter \code{\url{https://github.com/haenno/ai-api}} veröffentlicht. 
+
+
+
+
+\section{Notizen zur Django-Grundinstallation}\label{notes-djnago-base-install}
+
+Alle Einzelschritte die für die Django-Grundinstallation notwendig waren, wurden in der Datei \code{30-django-base-install\textbackslash README.md} im Markdown-Format festgehalten. Diese Datei wird hier im Anhang aufgenommen und in voller Länge dargestellt, da damit der Umfang und Detailgrad der Installationsanleitung verdeutlicht wird. Diese Installationsanleitung ist dabei das Ergebnis intensiver Recherchen und umfangreicher Tests. 
+
+\vspace{0.6cm} 
+
+\begin{lstlisting}[language=python,numbers=none]
+# django-base-install
+
+The contents of this folder are based on my own notes <https://github.com/haenno/public-krams/blob/main/django-rest-notes.md> and the experience I made while developing a browser RPG adventure for a previous exam <https://github.com/tstsrv-de/rpg>.
+
+## Useage
+
+This folder provides a ready to use installation of Django with the AI-Application allready included. You can also make your own, clean install with the steps described in the next part. But if you just want to test it, take these steps:
+
+1. Install Python and Pipenv.
+2. Install depencys with ``pipenv install``.
+3. Take the following steps to initialize and start Django:
+
+    ```bash
+    pipenv run python manage.py makemigrations
+    pipenv run python manage.py migrate --run-syncdb    
+    pipenv run python manage.py createsuperuser
+    pipenv run python manage.py collectstatic --noinput 
+    pipenv run python -m chatbot -t
+    pipenv run daphne -b 0.0.0.0 -p 8000 aiapiproject.asgi:application
+    ```
+
+4. Open the backend on <http://127.0.0.1:8000>.
+
+## The installation process
+
+1. Install Python and Pipenv.
+2. Create a ``Pipfile`` in the main folder with the following contents:
+
+    ```toml
+    [[source]]
+    url = "https://pypi.org/simple"
+    verify_ssl = true
+    name = "pypi"
+
+    [packages]
+
+    Django = "==4.1" # Django itself 
+    djangorestframework = "==3.13.1" # Django toolkit for rest api
+    drf-yasg = "==1.21.3" # Swagger for Django / OpenAPI 2.0 fits perfectly
+    django-cors-headers = "==3.13.0" # for cross site access from a frontend
+    daphne = "==3.0.2" # to serve django 
+    whitenoise = "==6.2.0" # to serve static files
+    tzdata = "==2022.2" # to fix depency error on some systems
+
+    # for the chatbot module
+    numpy = "==1.23.2" 
+    nltk = "==3.7"
+    HanTa = "==0.2.0" # 0.2.1 does not work well at this time, fallback to 0.2.0
+    torch = "==1.12.1"
+
+    [dev-packages]
+
+    [requires]
+    python_version = "3"
+
+    ```
+
+3. Then install the packeages with runnig ``pipenv install``.
+
+4. Create the Django project with the command ``pipenv run django-admin startproject aiapiproject .`` in the same folder.
+
+5. Next create the Django app with ``pipenv run django-admin startapp aiapiapp``.
+
+6. Add and/or change lines in the `settings.py` in porject folder `aiapiproject`:
+
+    ```python
+    import os # for staticfiles
+
+    # fill the list
+    ALLOWED_HOSTS = ['localhost', '0.0.0.0', '127.0.0.1']
+
+    # add the lines on the bottom to the list
+    INSTALLED_APPS = [
+        ...
+        'aiapiapp', # the ai-app itself
+        'rest_framework', # Django toolkit for a rest api
+        'drf_yasg', # Swagger for Django / OpenAPI 2.0 will do just fine
+        'corsheaders', # for configure acces from a frontend
+    ]
+
+
+    # Pay attention to the order:
+    MIDDLEWARE = [
+        'corsheaders.middleware.CorsMiddleware', # add cors as the first line
+        ...
+        'django.middleware.security.SecurityMiddleware', # look out for this line and insert whitenoise below
+        'whitenoise.middleware.WhiteNoiseMiddleware', # for static files
+        ...
+
+    # add the following to the bottom of the file
+
+    REST_FRAMEWORK = {
+        # Use Django's standard `django.contrib.auth` permissions,
+        # or allow read-only access for unauthenticated users.
+        'DEFAULT_PERMISSION_CLASSES': [
+            #'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly', # for later use
+            'rest_framework.permissions.AllowAny',
+        ]
+    }
+
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # for staticfiles
+
+    CORS_ORIGIN_ALLOW_ALL=True
+
+    # for later use
+    # CORS_ORIGIN_WHITELIST = [
+    #     'http://localhost:8000',
+    #     'http://127.0.0.1:8000'
+    # ]
+
+    ```
+
+7. Add and/or change lines in the `urls.py` also in the porject folder `aiapiproject`:
+
+    ```python
+    from django.urls import include, re_path
+    from django.http import HttpResponse # for index page
+
+    # for swagger: start
+    from rest_framework import permissions
+    from drf_yasg.views import get_schema_view
+    from drf_yasg import openapi
+    schema_view = get_schema_view(
+        openapi.Info(
+            title="AI-API",
+            default_version='v1',
+            description="A webservice for access to a AI-Application.",
+            terms_of_service="https://github.com/haenno/ai-api",
+            contact=openapi.Contact(email="haenno@web.de"),
+        ),
+        public=True,
+        permission_classes=(permissions.AllowAny,),
+    )
+    # for swagger: end
+
+    urlpatterns = [
+        path('', lambda request: HttpResponse('<html><body><p><h1>This is the backend of an \
+            AI-API-Application</h1><b>Proceed to</b>         <a href="doc/">doc</a>, \
+            <a href="redoc/">redoc</a>, <a href="spec.json">spec.json</a>         \
+            or <a href="spec.yaml">spec.yaml</a> for more details to this API.<br>\
+            <br>Check <a href="https://github.com/haenno/ai-api">github.com/haenno/ai-api</a>\
+            for the project documentation.</p></body></html>'), name='index'),  # for index page
+        path('admin/', admin.site.urls),
+        re_path(r'^spec(?P<format>\.json|\.yaml)$',
+                schema_view.without_ui(cache_timeout=0), name='schema-json'),  # for swagger
+        path('doc/', schema_view.with_ui('swagger', cache_timeout=0),
+            name='schema-swagger-ui'),  # for swagger
+        path('redoc/', schema_view.with_ui('redoc', cache_timeout=0),
+            name='schema-redoc'),  # for swagger
+        path('api/v1/', include('aiapiapp.chatbot.urls')),
+    ]
+
+    ```
+
+8. Create a folder ``staticfiles`` in the base directory (same as the file manage.py).
+
+9. Create an API endpoint that creates and gives us a UUID. First, create a new folder in the APP directory `aiapiapp\chatbot\`.
+
+10. Then create new files in that folder:
+    1. A empty `__init__.py`.
+    2. A file `serializers.py` with:
+
+        ```python
+        from rest_framework import serializers
+        from aiapiapp.models import ChatUuid, ChatDialogue
+
+
+        class ChatUuidSerializer(serializers.ModelSerializer):
+            class Meta:
+                model = ChatUuid
+                fields = '__all__'
+
+
+        class ChatTextInputSerializer(serializers.ModelSerializer):
+
+            class Meta:
+                model = ChatDialogue
+                fields = '__all__'
+        ```
+
+    3. A file `urls.py` with:
+
+        ```python
+        from django.urls import path
+        from aiapiapp.chatbot.views import ChatUuidNewAPIView, ChatUuidListAPIView, ChatInputAPIView, ChatTrainAPIView
+
+        app_name = 'aiapiapp'
+
+        urlpatterns = [
+            path('listchatuuids/', ChatUuidListAPIView.as_view(), name='listchatuuids'),
+            path('newchatuuid/', ChatUuidNewAPIView.as_view(), name='newchatuuid'),
+            path('input/', ChatInputAPIView.as_view(), name='input'),
+            path('train/', ChatTrainAPIView.as_view(), name='train'),
+        ]
+
+        ```
+
+    4. A file `views.py` with:
+
+        ```python
+        from distutils.log import error
+        import json
+        import uuid
+        from rest_framework.generics import ListAPIView, CreateAPIView
+        from aiapiapp.models import ChatUuid, ChatDialogue
+        from aiapiapp.chatbot.serializers import ChatUuidSerializer, ChatTextInputSerializer
+        from rest_framework import status, views
+        from rest_framework.response import Response
+        from rest_framework import authentication, permissions
+
+        from chatbot import get_new_uuid, singlechat, train
+
+
+        class ChatUuidListAPIView(ListAPIView):
+            model = ChatUuid
+            serializer_class = ChatUuidSerializer
+            queryset = ChatUuid.objects.all().order_by('-created')
+
+
+        class ChatUuidNewAPIView(CreateAPIView):
+            model = ChatUuid
+            serializer_class = ChatUuidSerializer
+            queryset = ChatUuid.objects.all()
+
+            def post(self, request, *args, **kwargs):
+                request.data["chatuuid"] = get_new_uuid()
+
+                if request.data["agreed"] != "Einverstanden":
+                    return Response(data="If 'agreed' is not 'Einverstanden' you can not use the services.",
+                                    status=status.HTTP_400_BAD_REQUEST)
+
+                return self.create(request, *args, **kwargs)
+
+
+        class ChatInputAPIView(CreateAPIView):
+            model = ChatDialogue
+            serializer_class = ChatTextInputSerializer
+
+            def post(self, request, *args, **kwargs):
+                try:
+                    textinput = str(request.data["input"])
+                    if type(textinput) is not str and\
+                            len(textinput) < 1:
+                        raise error
+
+                    chatuuid = uuid.UUID(request.data["chatuuid"])
+                    if type(chatuuid) is not uuid.UUID and\
+                            len(chatuuid) != 36:
+                        raise error
+
+                except:
+                    return Response(data="Please provide a valid UUID for the conversation and a input text to answer to.",
+                                    status=status.HTTP_400_BAD_REQUEST)
+
+                answer = json.loads(singlechat(chatuuid, textinput))
+
+                request.data["probability"] = float(answer["probability"])
+                request.data["understood"] = bool(answer["understood"])
+                request.data["output"] = str(answer["output"])
+
+                return self.create(request, *args, **kwargs)
+
+
+        class ChatTrainAPIView(views.APIView):
+            permission_classes = [permissions.IsAdminUser]
+
+            def get(self, request, format=None):
+                """
+                Returns the console output from the training process.
+                Only Admin Users can start the training.
+                """
+                trainoutput = train()
+                
+                return Response(data=str(trainoutput), status=status.HTTP_200_OK)
+
+
+        ```
+
+11. Then some changes in the files in the APP directory ``aiapiapp``:
+    1. In the `admin.py` add:
+
+        ```python
+        from aiapiapp.models import ChatUuid, ChatDialogue
+        admin.site.register(ChatUuid)
+        admin.site.register(ChatDialogue)
+
+        ```
+
+    2. In the `models.py` add:
+
+        ```python
+        import uuid
+        class ChatUuid(models.Model):
+            chatuuid = models.UUIDField(unique=True, default=uuid.uuid4,
+                                        editable=False, help_text="The UUID for a Chatbot conversation.")
+            created = models.DateTimeField(auto_now_add=True)
+            agreed = models.TextField(
+                blank=True, help_text="If user agreed to the service terms (http://...), send 'Einverstanden'.")
+
+            def __str__(self):
+                return str(self.chatuuid)
+
+
+        class ChatDialogue(models.Model):
+            chatuuid = models.UUIDField(blank=False)
+            created_at = models.DateTimeField(auto_now_add=True)
+            updated_at = models.DateTimeField(auto_now=True)
+            input = models.TextField(blank=False)
+            probability = models.FloatField(blank=True)
+            understood = models.BooleanField(blank=True)
+            output = models.TextField(blank=True)
+
+            def __str__(self):
+                return str(self.input)
+        ```
+
+12. Then copy over the chatbot AI-Application module folder. Here it was the contents of ``chatbot``-Folder in ``20-prepared-ai-app``. Copy it in the folder, that contains the ``manage.py``-File.
+
+13. Then initialize Django with the following coammnds. Note the superuser credentials!
+
+    ```bash
+    pipenv run python manage.py makemigrations
+    pipenv run python manage.py migrate
+    pipenv run python manage.py createsuperuser
+    pipenv run python manage.py collectstatic --noinput 
+    pipenv run python -m chatbot -t
+    ```
+
+14. The finally start Django by running ``pipenv run daphne -b 0.0.0.0 -p 8000 aiapiproject.asgi:application`` and open <http://127.0.0.1:8000>.
+
+## License
+
+MIT License: Copyright (c) 2022 Henning 'haenno' Beier, haenno@web.de, <https://github.com/haenno/ai-api>
+\end{lstlisting}
+  
+
+\section{KI-Anwedung als Python-Modul}\label{notes-ai-app-as-module}
+
+Die für die Einbindung in Django als Python-Modul vorbereitete KI-Anwendung findet sich in der Datei \code{20-prepared-ai-app\textbackslash chatbot\textbackslash _init__.py} die hier im Anhang der Seminararbeit aufgenommen wurde. Damit soll ein leichter Einblick in die Programmlogik ermöglicht werden.
+
+\vspace{0.6cm} 
+
+\begin{lstlisting}[language=python]
+try:
+  from ast import arg
+  from mailbox import linesep
+  import nltk
+  import torch
+  import torch.nn as nn
+  import json
+  import numpy as np
+  import uuid
+  import random
+  import csv
+  import os
+
+  from pickle import NONE
+  from datetime import datetime
+  from argparse import ArgumentParser
+  from torch.utils.data import Dataset, DataLoader
+  from HanTa import HanoverTagger as ht
+
+except ModuleNotFoundError:
+  print("Error: Install all needed modules first! See README.md for details...")
+  quit()
+
+# CPUGPU = 'cuda:0'
+CPUGPU = 'cpu'
+
+SRC_FILE = 'intents.json'
+OUT_FILE = 'data.pth'
+OPEN_QUESTIONS_FILE = 'to_answer.csv'
+DIALOG_LOG_FILE = 'dialog_log.csv'
+MIN_PROB = 0.95
+
+nltk.download('punkt')  # run only once (uncomment once, to init a new system)
+tagger = ht.HanoverTagger('morphmodel_ger.pgz')
+
+
+class NeuralNet(nn.Module):
+  def __init__(self, input_size, hidden_size, num_classes):
+      super(NeuralNet, self).__init__()
+
+      self.l1 = nn.Linear(input_size, hidden_size).to(CPUGPU)
+      self.l2 = nn.Linear(hidden_size, hidden_size).to(CPUGPU)
+      self.l3 = nn.Linear(hidden_size, num_classes).to(CPUGPU)
+
+      self.relu = nn.ReLU().to(CPUGPU)
+
+  def forward(self, x):
+      out = self.l1(x)
+      out = self.relu(out)
+      out = self.l2(out)
+      out = self.relu(out)
+      out = self.l3(out)
+
+      return out
+
+
+def singlechat(conversation_uuid, text_input):
+  """_summary_
+
+  Args:
+      conversation_uuid (_type_): _description_
+      text_input (_type_): _description_
+
+  Returns:
+      _type_: _description_
+  """
+
+  device = torch.device(CPUGPU)
+  data = torch.load(os.path.join(os.path.dirname(os.path.abspath(
+      __file__)), OUT_FILE), map_location=torch.device(CPUGPU))
+
+  input_size = data["input_size"]
+  hidden_size = data["hidden_size"]
+  output_size = data["output_size"]
+  all_words = data['all_words']
+  tags = data['tags']
+  model_state = data["model_state"]
+
+  model = NeuralNet(input_size, hidden_size, output_size).to(device)
+  model.load_state_dict(model_state)
+  model.eval()
+
+  bot_name = "Chatbot"
+
+  log_uuid = conversation_uuid
+
+  log_dialog(log_uuid, 200)
+
+  # sentence
+  sentence = text_input
+
+  log_dialog(log_uuid, 400, sentence)
+
+  #sentence = tokenize(sentence)
+  X = bag_of_words(sentence, all_words)
+  X = X.reshape(1, X.shape[0])
+  X = torch.from_numpy(X).to(device)
+
+  output = model(X)
+  _, predicted = torch.max(output, dim=1)
+
+  tag = tags[predicted.item()]
+
+  probs = torch.softmax(output, dim=1).to(CPUGPU)
+  prob = probs[0][predicted.item()]
+
+  if prob.item() > MIN_PROB:
+
+      with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), SRC_FILE), 'r', encoding='utf-8') as json_data:
+          intents = json.load(json_data)
+
+      for intent in intents['intents']:
+          if tag == intent["tag"]:
+              answer = random.choice(intent['responses'])
+              log_dialog(log_uuid, 600, answer, prob.item())
+              return json.JSONEncoder().encode({
+                  'probability': float(prob.item()),
+                  'understood': bool(True),
+                  'output': str(answer),
+              })
+  else:
+      log_dialog(log_uuid, 650, "", prob.item())
+
+      with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), OPEN_QUESTIONS_FILE), 'a', encoding='utf-8') as f:
+          f.write(str(log_uuid) + ";\"" + str(datetime.now()) +
+                  "\";\"" + sentence + "\"\n")
+      return json.JSONEncoder().encode({
+          'probability': float(prob.item()),
+          'understood': bool(False),
+          'output': str("Das habe ich nicht verstanden...")
+      })
+
+
+def chat():
+
+  device = torch.device(CPUGPU)
+  data = torch.load(os.path.join(os.path.dirname(os.path.abspath(
+      __file__)), OUT_FILE), map_location=torch.device(CPUGPU))
+
+  input_size = data["input_size"]
+  hidden_size = data["hidden_size"]
+  output_size = data["output_size"]
+  all_words = data['all_words']
+  tags = data['tags']
+  model_state = data["model_state"]
+
+  model = NeuralNet(input_size, hidden_size, output_size).to(device)
+  model.load_state_dict(model_state)
+  model.eval()
+
+  bot_name = "Chatbot"
+  print("Lass quatschen -- Schreib einfach drauf los! (tippe 'ende' zum beenden)")
+
+  log_uuid = get_new_uuid()
+
+  log_dialog(log_uuid, 200)
+
+  while True:
+      # sentence
+      sentence = input("            Du: ")
+
+      log_dialog(log_uuid, 400, sentence)
+
+      if sentence == "ende":
+          log_dialog(log_uuid, 900)
+          break
+
+      #sentence = tokenize(sentence)
+      X = bag_of_words(sentence, all_words)
+      X = X.reshape(1, X.shape[0])
+      X = torch.from_numpy(X).to(device)
+
+      output = model(X)
+      _, predicted = torch.max(output, dim=1)
+
+      tag = tags[predicted.item()]
+
+      probs = torch.softmax(output, dim=1).to(CPUGPU)
+      prob = probs[0][predicted.item()]
+      probstr = str(int(prob.item() * 100)) + " %"
+
+      if prob.item() > MIN_PROB:
+
+          with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), SRC_FILE), 'r', encoding='utf-8') as json_data:
+              intents = json.load(json_data)
+
+          for intent in intents['intents']:
+              if tag == intent["tag"]:
+                  answer = random.choice(intent['responses'])
+                  print(f"{bot_name} [{probstr}]: {answer}")
+                  log_dialog(log_uuid, 600, answer, prob.item())
+      else:
+          print(f"{bot_name} [{probstr}]: Das habe ich nicht verstanden...")
+          log_dialog(log_uuid, 650, "", prob.item())
+
+          with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), OPEN_QUESTIONS_FILE), 'a', encoding='utf-8') as f:
+              f.write(str(log_uuid) + ";\"" + str(datetime.now()) +
+                      "\";\"" + sentence + "\"\n")
+
+
+def log_dialog(log_uuid, type, log_str="", prob=None):
+  '''
+   50 = uuid created
+   51 = uuid created, no log file present     
+  200 = start chat session
+  400 = user input
+  600 = chatbot answer, understood
+  650 = chatbot answer, unshure
+  900 = end chat session with keyword
+  '''
+
+  with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), DIALOG_LOG_FILE), 'a', encoding='utf-8') as f:
+      if prob:
+          f.write(str(log_uuid) + ";" + str(datetime.now()) + ";" +
+                  str(type) + ";\"" + log_str + "\";" + str(prob) + "\n")
+      else:
+          f.write(str(log_uuid) + ";" + str(datetime.now()) +
+                  ";" + str(type) + ";\"" + log_str + "\";\n")
+
+
+def get_new_uuid():
+  while True:
+      new_uuid = str(uuid.uuid4())
+      found = False
+
+      try:
+          with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), DIALOG_LOG_FILE), 'r') as f:
+              my_content = csv.reader(f, delimiter=';')
+              for row in my_content:
+                  if new_uuid == row[0]:
+                      found = True
+                      break
+          if not found:
+              log_dialog(new_uuid, 50)
+              return new_uuid
+      except FileNotFoundError:	
+          log_dialog(new_uuid, 51)	
+          return new_uuid
+
+
+def token_and_stem(text):
+  text = str(text)
+  bag_of_words = []
+  delimiters = ('.')
+  split_char = '+'
+
+  tokenized_sentence = nltk.tokenize.word_tokenize(text, language='german')
+
+  for word in tokenized_sentence:
+      stemmed_words = tagger.analyze(word, taglevel=2)
+      stemmed_words = stemmed_words[0]
+
+      for char in delimiters:
+          stemmed_words = stemmed_words.replace(char, split_char)
+
+      seperated_stemmed_words = stemmed_words.split(split_char)
+      for single_stemmed_word in seperated_stemmed_words:
+          if len(single_stemmed_word) > 1 and single_stemmed_word not in bag_of_words:
+              bag_of_words.append(single_stemmed_word)
+
+  return bag_of_words
+
+
+def token_and_stem_array(text):
+  #text = str(text)
+  new_text = ""
+  for word in text:
+      new_text = new_text + str(word) + " "
+  text = new_text
+  bag_of_words = []
+  delimiters = ('.')
+  split_char = '+'
+
+  tokenized_sentence = nltk.tokenize.word_tokenize(text, language='german')
+
+  for word in tokenized_sentence:
+      stemmed_words = tagger.analyze(word, taglevel=2)
+      stemmed_words = stemmed_words[0]
+
+      for char in delimiters:
+          stemmed_words = stemmed_words.replace(char, split_char)
+
+      seperated_stemmed_words = stemmed_words.split(split_char)
+
+      for single_stemmed_word in seperated_stemmed_words:
+          if len(single_stemmed_word) > 1 and single_stemmed_word not in bag_of_words:
+              bag_of_words.append(single_stemmed_word)
+  return bag_of_words
+
+
+def bag_of_words(tokenized_sentence, all_words):
+
+  tokenized_sentence = token_and_stem(tokenized_sentence)
+  bag = np.zeros(len(all_words), dtype=np.float32)
+
+  for idx, w in enumerate(all_words):
+      if w in tokenized_sentence:
+          bag[idx] = 1
+
+  return bag
+
+
+def bag_of_words_array(tokenized_sentence, all_words):
+  tokenized_sentence = token_and_stem_array(tokenized_sentence)
+  bag = np.zeros(len(all_words), dtype=np.float32)
+
+  for idx, w in enumerate(all_words):
+      if w in tokenized_sentence:
+          bag[idx] = 1
+
+  return bag
+
+
+def train():
+  trian_output = ""
+  with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), SRC_FILE), 'r', encoding='utf-8') as f:
+      dialogus = json.load(f)
+  trian_output = trian_output + \
+      str(f'training starts with contents from file {SRC_FILE}') + os.linesep
+
+  all_words = []
+  tags = []
+  xy = []
+
+  for intent in dialogus['intents']:
+      tag = intent['tag']
+      tags.append(tag)
+      for pattern in intent['patterns']:
+          words = token_and_stem(pattern)
+          all_words.extend(words)
+          xy.append((words, tag))
+
+  # input()
+  x_train = []
+  y_train = []
+
+  for (patten_sentence, tag) in xy:
+      bag = bag_of_words_array(patten_sentence, all_words)
+      x_train.append(bag)
+
+      label = tags.index(tag)
+      y_train.append(label)
+
+  # input()
+  x_train = np.array(x_train)
+  y_train = np.array(y_train)
+
+  class ChatDataset(Dataset):
+      def __init__(self):
+          self.n_samples = len(x_train)
+          self.x_data = x_train
+          self.y_data = y_train
+
+      # dataset[idx]
+      def __getitem__(self, index):
+          return self.x_data[index], self.y_data[index]
+
+      def __len__(self):
+          return self.n_samples
+
+  # Hyperparmeters
+  batch_size = 8
+  hidden_size = 8
+  output_size = len(tags)
+  input_size = len(x_train[0])  # 1st is all_words
+  learning_rate = 0.001
+  num_epochs = 1000
+
+  dataset = ChatDataset()
+  train_loader = DataLoader(
+      dataset=dataset, batch_size=batch_size, shuffle=True, num_workers=0)
+
+  device = torch.device(CPUGPU)
+  trian_output = trian_output + str("device: %s" % device) + os.linesep
+  model = NeuralNet(input_size, hidden_size, output_size)
+
+  criterion = nn.CrossEntropyLoss()
+  optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+
+  for epoch in range(num_epochs):
+      for (words, labels) in train_loader:
+          words = words.to(device)
+          labels = labels.to(dtype=torch.long).to(device)
+
+          # forward
+          outputs = model(words)
+          loss = criterion(outputs, labels)
+
+          # backward
+          optimizer.zero_grad()
+          loss.backward()
+          optimizer.step()
+      if (epoch + 1) % 100 == 0:
+          trian_output = trian_output + \
+              str(f'epoch {epoch+1}/{num_epochs}, loss={loss.item():.4f}') + os.linesep
+
+  trian_output = trian_output + \
+      str(f'final loss, loss={loss.item():.4f}') + os.linesep
+
+  # save nn
+  data = {
+      "model_state": model.state_dict(),
+      "input_size": input_size,
+      "hidden_size": hidden_size,
+      "output_size": output_size,
+      "all_words": all_words,
+      "tags": tags
+  }
+
+  torch.save(data, os.path.join(os.path.dirname(
+      os.path.abspath(__file__)), OUT_FILE))
+
+  trian_output = trian_output + \
+      str(f'training complete. file saved to {OUT_FILE}') + os.linesep
+  return trian_output
+
+
+def main():
+  parser = ArgumentParser(
+      description='Allows the use of a chatbot with pyTorch.')
+
+  parser.add_argument('-u', '--newuuid',  action='store_true',
+                      help='Get a new, unique id for a conversation.')
+
+  parser.add_argument('-t', '--train',  action='store_true',
+                      help='Trains the NN model based on current data.')
+
+  parser.add_argument('-c', '--chat',  action='store_true',
+                      help='Chat with the chatbot.')
+
+  parser.add_argument('-i', '--textinput',  type=str,
+                      help='Give an text input to the chatbot and recive a answer. \
+                          Provide a UUID for the conversation with -cu or --conversationuuid \
+                              followed by the UUID.')
+
+  parser.add_argument('-cu', '--conversationuuid',  type=str,
+                      help='Needed when using -i, --textinput. Provide a UUID to a conversation.')
+
+  args = parser.parse_args()
+
+  if vars(args)['newuuid']:
+      print(str(get_new_uuid()))
+      quit()
+
+  if vars(args)['train']:
+      print(str(train()))
+      quit()
+
+  if vars(args)['chat']:
+      chat()
+      quit()
+
+  # check for complete input for a 'singlechat' call
+  complete_text_input = 0
+  if vars(args)['textinput']:
+      complete_text_input += 1
+  if vars(args)['conversationuuid']:
+      complete_text_input += 1
+
+  if complete_text_input == 1:
+      parser.error(
+          "Too few arguments: -cu/--conversationuuid and -i/--textinput are both needed.")
+
+  if complete_text_input == 2:
+      print(str(singlechat(str(args.conversationuuid), str(args.textinput))))
+      quit()
+
+  parser.print_help()
+
+
+if __name__ == '__main__':
+  main()
+\end{lstlisting}
+
+
 
 	% haenno-apa6-slim: End
-%\end{appendices}
-%\addtocontents{toc}{\protect\setcounter{tocdepth}{2}}
+\end{appendices}
+\addtocontents{toc}{\protect\setcounter{tocdepth}{2}}
 
 
 %-----------------------------------
